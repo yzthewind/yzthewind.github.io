@@ -1,0 +1,2 @@
+# yzthewind.github.io
+blog
