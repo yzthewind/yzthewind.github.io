@@ -1,28 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>所有文章 - </title>
-        <link>https://yzthewind.github.io/posts/</link>
-        <description>所有文章 | </description>
+        <title>elasticsearch - 标签 - </title>
+        <link>https://yzthewind.github.io/tags/elasticsearch/</link>
+        <description>elasticsearch - 标签 - </description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1126978661@qq.com (yz)</managingEditor>
-            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>AC自动机</title>
-    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_ac%E8%87%AA%E5%8A%A8%E6%9C%BA/</link>
-    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_ac%E8%87%AA%E5%8A%A8%E6%9C%BA/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/algorithm/AC%e8%87%aa%e5%8a%a8%e6%9c%ba.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 1. 数据结构与算法之美]]></description>
-</item><item>
-    <title>B&#43;树</title>
-    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_b%E6%A0%91/</link>
-    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_b%E6%A0%91/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/algorithm/B%e6%a0%91.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 1. 数据结构与算法之美]]></description>
-</item><item>
+            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/tags/elasticsearch/" rel="self" type="application/rss+xml" /><item>
     <title>elasticsearch介绍</title>
     <link>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/elasticsearch%E4%BB%8B%E7%BB%8D/</link>
     <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
@@ -67,32 +49,5 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/elasticsearch/elasticsearch%e7%b4%a2%e5%bc%95%e5%85%a5%e5%ba%93.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 elasticsearch权威指南]]></description>
-</item><item>
-    <title>http cookie机制</title>
-    <link>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http_cookie%E6%9C%BA%E5%88%B6/</link>
-    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http_cookie%E6%9C%BA%E5%88%B6/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/http/http_cookie%e6%9c%ba%e5%88%b6.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 透视HTTP协议]]></description>
-</item><item>
-    <title>http openresty</title>
-    <link>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http_openresty/</link>
-    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http_openresty/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/http/http_openresty.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 透视HTTP协议]]></description>
-</item><item>
-    <title>http ssl与tls</title>
-    <link>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http_ssl_tls/</link>
-    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http_ssl_tls/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/http/http_ssl_tls.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 透视HTTP协议]]></description>
 </item></channel>
 </rss>
