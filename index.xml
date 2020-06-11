@@ -7,94 +7,94 @@
             <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</lastBuildDate>
             <atom:link href="https://yzthewind.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>二叉树</title>
-    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+    <title>AC自动机</title>
+    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_ac%E8%87%AA%E5%8A%A8%E6%9C%BA/</link>
     <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_ac%E8%87%AA%E5%8A%A8%E6%9C%BA/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/algorithm/AC%e8%87%aa%e5%8a%a8%e6%9c%ba.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 1. 数据结构与算法之美]]></description>
+</item><item>
+    <title>B&#43;树</title>
+    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_b%E6%A0%91/</link>
+    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_b%E6%A0%91/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/algorithm/B%e6%a0%91.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 1. 数据结构与算法之美]]></description>
+</item><item>
+    <title>二分查找</title>
+    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</link>
+    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/algorithm/%e4%ba%8c%e5%88%86%e6%9f%a5%e6%89%be.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 1. 数据结构与算法之美]]></description>
+</item><item>
+    <title>二叉树</title>
+    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/algorithm/%e4%ba%8c%e5%8f%89%e6%a0%91.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 1. 数据结构与算法之美]]></description>
 </item><item>
-    <title>堆</title>
-    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%A0%86/</link>
+    <title>位图</title>
+    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E4%BD%8D%E5%9B%BE/</link>
     <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%A0%86/</guid>
+    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E4%BD%8D%E5%9B%BE/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/algorithm/%e5%a0%86.jpg" referrerpolicy="no-referrer">
+                <img src="/images/algorithm/%e4%bd%8d%e5%9b%be.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 1. 数据结构与算法之美]]></description>
 </item><item>
-    <title>散列表</title>
-    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%A3%E5%88%97%E8%A1%A8/</link>
+    <title>分治算法</title>
+    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/</link>
     <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%A3%E5%88%97%E8%A1%A8/</guid>
+    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/algorithm/%e6%95%a3%e5%88%97%e8%a1%a8.jpg" referrerpolicy="no-referrer">
+                <img src="/images/algorithm/%e5%88%86%e6%b2%bb%e7%ae%97%e6%b3%95.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 1. 数据结构与算法之美]]></description>
 </item><item>
-    <title>数组</title>
-    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_b%E6%A0%91/</link>
+    <title>动态规划</title>
+    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link>
     <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_b%E6%A0%91/</guid>
+    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/algorithm/%e6%95%b0%e7%bb%84.jpg" referrerpolicy="no-referrer">
+                <img src="/images/algorithm/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 1. 数据结构与算法之美]]></description>
 </item><item>
-    <title>数组</title>
-    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E4%BD%8D%E5%9B%BE/</link>
+    <title>向量空间</title>
+    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4/</link>
     <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E4%BD%8D%E5%9B%BE/</guid>
+    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/algorithm/%e6%95%b0%e7%bb%84.jpg" referrerpolicy="no-referrer">
+                <img src="/images/algorithm/%e5%90%91%e9%87%8f%e7%a9%ba%e9%97%b4.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 1. 数据结构与算法之美]]></description>
 </item><item>
-    <title>数组</title>
-    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%9B%BE/</link>
+    <title>哈希算法</title>
+    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/</link>
     <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%9B%BE/</guid>
+    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/algorithm/%e6%95%b0%e7%bb%84.jpg" referrerpolicy="no-referrer">
+                <img src="/images/algorithm/%e5%93%88%e5%b8%8c%e7%ae%97%e6%b3%95.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 1. 数据结构与算法之美]]></description>
 </item><item>
-    <title>数组</title>
-    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%AD%97%E5%85%B8%E6%A0%91/</link>
+    <title>回溯算法</title>
+    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/</link>
     <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%AD%97%E5%85%B8%E6%A0%91/</guid>
+    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/algorithm/%e6%95%b0%e7%bb%84.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 1. 数据结构与算法之美]]></description>
-</item><item>
-    <title>数组</title>
-    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/</link>
-    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/algorithm/%e6%95%b0%e7%bb%84.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 1. 数据结构与算法之美]]></description>
-</item><item>
-    <title>栈</title>
-    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%A0%88/</link>
-    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%A0%88/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/algorithm/%e6%a0%88.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 1. 数据结构与算法之美]]></description>
-</item><item>
-    <title>红黑树</title>
-    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E7%BA%A2%E9%BB%91%E6%A0%91/</link>
-    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E7%BA%A2%E9%BB%91%E6%A0%91/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/algorithm/%e7%ba%a2%e9%bb%91%e6%a0%91.jpg" referrerpolicy="no-referrer">
+                <img src="/images/algorithm/%e5%9b%9e%e6%ba%af%e7%ae%97%e6%b3%95.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 1. 数据结构与算法之美]]></description>
 </item></channel>
 </rss>
