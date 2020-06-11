@@ -1,12 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title></title>
-        <link>https://yzthewind.github.io/</link>
-        <description>这是我的全新 Hugo 网站</description>
+        <title>算法 - 标签 - </title>
+        <link>https://yzthewind.github.io/tags/%E7%AE%97%E6%B3%95/</link>
+        <description>算法 - 标签 - </description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1126978661@qq.com (yz)</managingEditor>
-            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</lastBuildDate>
-            <atom:link href="https://yzthewind.github.io/index.xml" rel="self" type="application/rss+xml" />
-        <item>
+            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/tags/%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
     <title>二叉树</title>
     <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
     <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
