@@ -4,7 +4,16 @@
         <link>https://yzthewind.github.io/posts/</link>
         <description>所有文章 | </description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1126978661@qq.com (yz)</managingEditor>
-            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Mon, 15 Jun 2020 10:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>elasticsearch官方优化建议</title>
+    <link>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/elasticsearch%E5%AE%98%E6%96%B9%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE/</link>
+    <pubDate>Mon, 15 Jun 2020 10:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/elasticsearch%E5%AE%98%E6%96%B9%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/elasticsearch/elasticsearch%e5%ae%98%e6%96%b9%e4%bc%98%e5%8c%96%e5%bb%ba%e8%ae%ae.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 elasticsearch权威指南 elasticsearch-7.7官方文档 二、基本建议 2.1 不要返回大数据集 elasticsearch]]></description>
+</item><item>
     <title>AC自动机</title>
     <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_ac%E8%87%AA%E5%8A%A8%E6%9C%BA/</link>
     <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
@@ -84,15 +93,6 @@
     <guid>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http_openresty/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/http/http_openresty.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 透视HTTP协议]]></description>
-</item><item>
-    <title>http ssl与tls</title>
-    <link>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http_ssl_tls/</link>
-    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http_ssl_tls/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/http/http_ssl_tls.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 透视HTTP协议]]></description>
 </item></channel>
 </rss>
