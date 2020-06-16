@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/yzthewind.github.io\/posts\/%E6%90%9C%E7%B4%A2_elasticsearch\/elasticsearch%E5%AE%98%E6%96%B9%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE\/"
-        },"genre": "posts","keywords": "elasticsearch","wordcount":  782 ,
+        },"genre": "posts","keywords": "elasticsearch","wordcount":  1391 ,
         "url": "https:\/\/yzthewind.github.io\/posts\/%E6%90%9C%E7%B4%A2_elasticsearch\/elasticsearch%E5%AE%98%E6%96%B9%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE\/","datePublished": "2020-06-15T10:00:00+08:00","dateModified": "2020-06-15T10:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": "yz"},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">elasticsearch官方优化建议</h1><h2 class="single-subtitle">elasticsearch官方文档</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%90%9C%E7%B4%A2/"><i class="far fa-folder fa-fw"></i>搜索</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-06-15">2020-06-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 782 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-06-15">2020-06-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1391 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -111,40 +111,69 @@
         <li><a href="#44-查询更少的字段">4.4 查询更少的字段</a></li>
         <li><a href="#45-利用查询语句反向优化索引模版">4.5 利用查询语句反向优化索引模版</a></li>
         <li><a href="#46-优先使用keyword字段相比较于nunber类型">4.6 优先使用keyword字段，相比较于nunber类型</a></li>
+        <li><a href="#47-禁用脚本">4.7 禁用脚本</a></li>
       </ul>
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="一-参考">一、 参考</h2>
+            </div><div class="content" id="content"><hr>
+<h2 id="一-参考">一、 参考</h2>
 <blockquote>
 <p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html" target="_blank" rel="noopener noreffer">elasticsearch权威指南</a></p>
 </blockquote>
 <blockquote>
 <p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/how-to.html" target="_blank" rel="noopener noreffer">elasticsearch-7.7官方文档</a></p>
 </blockquote>
+<p> 
+ </p>
+<hr>
 <h2 id="二基本建议">二、基本建议</h2>
+<p> </p>
+<hr>
 <h3 id="21-不要返回大数据集">2.1 不要返回大数据集</h3>
 <p><code>elasticsearch</code>设计为搜索引擎，可以获取匹配查询条件的文档集合, 但是如果查询的数据集合太大，例如：特定查询匹配全部的索引文档，效果会比较差</p>
+<p> </p>
+<hr>
 <h3 id="22-禁止大的文档入库">2.2 禁止大的文档入库</h3>
+<p> 
+ </p>
+<hr>
 <h2 id="三入库优化">三、入库优化</h2>
+<p> 
+ </p>
+<hr>
 <h2 id="四检索优化">四、检索优化</h2>
+<p> </p>
+<hr>
 <h3 id="41-更多的内存分配给文件系统的缓存">4.1 更多的内存分配给文件系统的缓存</h3>
 <p><code>elasticsearch</code> 严重依赖于文件系统的缓存，用于加速搜索，通常情况下，保证有一半的物理内存用于文件系统的缓存，<code>ES</code>可以将热查询区域保存于物理内存中</p>
+<p> </p>
+<hr>
 <h3 id="42-使用更好的硬件">4.2 使用更好的硬件</h3>
+<p> </p>
+<hr>
 <h3 id="43-文档建模">4.3 文档建模</h3>
 <p>文档建模，可以更好的提高查询效率，</p>
 <p>（1）避免使用<code>join</code>操作，嵌套<code>nested</code> 会使得查询速度减慢数倍，父子关系查询将会减慢数百倍</p>
+<p> </p>
+<hr>
 <h3 id="44-查询更少的字段">4.4 查询更少的字段</h3>
 <p>更多的字段查询，相比于单一字段查询，会更加慢，可以通过<code>copy_to</code>方式，再不修改源字段的情况下，添加新的查询字段（合并多个字段）</p>
+<p> </p>
+<hr>
 <h3 id="45-利用查询语句反向优化索引模版">4.5 利用查询语句反向优化索引模版</h3>
 <p>例如：</p>
+<p> </p>
 <p>(1) 入库的文档结构如下</p>
+<p> </p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">PUT</span> <span class="n">index</span><span class="o">/</span><span class="n">_doc</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">{</span>
   <span class="s2">&#34;designation&#34;</span><span class="p">:</span> <span class="s2">&#34;spoon&#34;</span><span class="p">,</span>
   <span class="s2">&#34;price&#34;</span><span class="p">:</span> <span class="mi">13</span>
 <span class="p">}</span>
-</code></pre></div><p>(2) 查询的请求如下</p>
+</code></pre></div><p> </p>
+<p>(2) 查询的请求如下</p>
+<p> </p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">GET</span> <span class="n">index</span><span class="o">/</span><span class="n">_search</span>
 <span class="p">{</span>
   <span class="s2">&#34;aggs&#34;</span><span class="p">:</span> <span class="p">{</span>
@@ -160,7 +189,9 @@
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><p>(3) 通过上面的分析，可以在入库时候，新增一个字段price_range, 聚合的语句将更快被执行</p>
+</code></pre></div><p> </p>
+<p>(3) 通过上面的分析，可以在入库时候，新增一个字段price_range, 聚合的语句将更快被执行</p>
+<p> </p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">PUT</span> <span class="n">index</span>
 <span class="p">{</span>
   <span class="s2">&#34;mappings&#34;</span><span class="p">:</span> <span class="p">{</span>
@@ -189,7 +220,9 @@
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><h3 id="46-优先使用keyword字段相比较于nunber类型">4.6 优先使用keyword字段，相比较于nunber类型</h3>
+</code></pre></div><p> </p>
+<hr>
+<h3 id="46-优先使用keyword字段相比较于nunber类型">4.6 优先使用keyword字段，相比较于nunber类型</h3>
 <p><code>number</code>类型（<code>long</code>， <code>integer</code>）的字段，执行范围查询比<code>keyword</code>快，但是，对于具体的<code>term</code>查询，<code>keyword</code>执行效率更高。</p>
 <p>在下面的场景下，优先使用<code>keyword</code>类型:</p>
 <p>(1) 不打算对于数字字段，进行范围查询；
@@ -227,7 +260,139 @@
   <span class="p">}</span>
 <span class="p">}</span>
 
-</code></pre></div></div><div class="post-footer" id="post-footer">
+</code></pre></div><p> </p>
+<hr>
+<h3 id="47-禁用脚本">4.7 禁用脚本</h3>
+<p>如果可能，在搜索的时候不使用脚本语言或者不查询脚本字段，因为脚本无法使用索引结构，在查询中使用脚本将会降低查询的效率。
+如果需要转换索引的文档字段，可以通过在<code>ingest</code>(摄取)阶段添加字段变化，注意，字段变化会导致索引速率降低。</p>
+<p> </p>
+<p>(1) 创建一个测试索引</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">DELETE</span> <span class="n">my_test_scores</span>
+
+<span class="n">PUT</span> <span class="n">my_test_scores</span>
+<span class="p">{</span>
+  <span class="s2">&#34;mappings&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&#34;properties&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&#34;math_score&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;long&#34;</span>
+      <span class="p">},</span>
+      <span class="s2">&#34;verbal_score&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;long&#34;</span>
+      <span class="p">},</span>
+      <span class="s2">&#34;grad_year&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;keyword&#34;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">POST</span> <span class="n">my_test_scores</span><span class="o">/</span><span class="n">_doc</span>
+<span class="p">{</span>
+  <span class="s2">&#34;math_score&#34;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+  <span class="s2">&#34;verbal_score&#34;</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span>
+  <span class="s2">&#34;grad_year&#34;</span><span class="p">:</span> <span class="s2">&#34;2020&#34;</span>
+<span class="p">}</span>
+
+
+<span class="n">POST</span> <span class="n">my_test_scores</span><span class="o">/</span><span class="n">_doc</span>
+<span class="p">{</span>
+  <span class="s2">&#34;math_score&#34;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+  <span class="s2">&#34;verbal_score&#34;</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
+  <span class="s2">&#34;grad_year&#34;</span><span class="p">:</span> <span class="s2">&#34;2020&#34;</span>
+<span class="p">}</span>
+
+
+<span class="n">GET</span> <span class="n">my_test_scores</span><span class="o">/</span><span class="n">_search</span>
+
+
+<span class="n">GET</span> <span class="o">/</span><span class="n">my_test_scores</span><span class="o">/</span><span class="n">_search</span>
+<span class="p">{</span>
+  <span class="s2">&#34;query&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&#34;term&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&#34;grad_year&#34;</span><span class="p">:</span> <span class="s2">&#34;2020&#34;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&#34;sort&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&#34;_script&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;number&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;script&#34;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;doc[&#39;math_score&#39;].value + doc[&#39;verbal_score&#39;].value&#34;</span>
+        <span class="p">},</span>
+        <span class="s2">&#34;order&#34;</span><span class="p">:</span> <span class="s2">&#34;desc&#34;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p>(2) 更新<code>mapping</code>, 添加一个新的字段<code>total_score</code>， 该字段中保存<code>math_score</code> 与 <code>verbal_score</code>的和</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">PUT</span> <span class="o">/</span><span class="n">my_test_scores</span><span class="o">/</span><span class="n">_mapping</span>
+<span class="p">{</span>
+  <span class="s2">&#34;properties&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&#34;total_score&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;long&#34;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p>(3) 通过<code>ingest</code>管道，管道中包含有<code>script</code>类型的处理器，计算<code>total_score</code>字段的值</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">PUT</span> <span class="n">_ingest</span><span class="o">/</span><span class="n">pipeline</span><span class="o">/</span><span class="n">my_test_scores_pipeline</span>
+<span class="p">{</span>
+  <span class="s2">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;测试分数和&#34;</span><span class="p">,</span>
+  <span class="s2">&#34;processors&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&#34;script&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;ctx.total_score = (ctx.math_score + ctx.verbal_score)&#34;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p>(4) 通过<code>reindex</code>接口，将<code>my_test_scores</code>索引中的数据，备份到<code>my_test_scores_2</code>, 通过<code>my_test_scores_pipeline</code>管道在索引过程中添加新的字段</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">POST</span> <span class="n">_reindex</span>
+<span class="p">{</span>
+  <span class="s2">&#34;source&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&#34;index&#34;</span><span class="p">:</span> <span class="s2">&#34;my_test_scores&#34;</span>
+  <span class="p">},</span>
+  <span class="s2">&#34;dest&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&#34;index&#34;</span><span class="p">:</span> <span class="s2">&#34;my_test_scores_2&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;pipeline&#34;</span><span class="p">:</span> <span class="s2">&#34;my_test_scores_pipeline&#34;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p>(5) 在新的索引程序中，使用管道<code>my_test_scores_pipeline</code>，用于添加字段</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">POST</span> <span class="n">my_test_scores_2</span><span class="o">/</span><span class="n">_doc</span><span class="err">?</span><span class="n">pipeline</span><span class="o">=</span><span class="n">my_test_scores_pipeline</span>
+<span class="p">{</span>
+  <span class="s2">&#34;math_score&#34;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+  <span class="s2">&#34;verbal_score&#34;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+  <span class="s2">&#34;grad_year&#34;</span><span class="p">:</span> <span class="s2">&#34;2020&#34;</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p>(6)使用新的字段<code>total_score</code>用于排序</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">GET</span> <span class="o">/</span><span class="n">my_test_scores_2</span><span class="o">/</span><span class="n">_search</span>
+<span class="p">{</span>
+  <span class="s2">&#34;query&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&#34;term&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&#34;grad_year&#34;</span><span class="p">:</span> <span class="s2">&#34;2020&#34;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&#34;sort&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&#34;total_score&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&#34;order&#34;</span><span class="p">:</span> <span class="s2">&#34;desc&#34;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p>最后，我们建议，在修改生产环境的索引步骤前，需要详细的进行基准测试。</p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
