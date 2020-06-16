@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>消息引擎系统abc - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="消息引擎系统abc" />
-<meta property="og:description" content="一、 参考 kafka核心技术与实战" />
+<meta property="og:description" content="一、 参考 kafka核心技术与实战 二、简介 2.1 消息引擎定义 维基百科的定义，消息引擎系统是一组规范，企业利用这组规范在不同的系统之间传递语义准确的" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yzthewind.github.io/posts/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E_kafka/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E%E7%B3%BB%E7%BB%9Fabc/" />
 <meta property="og:image" content="https://yzthewind.github.io/logo.png"/>
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://yzthewind.github.io/logo.png"/>
 
 <meta name="twitter:title" content="消息引擎系统abc"/>
-<meta name="twitter:description" content="一、 参考 kafka核心技术与实战"/>
+<meta name="twitter:description" content="一、 参考 kafka核心技术与实战 二、简介 2.1 消息引擎定义 维基百科的定义，消息引擎系统是一组规范，企业利用这组规范在不同的系统之间传递语义准确的"/>
 <meta name="application-name" content="一曲广陵散">
 <meta name="apple-mobile-web-app-title" content="一曲广陵散"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/yzthewind.github.io\/posts\/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E_kafka\/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E%E7%B3%BB%E7%BB%9Fabc\/"
-        },"genre": "posts","keywords": "kafka","wordcount":  16 ,
+        },"genre": "posts","keywords": "kafka","wordcount":  266 ,
         "url": "https:\/\/yzthewind.github.io\/posts\/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E_kafka\/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E%E7%B3%BB%E7%BB%9Fabc\/","datePublished": "2020-06-16T15:00:00+08:00","dateModified": "2020-06-16T15:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": "yz"},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">消息引擎系统abc</h1><h2 class="single-subtitle">kafka核心技术与实战</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E/"><i class="far fa-folder fa-fw"></i>消息引擎</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-06-16">2020-06-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 16 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-06-16">2020-06-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 266 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -96,12 +96,39 @@
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#一-参考">一、 参考</a></li>
+    <li><a href="#二简介">二、简介</a>
+      <ul>
+        <li><a href="#21-消息引擎定义">2.1 消息引擎定义</a></li>
+        <li><a href="#22-传输消息的格式">2.2 传输消息的格式</a></li>
+        <li><a href="#23-传输模型">2.3 传输模型</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="一-参考">一、 参考</h2>
+            </div><div class="content" id="content"><hr>
+<p> </p>
+<h2 id="一-参考">一、 参考</h2>
+<p> </p>
 <blockquote>
 <p><a href="https://time.geekbang.org/column/intro/191" target="_blank" rel="noopener noreffer">kafka核心技术与实战</a></p>
 </blockquote>
+<hr>
+<p> </p>
+<h2 id="二简介">二、简介</h2>
+<p> </p>
+<h3 id="21-消息引擎定义">2.1 消息引擎定义</h3>
+<p> </p>
+<p>维基百科的定义，消息引擎系统是一组规范，企业利用这组规范在不同的系统之间传递语义准确的消息，实现松耦合的异步式数据传递</p>
+<p>简单定义，系统A发送消息给消息引擎系统，系统B从消息引擎系统中读取系统A发送的消息</p>
+<p> </p>
+<h3 id="22-传输消息的格式">2.2 传输消息的格式</h3>
+<p> </p>
+<p>常见的编码格式有，</p>
+<p><code>CSV,XML,JSON</code>等成熟的编码格式，或者大厂提供的序列化框架，例如：<code>google</code>的 <code>protocol buffer</code>, <code>facebook</code> 的 <code>thrift</code>, 但是，kafka没有采用上述方</p>
+<p>式，而是直接使用纯二进制的字节序列。注意，消息还是结构化的，但是在使用之前，需要将其转化为二机制的字节序列</p>
+<p> </p>
+<h3 id="23-传输模型">2.3 传输模型</h3>
+<p> </p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
