@@ -4,7 +4,16 @@
         <link>https://yzthewind.github.io/tags/elasticsearch/</link>
         <description>elasticsearch - 标签 - </description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1126978661@qq.com (yz)</managingEditor>
-            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Mon, 15 Jun 2020 10:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/tags/elasticsearch/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Tue, 16 Jun 2020 17:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/tags/elasticsearch/" rel="self" type="application/rss+xml" /><item>
+    <title>elasticsearch中的字段长度限制？</title>
+    <link>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/%E5%AD%97%E6%AE%B5%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/</link>
+    <pubDate>Tue, 16 Jun 2020 17:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/%E5%AD%97%E6%AE%B5%E9%95%BF%E5%BA%A6%E9%99%90%E5%88%B6/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/elasticsearch/%e5%ad%97%e6%ae%b5%e9%95%bf%e5%ba%a6%e9%99%90%e5%88%b6.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 elasticsearch权威指南 keyword官方文档 二、字符串类型字段长度限制 2.1 keyword 类型长度限制]]></description>
+</item><item>
     <title>elasticsearch官方优化建议</title>
     <link>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/elasticsearch%E5%AE%98%E6%96%B9%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE/</link>
     <pubDate>Mon, 15 Jun 2020 10:00:00 &#43;0800</pubDate>
