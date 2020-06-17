@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>文件管理 - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="文件管理" />
-<meta property="og:description" content="一、 参考 趣谈linux操作系统" />
+<meta property="og:description" content="一、参考 趣谈linux操作系统 二、文件系统 2.1 文件系统的功能规划 第一点，文件系统要有严格的组织形式，使得文件能够以块为单位进行存储。 第二点，文" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" />
 <meta property="og:image" content="https://yzthewind.github.io/logo.png"/>
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://yzthewind.github.io/logo.png"/>
 
 <meta name="twitter:title" content="文件管理"/>
-<meta name="twitter:description" content="一、 参考 趣谈linux操作系统"/>
+<meta name="twitter:description" content="一、参考 趣谈linux操作系统 二、文件系统 2.1 文件系统的功能规划 第一点，文件系统要有严格的组织形式，使得文件能够以块为单位进行存储。 第二点，文"/>
 <meta name="application-name" content="一曲广陵散">
 <meta name="apple-mobile-web-app-title" content="一曲广陵散"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/yzthewind.github.io\/posts\/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux\/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86\/"
-        },"genre": "posts","keywords": "linux","wordcount":  15 ,
+        },"genre": "posts","keywords": "linux","wordcount":  1660 ,
         "url": "https:\/\/yzthewind.github.io\/posts\/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux\/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86\/","datePublished": "2020-06-17T09:00:00+08:00","dateModified": "2020-06-17T09:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": "yz"},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">文件管理</h1><h2 class="single-subtitle">linux操作系统</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="far fa-folder fa-fw"></i>操作系统</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 15 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1660 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -95,13 +95,114 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#一-参考">一、 参考</a></li>
+    <li><a href="#一参考">一、参考</a></li>
+    <li><a href="#二文件系统">二、文件系统</a>
+      <ul>
+        <li><a href="#21-文件系统的功能规划">2.1 文件系统的功能规划</a></li>
+        <li><a href="#22-文件的类型">2.2 文件的类型</a></li>
+        <li><a href="#23-软连接与硬连接">2.3 软连接与硬连接</a></li>
+        <li><a href="#24-带缓存的写入操作">2.4 带缓存的写入操作</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="一-参考">一、 参考</h2>
+            </div><div class="content" id="content"><hr>
+<p> </p>
+<h2 id="一参考">一、参考</h2>
+<p> </p>
 <blockquote>
 <p><a href="https://time.geekbang.org/column/intro/164" target="_blank" rel="noopener noreffer">趣谈linux操作系统</a></p>
 </blockquote>
+<hr>
+<p> </p>
+<h2 id="二文件系统">二、文件系统</h2>
+<p> </p>
+<h3 id="21-文件系统的功能规划">2.1 文件系统的功能规划</h3>
+<p> </p>
+<p>第一点，文件系统要有严格的组织形式，使得文件能够以块为单位进行存储。</p>
+<p>第二点，文件系统中也要有索引区，用来方便查找一个文件分成的多个块都存放在了什么位置</p>
+<p>第三点，如果文件系统中有的文件是热点文件，近期经常被读取和写入，文件系统应该有缓存层</p>
+<p>第四点，文件应该用文件夹的形式组织起来，方便管理和查询</p>
+<p>第五点，Linux 内核要在自己的内存里面维护一套数据结构，来保存哪些文件被哪些进程打开和使用</p>
+<p> </p>
+<h3 id="22-文件的类型">2.2 文件的类型</h3>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">
+<span class="o">-</span> <span class="err">表示普通文件；</span>
+
+<span class="n">d</span> <span class="err">表示文件夹；</span>
+
+<span class="n">c</span> <span class="err">表示字符设备文件；</span>
+
+<span class="n">b</span> <span class="err">表示块设备文件；</span>
+
+<span class="n">s</span> <span class="err">表示套接字</span> <span class="n">socket</span> <span class="err">文件；</span>
+
+<span class="n">l</span> <span class="err">表示符号链接，也即软链接，就是通过名字指向另外一个文件</span>
+
+</code></pre></div><p> </p>
+<p><code>ext3</code> 文件系统，使用间接块、二次间接块、三次间接块保存大文件中的数据块</p>
+<p>整个文件系统的格式如下：</p>
+<p>(1) 1k 大小的引导块</p>
+<p>(2) 多个块组，每个块组中分为 超级块、块组描述表、块位图块、inode位图块、inode列表、数据块</p>
+<p> </p>
+<h3 id="23-软连接与硬连接">2.3 软连接与硬连接</h3>
+<p> </p>
+<p>软链接和硬链接的存储格式:</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="n">ln</span> <span class="p">[</span><span class="err">参数</span><span class="p">][</span><span class="err">源文件或目录</span><span class="p">][</span><span class="err">目标文件或目录</span><span class="p">]</span>
+</code></pre></div><p> </p>
+<p><code>ln -s</code> 创建的是软链接，不带 <code>-s</code> 创建的是硬链接。它们有什么区别呢？在文件系统里面是怎么保存的呢？</p>
+<p>硬链接与原始文件共用一个 inode 的，但是 inode 是不跨文件系统的，每个文件系统都有自己的 inode 列表，因而硬链接是没有办法跨文件系统的</p>
+<p>而软链接不同，软链接相当于重新创建了一个文件。这个文件也有独立的 inode，只不过打开这个文件看里面内容的时候，内容指向另外的一个文件。这就很灵活了。我们可以跨文件系统，甚至目标文件被删除了，链接文件还是在的，只不过指向的文件找不到了而已</p>
+<p> </p>
+<h3 id="24-带缓存的写入操作">2.4 带缓存的写入操作</h3>
+<p>带缓存的写入操作</p>
+<p>带缓存写入的函数 <code>generic_perform_write</code></p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">
+<span class="n">ssize_t</span> <span class="nf">generic_perform_write</span><span class="p">(</span><span class="k">struct</span> <span class="n">file</span> <span class="o">*</span><span class="n">file</span><span class="p">,</span>
+        <span class="k">struct</span> <span class="n">iov_iter</span> <span class="o">*</span><span class="n">i</span><span class="p">,</span> <span class="n">loff_t</span> <span class="n">pos</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">struct</span> <span class="n">address_space</span> <span class="o">*</span><span class="n">mapping</span> <span class="o">=</span> <span class="n">file</span><span class="o">-&gt;</span><span class="n">f_mapping</span><span class="p">;</span>
+  <span class="k">const</span> <span class="k">struct</span> <span class="n">address_space_operations</span> <span class="o">*</span><span class="n">a_ops</span> <span class="o">=</span> <span class="n">mapping</span><span class="o">-&gt;</span><span class="n">a_ops</span><span class="p">;</span>
+  <span class="k">do</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">page</span> <span class="o">*</span><span class="n">page</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">offset</span><span class="p">;</span>  <span class="cm">/* Offset into pagecache page */</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">bytes</span><span class="p">;</span>  <span class="cm">/* Bytes to write to page */</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">a_ops</span><span class="o">-&gt;</span><span class="n">write_begin</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">mapping</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">bytes</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span>
+            <span class="o">&amp;</span><span class="n">page</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">fsdata</span><span class="p">);</span>
+    <span class="n">copied</span> <span class="o">=</span> <span class="n">iov_iter_copy_from_user_atomic</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>
+    <span class="n">flush_dcache_page</span><span class="p">(</span><span class="n">page</span><span class="p">);</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">a_ops</span><span class="o">-&gt;</span><span class="n">write_end</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">mapping</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">bytes</span><span class="p">,</span> <span class="n">copied</span><span class="p">,</span>
+            <span class="n">page</span><span class="p">,</span> <span class="n">fsdata</span><span class="p">);</span>
+    <span class="n">pos</span> <span class="o">+=</span> <span class="n">copied</span><span class="p">;</span>
+    <span class="n">written</span> <span class="o">+=</span> <span class="n">copied</span><span class="p">;</span>
+
+
+    <span class="n">balance_dirty_pages_ratelimited</span><span class="p">(</span><span class="n">mapping</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">iov_iter_count</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p>对于每个循环过程，主要是四个步骤：</p>
+<p>(1)对于每一页，先调用 <code>address_space</code> 的 <code>write_begin</code> 做一些准备;</p>
+<p><code>ext4</code> 是一种日志文件系统, 有三种模式，</p>
+<p> </p>
+<p>A. <code>Journal</code>模式， 这种模式在将数据写入文件系统前，必须等待元数据和数据的日志已经落盘才能发挥作用。这样性能比较差，但是最安全；</p>
+<p>B. <code>order</code>模式， 这个模式不记录数据的日志，只记录元数据的日志，但是在写元数据的日志前，必须先确保数据已经落盘。这个折中，是默认模式；</p>
+<p>C. <code>writeback</code>模式， 不记录数据的日志，仅记录元数据的日志，并且不保证数据比元数据先落盘。这个性能最好，但是最不安全</p>
+<p>(2) 调用 <code>iov_iter_copy_from_user_atomic</code>，将写入的内容从用户态拷贝到内核态的页中</p>
+<p>(3) 调用 <code>address_space</code> 的 <code>write_end</code> 完成写操作</p>
+<p>这里面会调用 <code>ext4_journal_stop</code> 完成日志的写入，会调用 <code>block_write_end</code>-&gt;<code>__block_commit_write</code>-&gt;<code>mark_buffer_dirty</code>，将修改过的缓存标记为脏页。可以看出，其实所谓的完成写入，并没有真正写入硬盘，仅仅是写入缓存后，标记为脏页, 但是这里有一个问题，数据很危险，一旦宕机就没有了，所以需要一种机制，将写入的页面真正写到硬盘中，我们称为回写（<code>Write Back</code>）</p>
+<p>(4) 调用 <code>balance_dirty_pages_ratelimited</code>，看脏页是否太多，需要写回硬盘。所谓脏页，就是写入到缓存，但是还没有写入到硬盘的页面</p>
+<p>在 <code>balance_dirty_pages_ratelimited</code> 里面，发现脏页的数目超过了规定的数目，就调用 <code>balance_dirty_pages</code>-&gt;<code>wb_start_background_writeback</code>，启动一个背后线程开始回写</p>
+<p> </p>
+<p>触发回写的场景：</p>
+<p> </p>
+<p>A. 在调用<code>write</code>时候，发现缓存的数据太多的时候，会触发回写</p>
+<p>B. 用户主动调用 <code>sync</code>，将缓存刷到硬盘上去，最终会调用 <code>wakeup_flusher_threads</code>，同步脏页；</p>
+<p>C. 当内存十分紧张，以至于无法分配页面的时候，会调用 <code>free_more_memory</code>，最终会调用 <code>wakeup_flusher_threads</code>，释放脏页</p>
+<p>D. 脏页已经更新了较长时间，时间上超过了 <code>timer</code>，需要及时回写，保持内存和磁盘上数据一致性</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

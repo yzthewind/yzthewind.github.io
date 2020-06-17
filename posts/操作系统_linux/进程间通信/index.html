@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>进程间通信 - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="进程间通信" />
-<meta property="og:description" content="一、 参考 趣谈linux操作系统" />
+<meta property="og:description" content="一、 参考 趣谈linux操作系统 二、通信模型 2.1 管道模型 类似于瀑布开发模式的管道, 命令行中常用的模式 2.2 消息队列模型 类似于邮件模式的消息队列, 消息" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/" />
 <meta property="og:image" content="https://yzthewind.github.io/logo.png"/>
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://yzthewind.github.io/logo.png"/>
 
 <meta name="twitter:title" content="进程间通信"/>
-<meta name="twitter:description" content="一、 参考 趣谈linux操作系统"/>
+<meta name="twitter:description" content="一、 参考 趣谈linux操作系统 二、通信模型 2.1 管道模型 类似于瀑布开发模式的管道, 命令行中常用的模式 2.2 消息队列模型 类似于邮件模式的消息队列, 消息"/>
 <meta name="application-name" content="一曲广陵散">
 <meta name="apple-mobile-web-app-title" content="一曲广陵散"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/yzthewind.github.io\/posts\/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux\/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1\/"
-        },"genre": "posts","keywords": "linux","wordcount":  15 ,
+        },"genre": "posts","keywords": "linux","wordcount":  723 ,
         "url": "https:\/\/yzthewind.github.io\/posts\/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux\/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1\/","datePublished": "2020-06-17T09:00:00+08:00","dateModified": "2020-06-17T09:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": "yz"},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">进程间通信</h1><h2 class="single-subtitle">linux操作系统</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="far fa-folder fa-fw"></i>操作系统</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 15 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 723 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -96,12 +96,91 @@
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#一-参考">一、 参考</a></li>
+    <li><a href="#二通信模型">二、通信模型</a>
+      <ul>
+        <li><a href="#21-管道模型">2.1 管道模型</a></li>
+        <li><a href="#22-消息队列模型">2.2 消息队列模型</a></li>
+        <li><a href="#23-共享内存模型">2.3 共享内存模型</a></li>
+        <li><a href="#24-信号">2.4 信号</a></li>
+      </ul>
+    </li>
+    <li><a href="#三信号">三、信号</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="一-参考">一、 参考</h2>
+            </div><div class="content" id="content"><hr>
+<p> </p>
+<h2 id="一-参考">一、 参考</h2>
+<p> </p>
 <blockquote>
 <p><a href="https://time.geekbang.org/column/intro/164" target="_blank" rel="noopener noreffer">趣谈linux操作系统</a></p>
 </blockquote>
+<hr>
+<p> </p>
+<h2 id="二通信模型">二、通信模型</h2>
+<p> </p>
+<h3 id="21-管道模型">2.1 管道模型</h3>
+<p> </p>
+<p>类似于瀑布开发模式的管道, 命令行中常用的模式</p>
+<p> </p>
+<h3 id="22-消息队列模型">2.2 消息队列模型</h3>
+<p> </p>
+<p>类似于邮件模式的消息队列, 消息队列其实非常少用到，因为有更多用户级别的消息队列，<code>ActiveMQ</code>, <code>RabbitMQ</code>, <code>ZeroMQ</code>, <code>Kafka</code>, <code>MetaMQ</code>, <code>RocketMQ</code>等等</p>
+<p> </p>
+<h3 id="23-共享内存模型">2.3 共享内存模型</h3>
+<p> </p>
+<p>类似于会议室联合开发的共享内存加信号量, 一些知名的C开源软件基于此</p>
+<p> </p>
+<h3 id="24-信号">2.4 信号</h3>
+<p> </p>
+<p>类似于应急预案的信号，信号更加复杂，机制也比较复杂</p>
+<p> </p>
+<hr>
+<p> </p>
+<h2 id="三信号">三、信号</h2>
+<p> </p>
+<p>信号类似内核中的中断，但是信号是用户态的</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="p">[</span><span class="n">root</span><span class="err">@</span><span class="n">bigdata01</span> <span class="o">~</span><span class="p">]</span><span class="err">#</span> <span class="n">kill</span> <span class="o">-</span><span class="n">l</span>
+ <span class="mi">1</span><span class="p">)</span> <span class="n">SIGHUP</span>	 <span class="mi">2</span><span class="p">)</span> <span class="n">SIGINT</span>	 <span class="mi">3</span><span class="p">)</span> <span class="n">SIGQUIT</span>	 <span class="mi">4</span><span class="p">)</span> <span class="n">SIGILL</span>	 <span class="mi">5</span><span class="p">)</span> <span class="n">SIGTRAP</span>
+ <span class="mi">6</span><span class="p">)</span> <span class="n">SIGABRT</span>	 <span class="mi">7</span><span class="p">)</span> <span class="n">SIGBUS</span>	 <span class="mi">8</span><span class="p">)</span> <span class="n">SIGFPE</span>	 <span class="mi">9</span><span class="p">)</span> <span class="n">SIGKILL</span>	<span class="mi">10</span><span class="p">)</span> <span class="n">SIGUSR1</span>
+<span class="mi">11</span><span class="p">)</span> <span class="n">SIGSEGV</span>	<span class="mi">12</span><span class="p">)</span> <span class="n">SIGUSR2</span>	<span class="mi">13</span><span class="p">)</span> <span class="n">SIGPIPE</span>	<span class="mi">14</span><span class="p">)</span> <span class="n">SIGALRM</span>	<span class="mi">15</span><span class="p">)</span> <span class="n">SIGTERM</span>
+<span class="mi">16</span><span class="p">)</span> <span class="n">SIGSTKFLT</span>	<span class="mi">17</span><span class="p">)</span> <span class="n">SIGCHLD</span>	<span class="mi">18</span><span class="p">)</span> <span class="n">SIGCONT</span>	<span class="mi">19</span><span class="p">)</span> <span class="n">SIGSTOP</span>	<span class="mi">20</span><span class="p">)</span> <span class="n">SIGTSTP</span>
+<span class="mi">21</span><span class="p">)</span> <span class="n">SIGTTIN</span>	<span class="mi">22</span><span class="p">)</span> <span class="n">SIGTTOU</span>	<span class="mi">23</span><span class="p">)</span> <span class="n">SIGURG</span>	<span class="mi">24</span><span class="p">)</span> <span class="n">SIGXCPU</span>	<span class="mi">25</span><span class="p">)</span> <span class="n">SIGXFSZ</span>
+<span class="mi">26</span><span class="p">)</span> <span class="n">SIGVTALRM</span>	<span class="mi">27</span><span class="p">)</span> <span class="n">SIGPROF</span>	<span class="mi">28</span><span class="p">)</span> <span class="n">SIGWINCH</span>	<span class="mi">29</span><span class="p">)</span> <span class="n">SIGIO</span>	<span class="mi">30</span><span class="p">)</span> <span class="n">SIGPWR</span>
+<span class="mi">31</span><span class="p">)</span> <span class="n">SIGSYS</span>	<span class="mi">34</span><span class="p">)</span> <span class="n">SIGRTMIN</span>	<span class="mi">35</span><span class="p">)</span> <span class="n">SIGRTMIN</span><span class="o">+</span><span class="mi">1</span>	<span class="mi">36</span><span class="p">)</span> <span class="n">SIGRTMIN</span><span class="o">+</span><span class="mi">2</span>	<span class="mi">37</span><span class="p">)</span> <span class="n">SIGRTMIN</span><span class="o">+</span><span class="mi">3</span>
+<span class="mi">38</span><span class="p">)</span> <span class="n">SIGRTMIN</span><span class="o">+</span><span class="mi">4</span>	<span class="mi">39</span><span class="p">)</span> <span class="n">SIGRTMIN</span><span class="o">+</span><span class="mi">5</span>	<span class="mi">40</span><span class="p">)</span> <span class="n">SIGRTMIN</span><span class="o">+</span><span class="mi">6</span>	<span class="mi">41</span><span class="p">)</span> <span class="n">SIGRTMIN</span><span class="o">+</span><span class="mi">7</span>	<span class="mi">42</span><span class="p">)</span> <span class="n">SIGRTMIN</span><span class="o">+</span><span class="mi">8</span>
+<span class="mi">43</span><span class="p">)</span> <span class="n">SIGRTMIN</span><span class="o">+</span><span class="mi">9</span>	<span class="mi">44</span><span class="p">)</span> <span class="n">SIGRTMIN</span><span class="o">+</span><span class="mi">10</span>	<span class="mi">45</span><span class="p">)</span> <span class="n">SIGRTMIN</span><span class="o">+</span><span class="mi">11</span>	<span class="mi">46</span><span class="p">)</span> <span class="n">SIGRTMIN</span><span class="o">+</span><span class="mi">12</span>	<span class="mi">47</span><span class="p">)</span> <span class="n">SIGRTMIN</span><span class="o">+</span><span class="mi">13</span>
+<span class="mi">48</span><span class="p">)</span> <span class="n">SIGRTMIN</span><span class="o">+</span><span class="mi">14</span>	<span class="mi">49</span><span class="p">)</span> <span class="n">SIGRTMIN</span><span class="o">+</span><span class="mi">15</span>	<span class="mi">50</span><span class="p">)</span> <span class="n">SIGRTMAX</span><span class="o">-</span><span class="mi">14</span>	<span class="mi">51</span><span class="p">)</span> <span class="n">SIGRTMAX</span><span class="o">-</span><span class="mi">13</span>	<span class="mi">52</span><span class="p">)</span> <span class="n">SIGRTMAX</span><span class="o">-</span><span class="mi">12</span>
+<span class="mi">53</span><span class="p">)</span> <span class="n">SIGRTMAX</span><span class="o">-</span><span class="mi">11</span>	<span class="mi">54</span><span class="p">)</span> <span class="n">SIGRTMAX</span><span class="o">-</span><span class="mi">10</span>	<span class="mi">55</span><span class="p">)</span> <span class="n">SIGRTMAX</span><span class="o">-</span><span class="mi">9</span>	<span class="mi">56</span><span class="p">)</span> <span class="n">SIGRTMAX</span><span class="o">-</span><span class="mi">8</span>	<span class="mi">57</span><span class="p">)</span> <span class="n">SIGRTMAX</span><span class="o">-</span><span class="mi">7</span>
+<span class="mi">58</span><span class="p">)</span> <span class="n">SIGRTMAX</span><span class="o">-</span><span class="mi">6</span>	<span class="mi">59</span><span class="p">)</span> <span class="n">SIGRTMAX</span><span class="o">-</span><span class="mi">5</span>	<span class="mi">60</span><span class="p">)</span> <span class="n">SIGRTMAX</span><span class="o">-</span><span class="mi">4</span>	<span class="mi">61</span><span class="p">)</span> <span class="n">SIGRTMAX</span><span class="o">-</span><span class="mi">3</span>	<span class="mi">62</span><span class="p">)</span> <span class="n">SIGRTMAX</span><span class="o">-</span><span class="mi">2</span>
+<span class="mi">63</span><span class="p">)</span> <span class="n">SIGRTMAX</span><span class="o">-</span><span class="mi">1</span>	<span class="mi">64</span><span class="p">)</span> <span class="n">SIGRTMAX</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c">
+<span class="n">Signal</span>     <span class="n">Value</span>     <span class="n">Action</span>   <span class="n">Comment</span>
+<span class="err">──────────────────────────────────────────────────────────────────────</span>
+<span class="n">SIGHUP</span>        <span class="mi">1</span>       <span class="n">Term</span>    <span class="n">Hangup</span> <span class="n">detected</span> <span class="n">on</span> <span class="n">controlling</span> <span class="n">terminal</span>
+                              <span class="n">or</span> <span class="n">death</span> <span class="n">of</span> <span class="n">controlling</span> <span class="n">process</span>
+<span class="n">SIGINT</span>        <span class="mi">2</span>       <span class="n">Term</span>    <span class="n">Interrupt</span> <span class="n">from</span> <span class="n">keyboard</span>
+<span class="n">SIGQUIT</span>       <span class="mi">3</span>       <span class="n">Core</span>    <span class="n">Quit</span> <span class="n">from</span> <span class="n">keyboard</span>
+<span class="n">SIGILL</span>        <span class="mi">4</span>       <span class="n">Core</span>    <span class="n">Illegal</span> <span class="n">Instruction</span>
+
+
+<span class="n">SIGABRT</span>       <span class="mi">6</span>       <span class="n">Core</span>    <span class="n">Abort</span> <span class="n">signal</span> <span class="n">from</span> <span class="n">abort</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">SIGFPE</span>        <span class="mi">8</span>       <span class="n">Core</span>    <span class="n">Floating</span> <span class="n">point</span> <span class="n">exception</span>
+<span class="n">SIGKILL</span>       <span class="mi">9</span>       <span class="n">Term</span>    <span class="n">Kill</span> <span class="n">signal</span>
+<span class="n">SIGSEGV</span>      <span class="mi">11</span>       <span class="n">Core</span>    <span class="n">Invalid</span> <span class="n">memory</span> <span class="n">reference</span>
+<span class="n">SIGPIPE</span>      <span class="mi">13</span>       <span class="n">Term</span>    <span class="n">Broken</span> <span class="nl">pipe</span><span class="p">:</span> <span class="n">write</span> <span class="n">to</span> <span class="n">pipe</span> <span class="n">with</span> <span class="n">no</span>
+                              <span class="n">readers</span>
+<span class="n">SIGALRM</span>      <span class="mi">14</span>       <span class="n">Term</span>    <span class="n">Timer</span> <span class="n">signal</span> <span class="n">from</span> <span class="n">alarm</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">SIGTERM</span>      <span class="mi">15</span>       <span class="n">Term</span>    <span class="n">Termination</span> <span class="n">signal</span>
+<span class="n">SIGUSR1</span>   <span class="mi">30</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">16</span>    <span class="n">Term</span>    <span class="n">User</span><span class="o">-</span><span class="n">defined</span> <span class="n">signal</span> <span class="mi">1</span>
+<span class="n">SIGUSR2</span>   <span class="mi">31</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">17</span>    <span class="n">Term</span>    <span class="n">User</span><span class="o">-</span><span class="n">defined</span> <span class="n">signal</span> <span class="mi">2</span>
+<span class="err">……</span>
+</code></pre></div><p>一旦有信号产生，下面的用户进程对于信号的处理方式：</p>
+<p>(1) 执行默认操作，<code>linux</code>对于每种信号都规定了默认操作，例如：</p>
+<p><code>Term</code>表示终止进程，<code>Core</code>表示终止进程后，通过<code>Core Dump</code>将当前进程的状态保存到文件中，方便后期定位问题</p>
+<p>(2) 捕捉信号</p>
+<p>可以为每个信号定义一个信号处理函数，当信号发生时候，执行相应的信号处理函数</p>
+<p>(3) 忽略信号</p>
+<p>当不希望处理某些信号，可以忽略该信号，不做任何处理，但是， <code>SIGKILL</code>, <code>SIGSTOP</code>是无法被忽略的，任何情况下，都中断或结束一个进程</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
