@@ -4,7 +4,16 @@
         <link>https://yzthewind.github.io/categories/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E/</link>
         <description>消息引擎 - 分类 - </description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1126978661@qq.com (yz)</managingEditor>
-            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Tue, 16 Jun 2020 15:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/categories/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Thu, 18 Jun 2020 15:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/categories/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E/" rel="self" type="application/rss+xml" /><item>
+    <title>集群配置参数</title>
+    <link>https://yzthewind.github.io/posts/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E_kafka/%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0/</link>
+    <pubDate>Thu, 18 Jun 2020 15:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E_kafka/%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/kafka/%e9%9b%86%e7%be%a4%e9%85%8d%e7%bd%ae%e5%8f%82%e6%95%b0.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 kafka核心技术与实战 二、Broker端参数 Broker 端参数也被称为静态参数（Static Configs）， (1) 静态参数是指必须在配置文件s]]></description>
+</item><item>
     <title>java消费者如何管理tcp连接</title>
     <link>https://yzthewind.github.io/posts/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E_kafka/java%E6%B6%88%E8%B4%B9%E8%80%85%E6%98%AF%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86tcp%E8%BF%9E%E6%8E%A5/</link>
     <pubDate>Tue, 16 Jun 2020 15:00:00 &#43;0800</pubDate>
@@ -84,15 +93,6 @@
     <guid>https://yzthewind.github.io/posts/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E_kafka/%E4%BD%8D%E7%A7%BB/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/kafka/%e4%bd%8d%e7%a7%bb.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 kafka核心技术与实战]]></description>
-</item><item>
-    <title>位移提交</title>
-    <link>https://yzthewind.github.io/posts/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E_kafka/%E4%BD%8D%E7%A7%BB%E6%8F%90%E4%BA%A4/</link>
-    <pubDate>Tue, 16 Jun 2020 15:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E_kafka/%E4%BD%8D%E7%A7%BB%E6%8F%90%E4%BA%A4/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/kafka/%e4%bd%8d%e7%a7%bb%e6%8f%90%e4%ba%a4.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 kafka核心技术与实战]]></description>
 </item></channel>
 </rss>
