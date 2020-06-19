@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/yzthewind.github.io\/posts\/%E8%AF%AD%E8%A8%80_java\/java%E5%9F%BA%E7%A1%80\/"
-        },"genre": "posts","keywords": "java","wordcount":  411 ,
+        },"genre": "posts","keywords": "java","wordcount":  453 ,
         "url": "https:\/\/yzthewind.github.io\/posts\/%E8%AF%AD%E8%A8%80_java\/java%E5%9F%BA%E7%A1%80\/","datePublished": "2020-06-19T19:00:00+08:00","dateModified": "2020-06-19T19:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": "yz"},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">java基础</h1><h2 class="single-subtitle">java入门</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E8%AF%AD%E8%A8%80/"><i class="far fa-folder fa-fw"></i>语言</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-06-19">2020-06-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 411 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-06-19">2020-06-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 453 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -111,7 +111,8 @@
 <h2 id="二常识">二、常识</h2>
 <p> </p>
 <p>&lt;1&gt; java中类名首字母需要大写， 即文件的名称首字母是大写；</p>
-<p>&lt;2&gt; java中的两种运算符， (1) 或运算<code>|</code> 与 或或运算 <code>||</code>, (2) 且运算<code>&amp;</code>和 且且运算, 之间的区别是或运算、且运算一定会计算二元的值， 而 或或运算 和 且且运算 可能只计算一元值</p>
+<p>&lt;2&gt; java中的两种运算符， (1) 或运算<code>|</code> 与 或或运算 <code>||</code>, (2) 且运算<code>&amp;</code>和 且且运算, 之间的区别是或运算、且运算一定会计算左右两边的值， 而 或或运算 和 且且运算 可能只计算一边的值</p>
+<p>正常情况下，都是使用或或运算，而不使用 或运算， 都是使用 且且运算 ，而不使用 且运算</p>
 <p>例如：</p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">C2</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
