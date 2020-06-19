@@ -4,7 +4,25 @@
         <link>https://yzthewind.github.io/posts/</link>
         <description>所有文章 | </description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1126978661@qq.com (yz)</managingEditor>
-            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Thu, 18 Jun 2020 15:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Fri, 19 Jun 2020 19:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>java基础</title>
+    <link>https://yzthewind.github.io/posts/%E8%AF%AD%E8%A8%80_java/java%E5%9F%BA%E7%A1%80/</link>
+    <pubDate>Fri, 19 Jun 2020 19:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E8%AF%AD%E8%A8%80_java/java%E5%9F%BA%E7%A1%80/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/java/java%e5%9f%ba%e7%a1%80.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 零基础学java 二、常识 &lt;1&gt; java中类名首字母需要大写， 即文件的名称首字母是大写； &lt;2&gt; java中的两种运算符， (1) 或运算| 与 或或运算 ||, (2)]]></description>
+</item><item>
+    <title>网络系统</title>
+    <link>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/</link>
+    <pubDate>Fri, 19 Jun 2020 09:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/linux/%e7%bd%91%e7%bb%9c%e7%b3%bb%e7%bb%9f.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 趣谈linux操作系统 二、 socket通信的基本原理 socket属于网络协议的哪一层？其实，它不属于任意一层，因为socket属于操]]></description>
+</item><item>
     <title>集群配置参数</title>
     <link>https://yzthewind.github.io/posts/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E_kafka/%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0/</link>
     <pubDate>Thu, 18 Jun 2020 15:00:00 &#43;0800</pubDate>
@@ -50,15 +68,6 @@
                 <img src="/images/linux/%e7%b3%bb%e7%bb%9f%e5%88%9d%e5%a7%8b%e5%8c%96.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 趣谈linux操作系统]]></description>
 </item><item>
-    <title>网络系统</title>
-    <link>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/</link>
-    <pubDate>Wed, 17 Jun 2020 09:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/linux/%e7%bd%91%e7%bb%9c%e7%b3%bb%e7%bb%9f.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 趣谈linux操作系统]]></description>
-</item><item>
     <title>虚拟化</title>
     <link>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E8%99%9A%E6%8B%9F%E5%8C%96/</link>
     <pubDate>Wed, 17 Jun 2020 09:00:00 &#43;0800</pubDate>
@@ -85,14 +94,5 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/linux/%e8%bf%9b%e7%a8%8b%e7%ae%a1%e7%90%86.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 趣谈linux操作系统]]></description>
-</item><item>
-    <title>进程间通信</title>
-    <link>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</link>
-    <pubDate>Wed, 17 Jun 2020 09:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/linux/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 趣谈linux操作系统 二、通信模型 2.1 管道模型 类似于瀑布开发模式的管道, 命令行中常用的模式 2.2 消息队列模型 类似于邮件模式的消息队列, 消息]]></description>
 </item></channel>
 </rss>
