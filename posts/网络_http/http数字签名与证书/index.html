@@ -6,21 +6,21 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>http数字签名与证书 - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="http数字签名与证书" />
-<meta property="og:description" content="一、 参考 透视HTTP协议" />
+<meta property="og:description" content="一、 参考 透视HTTP协议 二、概要 使用非对称加密和对称加密结合的混合加密，可以实现机密性，但是仅有机密性，离安全通信还很远。 黑客虽然拿不到会话" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E4%B8%8E%E8%AF%81%E4%B9%A6/" />
 <meta property="og:image" content="https://yzthewind.github.io/logo.png"/>
-<meta property="article:published_time" content="2020-06-10T10:00:00+08:00" />
-<meta property="article:modified_time" content="2020-06-10T10:00:00+08:00" />
+<meta property="article:published_time" content="2020-06-22T14:00:00+08:00" />
+<meta property="article:modified_time" content="2020-06-22T14:00:00+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://yzthewind.github.io/logo.png"/>
 
 <meta name="twitter:title" content="http数字签名与证书"/>
-<meta name="twitter:description" content="一、 参考 透视HTTP协议"/>
+<meta name="twitter:description" content="一、 参考 透视HTTP协议 二、概要 使用非对称加密和对称加密结合的混合加密，可以实现机密性，但是仅有机密性，离安全通信还很远。 黑客虽然拿不到会话"/>
 <meta name="application-name" content="一曲广陵散">
 <meta name="apple-mobile-web-app-title" content="一曲广陵散"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E4%B8%8E%E8%AF%81%E4%B9%A6/" /><link rel="prev" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http%E7%9A%84%E4%BC%98%E5%8C%96/" /><link rel="next" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http%E6%8C%89%E4%B8%8B%E7%BD%91%E5%9D%80/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E4%B8%8E%E8%AF%81%E4%B9%A6/" /><link rel="prev" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http%E5%8A%A0%E5%AF%86/" /><link rel="next" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http_https%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,8 +29,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/yzthewind.github.io\/posts\/%E7%BD%91%E7%BB%9C_http\/http%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E4%B8%8E%E8%AF%81%E4%B9%A6\/"
-        },"genre": "posts","keywords": "http","wordcount":  12 ,
-        "url": "https:\/\/yzthewind.github.io\/posts\/%E7%BD%91%E7%BB%9C_http\/http%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E4%B8%8E%E8%AF%81%E4%B9%A6\/","datePublished": "2020-06-10T10:00:00+08:00","dateModified": "2020-06-10T10:00:00+08:00","publisher": {
+        },"genre": "posts","keywords": "http","wordcount":  3136 ,
+        "url": "https:\/\/yzthewind.github.io\/posts\/%E7%BD%91%E7%BB%9C_http\/http%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E4%B8%8E%E8%AF%81%E4%B9%A6\/","datePublished": "2020-06-22T14:00:00+08:00","dateModified": "2020-06-22T14:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": "yz"},"author": {
                 "@type": "Person",
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">http数字签名与证书</h1><h2 class="single-subtitle">http协议</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>网络</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-06-10">2020-06-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 12 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-06-22">2020-06-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3136 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -96,17 +96,127 @@
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#一-参考">一、 参考</a></li>
+    <li><a href="#二概要">二、概要</a></li>
+    <li><a href="#三摘要算法">三、摘要算法</a>
+      <ul>
+        <li><a href="#31-md5sha-1">3.1 MD5/SHA-1</a></li>
+        <li><a href="#32-sha-2">3.2 SHA-2</a></li>
+      </ul>
+    </li>
+    <li><a href="#四-完整性">四、 完整性</a></li>
+    <li><a href="#五数字签名">五、数字签名</a>
+      <ul>
+        <li><a href="#51-私钥">5.1 私钥</a></li>
+        <li><a href="#52-签名">5.2 签名</a></li>
+        <li><a href="#53-验签">5.3 验签</a></li>
+      </ul>
+    </li>
+    <li><a href="#六数字证书与ca">六、数字证书与CA</a>
+      <ul>
+        <li><a href="#61-ca">6.1 CA</a></li>
+        <li><a href="#62-证书体系的弱点">6.2 证书体系的弱点</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="一-参考">一、 参考</h2>
+            </div><div class="content" id="content"><hr>
+<p> </p>
+<h2 id="一-参考">一、 参考</h2>
+<p> </p>
 <blockquote>
 <p><a href="https://time.geekbang.org/column/intro/189?utm_source=website&amp;utm_medium=geektime&amp;utm_term=pc_interstitial_331&amp;utm_campaign=314-presell&amp;utm_content=pc0601" target="_blank" rel="noopener noreffer">透视HTTP协议</a></p>
 </blockquote>
+<hr>
+<p> </p>
+<h2 id="二概要">二、概要</h2>
+<p>使用非对称加密和对称加密结合的混合加密，可以实现机密性，但是仅有机密性，离安全通信还很远。</p>
+<p>黑客虽然拿不到会话密钥，无法破解密文，但可以通过窃听收集到足够多的密文，再尝试着修改、重组后发给网站。因为没有完整性保证，服务器只能“照单全收”，然后他就可以通过服务器的响应获取进一步的线索，最终就会破解出明文</p>
+<p>另外，黑客也可以伪造身份发布公钥。如果你拿到了假的公钥，混合加密就完全失效了。你以为自己是在和“某宝”通信，实际上网线的另一端却是黑客，银行卡号、密码等敏感信息就在“安全”的通信过程中被窃取了</p>
+<p>所以，在机密性的基础上还必须加上完整性、身份认证等特性，才能实现真正的安全</p>
+<hr>
+<p> </p>
+<h2 id="三摘要算法">三、摘要算法</h2>
+<p> </p>
+<p>实现完整性的主要手段是，摘要算法，<code>Digest Algorithm</code>， 也就是常说的散列函数、哈希函数（<code>Hash Function</code>）</p>
+<p>你可以把摘要算法近似地理解成一种特殊的压缩算法，它能够把任意长度的数据“压缩”成固定长度、而且独一无二的“摘要”字符串，就好像是给这段数据生成了一个数字&quot;指纹&rdquo;</p>
+<p>换一个角度，也可以把摘要算法理解成特殊的“单向”加密算法，它只有算法，没有密钥，加密后的数据无法解密，不能从摘要逆推出原文</p>
+<p>摘要算法实际上是把数据从一个“大空间”映射到了“小空间”，所以就存在“冲突”（<code>collision</code>，也叫碰撞）的可能性，就如同现实中的指纹一样，可能会有两份不同的原文对应相同的摘要。好的摘要算法必须能够“抵抗冲突”，让这种可能性尽量地小</p>
+<p>因为摘要算法对输入具有“单向性”和“雪崩效应”，输入的微小不同会导致输出的剧烈变化，所以也被 <code>TLS</code> 用来生成伪随机数（<code>PRF，pseudo random function</code>)</p>
+<p> </p>
+<h3 id="31-md5sha-1">3.1 MD5/SHA-1</h3>
+<p> </p>
+<p><code>MD5（Message-Digest 5）</code>、<code>SHA-1（Secure Hash Algorithm 1）</code>，是最常用的两个摘要算法，能够生成 16 字节和 20 字节长度的数字摘要。但这两个算法的安全强度比较低，不够安全，在 <code>TLS</code> 里已经被禁止使用了</p>
+<p> </p>
+<h3 id="32-sha-2">3.2 SHA-2</h3>
+<p> </p>
+<p>目前 <code>TLS </code>推荐使用的是 <code>SHA-1</code> 的后继者：<code>SHA-2</code></p>
+<p><code>SHA-2 </code>实际上是一系列摘要算法的统称，总共有 <code>6</code> 种，常用的有 <code>SHA224</code>、<code>SHA256</code>、<code>SHA384</code>，分别能够生成 28 字节、32 字节、48 字节的摘要</p>
+<hr>
+<p> </p>
+<h2 id="四-完整性">四、 完整性</h2>
+<p> </p>
+<p>摘要算法保证了数据摘要和原文是完全等价的，所以，只需要在原文后添加摘要，即可以保证原文的完整性。</p>
+<p>例如：</p>
+<p>比如，你发了条消息：“<code>hello world</code>”，然后再加上一个 <code>SHA-2</code> 的摘要。网站收到后也计算一下消息的摘要，把这两份“指纹”做个对比，如果一致，就说明消息是完整可信的，没有被修改</p>
+<p>如果黑客在中间哪怕改动了一个标点符号，摘要也会完全不同，网站计算比对就会发现消息被窜改，是不可信的</p>
+<p>不过摘要算法不具有机密性，如果明文传输，那么黑客可以修改消息后把摘要也一起改了，网站还是鉴别不出完整性</p>
+<p>所以，真正的完整性必须要建立在机密性之上，在混合加密系统里用会话密钥加密消息和摘要，这样黑客无法得知明文，也就没有办法动手脚</p>
+<p>这有个术语，叫哈希消息认证码（<code>HMAC</code>）</p>
+<hr>
+<p> </p>
+<h2 id="五数字签名">五、数字签名</h2>
+<p> </p>
+<p>机密算法和摘要算法，分别保证了通信的机密性和完整性，可以说通信是比较安全的了，但是，还存在漏洞，即通信的两个端口存在问题。</p>
+<p>就像一开始所说的，黑客可以伪装成网站来窃取信息。而反过来，他也可以伪装成你，向网站发送支付、转账等消息，网站没有办法确认你的身份，钱可能就这么被偷走了</p>
+<p>现实生活中，解决身份认证的手段是签名和印章，只要在纸上写下签名或者盖个章，就能够证明这份文件确实是由本人而不是其他人发出的</p>
+<p> </p>
+<h3 id="51-私钥">5.1 私钥</h3>
+<p> </p>
+<p>在 TLS 里有什么东西和现实中的签名、印章很像，只能由本人持有，而其他任何人都不会有呢？只要用这个东西，就能够在数字世界里证明你的身份?</p>
+<p>这个东西就是私钥，使用私钥再加上摘要算法，就能够实现数字签名，同时实现，身份认证和不可否认</p>
+<p> </p>
+<h3 id="52-签名">5.2 签名</h3>
+<p> </p>
+<p>数字签名的原理其实很简单，就是把公钥私钥的用法反过来，之前是公钥加密、私钥解密，现在是私钥加密、公钥解密</p>
+<p>但又因为非对称加密效率太低，所以私钥只加密原文的摘要，这样运算量就小的多，而且得到的数字签名也很小，方便保管和传输</p>
+<p> </p>
+<h3 id="53-验签">5.3 验签</h3>
+<p> </p>
+<p>签名和公钥一样完全公开，任何人都可以获取。但这个签名只有用私钥对应的公钥才能解开，拿到摘要后，再比对原文验证完整性，就可以像签署文件一样证明消息确实是你发的</p>
+<p>只要你和网站互相交换公钥，就可以用“签名”和“验签”来确认消息的真实性，因为私钥保密，黑客不能伪造签名，就能够保证通信双方的身份</p>
+<p>例如：</p>
+<p>比如，你用自己的私钥签名一个消息“我是小明”。网站收到后用你的公钥验签，确认身份没问题，于是也用它的私钥签名消息“我是某宝”。你收到后再用它的公钥验一下，也没问题，这样你和网站就都知道对方不是假冒的，后面就可以用混合加密进行安全通信了</p>
+<hr>
+<p> </p>
+<h2 id="六数字证书与ca">六、数字证书与CA</h2>
+<p> </p>
+<p>现在，我们已经使用混合加密实现了机密性，摘要算法实现了完整性，数字签名实现了身份认证和不可抵赖， 那么，我们可以说，已经实现了安全通信了吗？</p>
+<p>不是的，这里还有一个“公钥的信任”问题。因为谁都可以发布公钥，我们还缺少防止黑客伪造公钥的手段，也就是说，怎么来判断这个公钥就是你或者某宝的公钥呢？</p>
+<p> </p>
+<h3 id="61-ca">6.1 CA</h3>
+<p> </p>
+<p>必须引入“外力”，找一个公认的可信第三方，让它作为“信任的起点，递归的终点”，构建起公钥的信任链</p>
+<p><code>CA</code>（<code>Certificate Authority</code>，证书认证机构）, 它就像网络世界里的公安局、教育部、公证中心，具有极高的可信度，由它来给各个公钥签名，用自身的信誉来保证公钥无法伪造，是可信的。</p>
+<p><code>CA </code>对公钥的签名认证也是有格式的，不是简单地把公钥绑定在持有者身份上就完事了，还要包含序列号、用途、颁发者、有效时间等等，把这些打成一个包再签名，完整地证明公钥关联的各种信息，形成“数字证书”（<code>Certificate</code>）</p>
+<p>知名的 <code>CA</code> 全世界就那么几家，比如 <code>DigiCert、VeriSign、Entrust、Let’s Encrypt</code> 等，它们签发的证书分 <code>DV、OV、EV</code> 三种，区别在于可信程度</p>
+<p><code>DV </code>是最低的，只是域名级别的可信，背后是谁不知道。<code>EV</code> 是最高的，经过了法律和审计的严格核查，可以证明网站拥有者的身份（在浏览器地址栏会显示出公司的名字，例如 <code>Apple、GitHub</code> 的网站）</p>
+<p>不过，<code>CA</code> 怎么证明自己呢？</p>
+<p>这还是信任链的问题。小一点的 <code>CA</code> 可以让大 <code>CA </code>签名认证，但链条的最后，也就是 <code>Root CA</code>，就只能自己证明自己了，这个就叫“自签名证书”（<code>Self-Signed Certificate</code>）或者“根证书”（<code>Root Certificate</code>）。你必须相信，否则整个证书信任链就走不下去了</p>
+<p>有了这个证书体系，操作系统和浏览器都内置了各大 <code>CA</code> 的根证书，上网的时候只要服务器发过来它的证书，就可以验证证书里的签名，顺着证书链（<code>Certificate Chain</code>）一层层地验证，直到找到根证书，就能够确定证书是可信的，从而里面的公钥也是可信的</p>
+<p> </p>
+<h3 id="62-证书体系的弱点">6.2 证书体系的弱点</h3>
+<p> </p>
+<p>证书体系（<code>PKI，Public Key Infrastructure</code>）虽然是目前整个网络世界的安全基础设施，但绝对的安全是不存在的，它也有弱点，还是关键的“信任”二字</p>
+<p>如果 <code>CA</code> 失误或者被欺骗，签发了错误的证书，虽然证书是真的，可它代表的网站却是假的</p>
+<p>还有一种更危险的情况，<code>CA</code> 被黑客攻陷，或者 <code>CA</code> 有恶意，因为它（即根证书）是信任的源头，整个信任链里的所有证书也就都不可信了</p>
+<p>这两种事情并不是“耸人听闻”，都曾经实际出现过。所以，需要再给证书体系打上一些补丁</p>
+<p>针对第一种，开发出了 <code>CRL</code>（证书吊销列表，<code>Certificate revocation list</code>）和 <code>OCSP</code>（在线证书状态协议，<code>Online Certificate Status Protocol</code>），及时废止有问题的证书</p>
+<p>对于第二种，因为涉及的证书太多，就只能操作系统或者浏览器从根上“下狠手”了，撤销对<code> CA</code> 的信任，列入“黑名单”，这样它颁发的所有证书就都会被认为是不安全的</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2020-06-10</span>
+                <span>更新于 2020-06-22</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -125,8 +235,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/%E7%BD%91%E7%BB%9C_http/http%E7%9A%84%E4%BC%98%E5%8C%96/" class="prev" rel="prev" title="http的优化"><i class="fas fa-angle-left fa-fw"></i>http的优化</a>
-            <a href="/posts/%E7%BD%91%E7%BB%9C_http/http%E6%8C%89%E4%B8%8B%E7%BD%91%E5%9D%80/" class="next" rel="next" title="http按下网址">http按下网址<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/%E7%BD%91%E7%BB%9C_http/http%E5%8A%A0%E5%AF%86/" class="prev" rel="prev" title="http加密"><i class="fas fa-angle-left fa-fw"></i>http加密</a>
+            <a href="/posts/%E7%BD%91%E7%BB%9C_http/http_https%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B/" class="next" rel="next" title="https连接过程">https连接过程<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
@@ -142,5 +252,5 @@
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
                 <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["yzthewind"],"clientID":"8e70465ecd960275a174","clientSecret":"32c54e1095f64e2ac3dcfa4afed2e61d5444bc0d","id":"2020-06-10T10:00:00+08:00","owner":"yzthewind","repo":"blog_gitalk","title":"http数字签名与证书"}},"data":{"id-1":"一曲广陵散","id-2":"一曲广陵散"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["yzthewind"],"clientID":"8e70465ecd960275a174","clientSecret":"32c54e1095f64e2ac3dcfa4afed2e61d5444bc0d","id":"2020-06-22T14:00:00+08:00","owner":"yzthewind","repo":"blog_gitalk","title":"http数字签名与证书"}},"data":{"id-1":"一曲广陵散","id-2":"一曲广陵散"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>
