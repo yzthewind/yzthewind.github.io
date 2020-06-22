@@ -4,9 +4,18 @@
         <link>https://yzthewind.github.io/</link>
         <description>这是我的全新 Hugo 网站</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1126978661@qq.com (yz)</managingEditor>
-            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Mon, 22 Jun 2020 10:00:00 &#43;0800</lastBuildDate>
+            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Mon, 22 Jun 2020 11:00:00 &#43;0800</lastBuildDate>
             <atom:link href="https://yzthewind.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>http加密</title>
+    <link>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http%E5%8A%A0%E5%AF%86/</link>
+    <pubDate>Mon, 22 Jun 2020 11:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http%E5%8A%A0%E5%AF%86/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/http/http%e5%8a%a0%e5%af%86.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 透视HTTP协议 二、 概要 机密性是信息安全的基础，缺乏机密性的TLS无法使用，实现机密性的最常用手段是加密，就是把消息用某种方式转换成]]></description>
+</item><item>
     <title>http ssl与tls</title>
     <link>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http_ssl_tls/</link>
     <pubDate>Mon, 22 Jun 2020 10:00:00 &#43;0800</pubDate>
@@ -86,15 +95,6 @@
     <guid>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E8%99%9A%E6%8B%9F%E5%8C%96/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/linux/%e8%99%9a%e6%8b%9f%e5%8c%96.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 趣谈linux操作系统]]></description>
-</item><item>
-    <title>输入输出系统</title>
-    <link>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F/</link>
-    <pubDate>Wed, 17 Jun 2020 09:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/linux/%e8%be%93%e5%85%a5%e8%be%93%e5%87%ba%e7%b3%bb%e7%bb%9f.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 趣谈linux操作系统]]></description>
 </item></channel>
 </rss>
