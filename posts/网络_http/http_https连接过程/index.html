@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/yzthewind.github.io\/posts\/%E7%BD%91%E7%BB%9C_http\/http_https%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B\/"
-        },"genre": "posts","keywords": "http","wordcount":  749 ,
+        },"genre": "posts","keywords": "http","wordcount":  2840 ,
         "url": "https:\/\/yzthewind.github.io\/posts\/%E7%BD%91%E7%BB%9C_http\/http_https%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B\/","datePublished": "2020-06-22T16:00:00+08:00","dateModified": "2020-06-22T16:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": "yz"},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">https连接过程</h1><h2 class="single-subtitle">http协议</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>网络</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-06-22">2020-06-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 749 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-06-22">2020-06-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2840 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -105,6 +105,9 @@
         <li><a href="#34-变更密码规范协议">3.4 变更密码规范协议</a></li>
       </ul>
     </li>
+    <li><a href="#四ecdhe握手过程">四、ECDHE握手过程</a></li>
+    <li><a href="#五rsa握手过程">五、RSA握手过程</a></li>
+    <li><a href="#六-双向认证">六、 双向认证</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><hr>
@@ -143,6 +146,97 @@
 <h3 id="34-变更密码规范协议">3.4 变更密码规范协议</h3>
 <p> </p>
 <p>变更密码规范协议（Change Cipher Spec Protocol），它非常简单，就是一个“通知”，告诉对方，后续的数据都将使用加密保护。那么反过来，在它之前，数据都是明文的。</p>
+<hr>
+<p> </p>
+<h2 id="四ecdhe握手过程">四、ECDHE握手过程</h2>
+<p> </p>
+<p>握手过程如下：</p>
+<p> </p>
+<p>(1) 在TCP建立连接过后，浏览器会首先发送一个“Client Hello”消息，也即与服务器打招呼，里面包含客户端的版本号、支持的密码套件，还有一个随机数，client random, 用于后续生成会话密钥</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">
+<span class="n">Handshake</span> <span class="n">Protocol</span><span class="o">:</span> <span class="n">Client</span> <span class="n">Hello</span> <span class="c1">// 打招呼内容
+</span><span class="c1"></span>    <span class="n">Version</span><span class="o">:</span> <span class="n">TLS</span> <span class="n">1</span><span class="o">.</span><span class="na">2</span> <span class="o">(</span><span class="n">0x0303</span><span class="o">)</span> <span class="c1">// 客户端TLS版本号
+</span><span class="c1"></span>    <span class="n">Random</span><span class="o">:</span> <span class="n">1cbf803321fd2623408dfe</span><span class="err">…</span> <span class="c1">// 随机数
+</span><span class="c1"></span>    <span class="n">Cipher</span> <span class="nf">Suites</span> <span class="o">(</span><span class="n">17</span> <span class="n">suites</span><span class="o">)</span> <span class="c1">// 可用的密码套件列表
+</span><span class="c1"></span>        <span class="n">Cipher</span> <span class="n">Suite</span><span class="o">:</span> <span class="n">TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</span> <span class="o">(</span><span class="n">0xc02f</span><span class="o">)</span>
+        <span class="n">Cipher</span> <span class="n">Suite</span><span class="o">:</span> <span class="n">TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</span> <span class="o">(</span><span class="n">0xc030</span><span class="o">)</span>
+
+</code></pre></div><p>可以理解为客户端向服务器通信，&ldquo;我这边有这些这些信息，你看看哪些是可用的，关键的随机数可得留着&rdquo;</p>
+<p> </p>
+<p>(2) 作为“礼尚往来”，服务器收到“Client Hello”后，会返回一个“Server Hello”消息。把版本号对一下，也给出一个随机数（Server Random），然后从客户端的列表里选一个作为本次通信使用的密码套件，在这里它选择了“TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384”</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">
+<span class="n">Handshake</span> <span class="n">Protocol</span><span class="o">:</span> <span class="n">Server</span> <span class="n">Hello</span> <span class="c1">//服务器发送内容
+</span><span class="c1"></span>    <span class="n">Version</span><span class="o">:</span> <span class="n">TLS</span> <span class="n">1</span><span class="o">.</span><span class="na">2</span> <span class="o">(</span><span class="n">0x0303</span><span class="o">)</span> <span class="c1">// 服务端使用的TLS版本
+</span><span class="c1"></span>    <span class="n">Random</span><span class="o">:</span> <span class="n">0e6320f21bae50842e96</span><span class="err">…</span> <span class="c1">// 服务端的随机数
+</span><span class="c1"></span>    <span class="n">Cipher</span> <span class="n">Suite</span><span class="o">:</span> <span class="n">TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</span> <span class="o">(</span><span class="n">0xc030</span><span class="o">)</span> <span class="c1">// 服务端决定的通信密码套件
+</span><span class="c1"></span>
+</code></pre></div><p> </p>
+<p>可以理解为服务端向客户端通信，&ldquo;我这边版本对上了，可以加密，你的密码套件还挺多的呀，就使用这个吧，用椭圆曲线加 RSA、AES、SHA384， 我这边也有一个随机数，你先留着吧&rdquo;</p>
+<p> </p>
+<p>(3) 服务端为了证明自己的身份，把自身证书（Server Certificate）发给了客户端， 服务端证书是CA使用私钥对服务端的公钥的签名结果，即是说，通过服务端证书可以获得服务端的公钥。</p>
+<p> </p>
+<p> </p>
+<p>(4) 这个步骤是关键，因为服务器选择了ECDHE算法，所以，服务端会在发送证书后，发送 server key exchange消息，里面是椭圆曲线的公钥 server params, 用于实现密钥交换算法，在加上自己的私钥签名认证</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">
+
+<span class="n">Handshake</span> <span class="n">Protocol</span><span class="o">:</span> <span class="n">Server</span> <span class="n">Key</span> <span class="n">Exchange</span>
+    <span class="n">EC</span> <span class="n">Diffie</span><span class="o">-</span><span class="n">Hellman</span> <span class="n">Server</span> <span class="n">Params</span>
+        <span class="n">Curve</span> <span class="n">Type</span><span class="o">:</span> <span class="n">named_curve</span> <span class="o">(</span><span class="n">0x03</span><span class="o">)</span>
+        <span class="n">Named</span> <span class="n">Curve</span><span class="o">:</span> <span class="n">x25519</span> <span class="o">(</span><span class="n">0x001d</span><span class="o">)</span>
+        <span class="n">Pubkey</span><span class="o">:</span> <span class="n">3b39deaf00217894e</span><span class="o">...</span> <span class="c1">// 椭圆曲线的公钥
+</span><span class="c1"></span>        <span class="n">Signature</span> <span class="n">Algorithm</span><span class="o">:</span> <span class="n">rsa_pkcs1_sha512</span> <span class="o">(</span><span class="n">0x0601</span><span class="o">)</span> 
+        <span class="n">Signature</span><span class="o">:</span> <span class="n">37141adac38ea4</span><span class="o">...</span> <span class="c1">// 私钥签名认证
+</span><span class="c1"></span> 
+</code></pre></div><p> </p>
+<p>这相当于说，刚才我选的密码套件有点复杂，所以再给你个算法的参数，和刚才的随机数一样，要保留着，别丢了，为了防止别人冒充我，我又盖了一个章，因为(3)中客户端已经可以得到服务端的公钥，所以（服务端私钥加密椭圆曲线的公钥, 服务端公钥解密）客户端可以得到椭圆曲线的公钥</p>
+<p> </p>
+<p> </p>
+<p>(5) 服务端发送Server Hello Done， 表示我的信息就是这些，打招呼完毕</p>
+<p>上述，（1）到（5）表示第一个消息往返已经完成，（两个TCP包），结果是客户端和服务端通过明文共享了三个信息：</p>
+<p>Client Random、Server Random 和 Server Params</p>
+<p>客户端此时拿到了服务端的证书，那这个证书是不是有效的呢？</p>
+<p>客户端开始走证书链逐级验证，确认证书的真实性，再用证书公钥验证签名，就确认了服务端的真实性，刚才跟我打招呼的不是骗子，可以接着往下走</p>
+<p> </p>
+<p> </p>
+<p>(6) 客户端按照密码套件的要求，生成一个椭圆曲线的公钥（Client Params），用“Client Key Exchange”消息发给服务器</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">
+<span class="n">Handshake</span> <span class="n">Protocol</span><span class="o">:</span> <span class="n">Client</span> <span class="n">Key</span> <span class="n">Exchange</span>
+    <span class="n">EC</span> <span class="n">Diffie</span><span class="o">-</span><span class="n">Hellman</span> <span class="n">Client</span> <span class="n">Params</span>
+        <span class="n">Pubkey</span><span class="o">:</span> <span class="n">8c674d0e08dc27b5eaa</span><span class="err">…</span> <span class="c1">//客户端生成的公钥
+</span><span class="c1"></span>
+</code></pre></div><p> </p>
+<p>现在客户端和服务器手里都拿到了密钥交换算法的两个参数（Client Params、Server Params），就用 ECDHE 算法一阵算，算出了一个新的东西，叫“Pre-Master”，其实也是一个随机数</p>
+<p>至于具体的计算原理和过程，因为太复杂就不细说了，但算法可以保证即使黑客截获了之前的参数，也是绝对算不出这个随机数的</p>
+<p>现在客户端和服务器手里有了三个随机数：Client Random、Server Random 和 Pre-Master。用这三个作为原始材料，就可以生成用于加密会话的主密钥，叫“Master Secret”。而黑客因为拿不到“Pre-Master”，所以也就得不到主密钥</p>
+<p>为什么非得这么麻烦，非要三个随机数呢？</p>
+<p>这就必须说 TLS 的设计者考虑得非常周到了，他们不信任客户端或服务器伪随机数的可靠性，为了保证真正的“完全随机”“不可预测”，把三个不可靠的随机数混合起来，那么“随机”的程度就非常高了，足够让黑客难以猜测</p>
+<p>“Master Secret”究竟是怎么算出来的呢？</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">
+
+<span class="n">master_secret</span> <span class="o">=</span> <span class="n">PRF</span><span class="o">(</span><span class="n">pre_master_secret</span><span class="o">,</span> <span class="s">&#34;master secret&#34;</span><span class="o">,</span>
+                    <span class="n">ClientHello</span><span class="o">.</span><span class="na">random</span> <span class="o">+</span> <span class="n">ServerHello</span><span class="o">.</span><span class="na">random</span><span class="o">)</span>
+
+</code></pre></div><p> </p>
+<p>这里的“PRF”就是伪随机数函数，它基于密码套件里的最后一个参数，比如这次的 SHA384，通过摘要算法来再一次强化“Master Secret”的随机性</p>
+<p>主密钥有 48 字节，但它也不是最终用于通信的会话密钥，还会再用 PRF 扩展出更多的密钥，比如客户端发送用的会话密钥（client_write_key）、服务器发送用的会话密钥（server_write_key）等等，避免只用一个密钥带来的安全隐患</p>
+<p> </p>
+<p>(7) 有了主密钥和派生的会话密钥，握手就快结束了。客户端发一个“Change Cipher Spec”，然后再发一个“Finished”消息，把之前所有发送的数据做个摘要，再加密一下，让服务器做个验证. 意思就是告诉服务器：“后面都改用对称算法加密通信了啊，用的就是打招呼时说的 AES，加密对不对还得你测一下。”</p>
+<p> </p>
+<p> </p>
+<p>(8) 服务器也是同样的操作，发“Change Cipher Spec”和“Finished”消息，双方都验证加密解密 OK，握手正式结束，后面就收发被加密的 HTTP 请求和响应了</p>
+<p> </p>
+<hr>
+<p> </p>
+<h2 id="五rsa握手过程">五、RSA握手过程</h2>
+<p> </p>
+<hr>
+<p> </p>
+<h2 id="六-双向认证">六、 双向认证</h2>
+<p> </p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
