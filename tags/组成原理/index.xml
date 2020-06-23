@@ -1,0 +1,98 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>组成原理 - 标签 - </title>
+        <link>https://yzthewind.github.io/tags/%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/</link>
+        <description>组成原理 - 标签 - </description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1126978661@qq.com (yz)</managingEditor>
+            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Tue, 23 Jun 2020 10:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/tags/%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" rel="self" type="application/rss+xml" /><item>
+    <title>CISC和RISC</title>
+    <link>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/cisc%E5%92%8Crisc/</link>
+    <pubDate>Tue, 23 Jun 2020 10:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/cisc%E5%92%8Crisc/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/os/CISC%e5%92%8cRISC.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 深入浅出计算机组成原理]]></description>
+</item><item>
+    <title>DMA</title>
+    <link>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/dma/</link>
+    <pubDate>Tue, 23 Jun 2020 10:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/dma/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/os/DMA.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 深入浅出计算机组成原理]]></description>
+</item><item>
+    <title>ELF和静态链接</title>
+    <link>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/elf%E5%92%8C%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5/</link>
+    <pubDate>Tue, 23 Jun 2020 10:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/elf%E5%92%8C%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/os/ELF%e5%92%8c%e9%9d%99%e6%80%81%e9%93%be%e6%8e%a5.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 深入浅出计算机组成原理]]></description>
+</item><item>
+    <title>FPGA和ASIC</title>
+    <link>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/fpga%E5%92%8Casic/</link>
+    <pubDate>Tue, 23 Jun 2020 10:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/fpga%E5%92%8Casic/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/os/FPGA%e5%92%8cASIC.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 深入浅出计算机组成原理]]></description>
+</item><item>
+    <title>GPU</title>
+    <link>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/gpu/</link>
+    <pubDate>Tue, 23 Jun 2020 10:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/gpu/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/os/GPU.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 深入浅出计算机组成原理]]></description>
+</item><item>
+    <title>MESI协议</title>
+    <link>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/mesi%E5%8D%8F%E8%AE%AE/</link>
+    <pubDate>Tue, 23 Jun 2020 10:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/mesi%E5%8D%8F%E8%AE%AE/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/os/MESI%e5%8d%8f%e8%ae%ae.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 深入浅出计算机组成原理]]></description>
+</item><item>
+    <title>SIMD</title>
+    <link>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/simd/</link>
+    <pubDate>Tue, 23 Jun 2020 10:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/simd/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/os/SIMD.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 深入浅出计算机组成原理]]></description>
+</item><item>
+    <title>SSD硬盘</title>
+    <link>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/ssd%E7%A1%AC%E7%9B%98/</link>
+    <pubDate>Tue, 23 Jun 2020 10:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/ssd%E7%A1%AC%E7%9B%98/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/os/SSD%e7%a1%ac%e7%9b%98.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 深入浅出计算机组成原理]]></description>
+</item><item>
+    <title>Superscalar和VLIW</title>
+    <link>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/superscalar%E5%92%8Cvliw/</link>
+    <pubDate>Tue, 23 Jun 2020 10:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/superscalar%E5%92%8Cvliw/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/os/Superscalar%e5%92%8cVLIW.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 深入浅出计算机组成原理]]></description>
+</item><item>
+    <title>乘法器</title>
+    <link>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/%E4%B9%98%E6%B3%95%E5%99%A8/</link>
+    <pubDate>Tue, 23 Jun 2020 10:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/%E4%B9%98%E6%B3%95%E5%99%A8/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/os/%e4%b9%98%e6%b3%95%e5%99%a8.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 深入浅出计算机组成原理]]></description>
+</item></channel>
+</rss>
