@@ -4,7 +4,16 @@
         <link>https://yzthewind.github.io/categories/%E6%95%B0%E5%AD%A6/</link>
         <description>数学 - 分类 - </description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1126978661@qq.com (yz)</managingEditor>
-            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/categories/%E6%95%B0%E5%AD%A6/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Wed, 24 Jun 2020 09:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/categories/%E6%95%B0%E5%AD%A6/" rel="self" type="application/rss+xml" /><item>
+    <title>1. 数组</title>
+    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/</link>
+    <pubDate>Wed, 24 Jun 2020 09:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/algorithm/%e6%95%b0%e7%bb%84.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 1. 数据结构与算法之美 二、如何实现随机访问？ 什么是数组，数组（array）是一种线性表数据结构，用一组连续的内存空间，来存储具有相同的]]></description>
+</item><item>
     <title>AC自动机</title>
     <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_ac%E8%87%AA%E5%8A%A8%E6%9C%BA/</link>
     <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
@@ -84,15 +93,6 @@
     <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/algorithm/%e5%93%88%e5%b8%8c%e7%ae%97%e6%b3%95.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 1. 数据结构与算法之美]]></description>
-</item><item>
-    <title>回溯算法</title>
-    <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/</link>
-    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/algorithm/%e5%9b%9e%e6%ba%af%e7%ae%97%e6%b3%95.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 1. 数据结构与算法之美]]></description>
 </item></channel>
 </rss>

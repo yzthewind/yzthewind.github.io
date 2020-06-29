@@ -4,7 +4,16 @@
         <link>https://yzthewind.github.io/categories/%E7%BD%91%E7%BB%9C/</link>
         <description>网络 - 分类 - </description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1126978661@qq.com (yz)</managingEditor>
-            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Mon, 22 Jun 2020 16:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/categories/%E7%BD%91%E7%BB%9C/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Mon, 29 Jun 2020 10:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/categories/%E7%BD%91%E7%BB%9C/" rel="self" type="application/rss+xml" /><item>
+    <title>http实体数据</title>
+    <link>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http%E5%AE%9E%E4%BD%93%E6%95%B0%E6%8D%AE/</link>
+    <pubDate>Mon, 29 Jun 2020 10:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http%E5%AE%9E%E4%BD%93%E6%95%B0%E6%8D%AE/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/http/http%e5%ae%9e%e4%bd%93%e6%95%b0%e6%8d%ae.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 透视HTTP协议 二、数据类型和编码 在TCP/IP协议栈中，传输数据基本上都是使用 header+body 的格式，TCP/UDP传输层协议，不关心body数]]></description>
+</item><item>
     <title>https连接过程</title>
     <link>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http_https%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B/</link>
     <pubDate>Mon, 22 Jun 2020 16:00:00 &#43;0800</pubDate>
@@ -84,15 +93,6 @@
     <guid>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http2%E5%86%85%E6%A0%B8%E5%89%96%E6%9E%90/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/http/http2%e5%86%85%e6%a0%b8%e5%89%96%e6%9e%90.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 透视HTTP协议]]></description>
-</item><item>
-    <title>http2.0 特性</title>
-    <link>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http2%E7%89%B9%E6%80%A7/</link>
-    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http2%E7%89%B9%E6%80%A7/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/http/http2%e7%89%b9%e6%80%a7.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 透视HTTP协议]]></description>
 </item></channel>
 </rss>

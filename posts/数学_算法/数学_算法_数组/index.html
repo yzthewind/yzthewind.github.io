@@ -5,32 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>数组 - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="数组" />
-<meta property="og:description" content="一、 参考 1. 数据结构与算法之美" />
+        <title>1. 数组 - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="1. 数组" />
+<meta property="og:description" content="一、 参考 1. 数据结构与算法之美 二、如何实现随机访问？ 什么是数组，数组（array）是一种线性表数据结构，用一组连续的内存空间，来存储具有相同的" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/" />
 <meta property="og:image" content="https://yzthewind.github.io/logo.png"/>
-<meta property="article:published_time" content="2020-06-10T10:00:00+08:00" />
-<meta property="article:modified_time" content="2020-06-10T10:00:00+08:00" />
+<meta property="article:published_time" content="2020-06-24T09:00:00+08:00" />
+<meta property="article:modified_time" content="2020-06-24T09:00:00+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://yzthewind.github.io/logo.png"/>
 
-<meta name="twitter:title" content="数组"/>
-<meta name="twitter:description" content="一、 参考 1. 数据结构与算法之美"/>
+<meta name="twitter:title" content="1. 数组"/>
+<meta name="twitter:description" content="一、 参考 1. 数据结构与算法之美 二、如何实现随机访问？ 什么是数组，数组（array）是一种线性表数据结构，用一组连续的内存空间，来存储具有相同的"/>
 <meta name="application-name" content="一曲广陵散">
 <meta name="apple-mobile-web-app-title" content="一曲广陵散"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/" /><link rel="prev" href="https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" /><link rel="next" href="https://yzthewind.github.io/posts/%E5%AD%98%E5%82%A8_%E5%88%86%E5%B8%83%E5%BC%8F/%E6%95%B0%E6%8D%AE%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9C%AA%E6%9D%A5/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/" /><link rel="prev" href="https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/cisc%E5%92%8Crisc/" /><link rel="next" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http%E5%AE%9E%E4%BD%93%E6%95%B0%E6%8D%AE/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "数组",
+        "headline": "1. 数组",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/yzthewind.github.io\/posts\/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95\/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84\/"
-        },"genre": "posts","keywords": "算法","wordcount":  14 ,
-        "url": "https:\/\/yzthewind.github.io\/posts\/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95\/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84\/","datePublished": "2020-06-10T10:00:00+08:00","dateModified": "2020-06-10T10:00:00+08:00","publisher": {
+        },"genre": "posts","keywords": "算法","wordcount":  3265 ,
+        "url": "https:\/\/yzthewind.github.io\/posts\/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95\/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84\/","datePublished": "2020-06-24T09:00:00+08:00","dateModified": "2020-06-24T09:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": "yz"},"author": {
                 "@type": "Person",
@@ -77,10 +77,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">数组</h1><h2 class="single-subtitle">数据结构</h2><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">1. 数组</h1><h2 class="single-subtitle">数据结构</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E5%AD%A6/"><i class="far fa-folder fa-fw"></i>数学</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-06-10">2020-06-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 14 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-06-24">2020-06-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3265 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -96,17 +96,216 @@
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#一-参考">一、 参考</a></li>
+    <li><a href="#二如何实现随机访问">二、如何实现随机访问？</a>
+      <ul>
+        <li><a href="#21-线性表">2.1 线性表</a></li>
+        <li><a href="#22-连续的内存空间和相同类型的数据">2.2 连续的内存空间和相同类型的数据</a></li>
+        <li><a href="#23-数组查找的误区">2.3 数组查找的误区</a></li>
+      </ul>
+    </li>
+    <li><a href="#三插入和删除">三、插入和删除</a>
+      <ul>
+        <li><a href="#31-插入操作">3.1 插入操作</a></li>
+        <li><a href="#32-删除操作">3.2 删除操作</a></li>
+      </ul>
+    </li>
+    <li><a href="#四访问越界问题">四、访问越界问题</a>
+      <ul>
+        <li><a href="#41-c语言中的数组越界">4.1 c语言中的数组越界</a></li>
+        <li><a href="#42-java语言中的数组越界">4.2 java语言中的数组越界</a></li>
+      </ul>
+    </li>
+    <li><a href="#五容器与数组">五、容器与数组</a>
+      <ul>
+        <li><a href="#51-容器的优势">5.1 容器的优势</a></li>
+        <li><a href="#52-数组的使用场景">5.2 数组的使用场景</a></li>
+      </ul>
+    </li>
+    <li><a href="#六数组的下标">六、数组的下标</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="一-参考">一、 参考</h2>
+            </div><div class="content" id="content"><hr>
+<p> </p>
+<h2 id="一-参考">一、 参考</h2>
+<p> </p>
 <blockquote>
 <p><a href="https://time.geekbang.org/column/intro/126?utm_source=website&amp;utm_medium=geektime&amp;utm_term=pc_interstitial_331&amp;utm_campaign=314-presell&amp;utm_content=pc0601" target="_blank" rel="noopener noreffer">1. 数据结构与算法之美</a></p>
 </blockquote>
+<hr>
+<p> </p>
+<h2 id="二如何实现随机访问">二、如何实现随机访问？</h2>
+<p> </p>
+<p>什么是数组，数组（array）是一种线性表数据结构，用一组连续的内存空间，来存储具有相同的数据类型的数据。</p>
+<p>不仅仅是一门编程语言中的数据类型，还是一种最基础的数据结构。</p>
+<p>数组定义的分析：</p>
+<p> </p>
+<h3 id="21-线性表">2.1 线性表</h3>
+<p> </p>
+<p>线性表，linear list, 线性表就是数据排成像一条线一样的结构，每个线性表上的数据最多只有向前和向后两个方向，</p>
+<p>除了数组，链表、队列、栈等也是线性表结构。</p>
+<p>与线性表相对立的概念是非线性表，比如：二叉树、堆、图等等，之所以称为非线性表，是因为，在非线性表中，数据之间并不是简单的前后关系。</p>
+<p> </p>
+<h3 id="22-连续的内存空间和相同类型的数据">2.2 连续的内存空间和相同类型的数据</h3>
+<p> </p>
+<p>正因为有了连续的内存空间和相同类型的数据，这两个限制，数组才有了“随机访问”这个强大的特性，但是，有利就有弊，因为这两个限制，让数组的许多限制变得低效，例如：在数组中插入、删除一个数据，为了保证连续性，就需要做大量的数据迁移工作。</p>
+<p>数组是如何实现根据下标随机访问数组元素的呢？</p>
+<p>例如：一个长度为10的int数组 <code>int[] a = new int[10];</code>, 假设给数组<code>a[10]</code>分配了一块连续的内存空间<code>1000~1039</code>,</p>
+<p>其中内存块的首地址是<code>base_address = 1000</code>, 在计算机操作系统中，会给每个内存单元分配一个地址，计算机通过地址来访问内存中的数据，当计算机需要随机访问数组中的某个元素时候，可以通过寻址公式，计算出寻找元素的存储内存地址</p>
+<p><code>a[i]_address = base_address + i * data_type_size</code></p>
+<p>即, <code>a[i]_address = 1000 + i * 4</code>, 因为int类型的长度为4个字节</p>
+<p> </p>
+<h3 id="23-数组查找的误区">2.3 数组查找的误区</h3>
+<p> </p>
+<p>数组和链表的区别？下面的表述是正确的吗？</p>
+<p>链表适合插入删除，时间复杂度为<code>O(1)</code>, 数组适合查找，时间复杂度是<code>O(1)</code></p>
+<p>其实，这种表述是不准确的，数组适合查找操作，但是查找的时间复杂度并不是<code>O(1)</code>,</p>
+<p>即使是排序过的数组，使用二分查找，时间复杂度依然是<code>O(logn)</code></p>
+<p>正确的表述是，数组支持随机访问，根据下标随机访问的时间复杂度是<code>O(1)</code></p>
+<hr>
+<p> </p>
+<h2 id="三插入和删除">三、插入和删除</h2>
+<p> </p>
+<p>数组为了保持内存数据的连续性，会导致插入、删除操作低效，但是为什么会低效，有什么改进方式呢？</p>
+<p> </p>
+<h3 id="31-插入操作">3.1 插入操作</h3>
+<p> </p>
+<p> </p>
+<h4 id="311-时间复杂度分析">3.1.1 时间复杂度分析</h4>
+<p> </p>
+<p>假设数组长度为n， 现在想要在k位置插入一个数据，为了把k位置腾出来，需要把k～n位置的元素都往后挪一位，这样，插入的复杂度是多少呢？</p>
+<p>最好时间复杂度<code>O(1)</code>, 如果在数组的最后位置插入一个数据，这时不需要挪动数据</p>
+<p>最坏时间复杂度<code>O(n)</code>, 如果在数组的开始位置插入一个数据，则数组中每个数据，都需要往后挪动一位</p>
+<p>平均时间复杂度是<code>O(n)</code>, <code>(1+2+…n)/n=O(n)</code></p>
+<p> </p>
+<h4 id="312-特殊场景">3.1.2 特殊场景</h4>
+<p> </p>
+<p>如果数组是有序的，在某个位置插入一个新的元素，需要按照上面的描述方式，挪动k后的数据， 但是如果数组中保存的数据没有任何规律，数组只是被当成一个存储数据的集合呢？</p>
+<p>在这种情况下，如果将数据插入到k位置，可以采用下面的方式：</p>
+<p>A. 直接把k位置的数据搬移到数组的最后</p>
+<p>B. 将新的数据插入到k位置</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// package learn;
+</span><span class="c1"></span><span class="kn">package</span> <span class="nn">t1</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">C1</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">10</span><span class="o">];</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printArray</span><span class="o">(){</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="n">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">i</span><span class="o">;</span>
+        <span class="o">};</span>
+        <span class="n">printArray</span><span class="o">();</span>
+
+        <span class="c1">// 在位置3插入一个数据10
+</span><span class="c1"></span>        <span class="n">a</span><span class="o">[</span><span class="n">5</span><span class="o">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">3</span><span class="o">];</span>
+        <span class="n">a</span><span class="o">[</span><span class="n">3</span><span class="o">]</span> <span class="o">=</span> <span class="n">10</span><span class="o">;</span>
+
+        <span class="n">printArray</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><p> </p>
+<p>利用这种处理技巧，在特定场景下，在k位置插入一个数据的时间复杂度降低到<code>O(1)</code>, 这个思想在快排中会使用。</p>
+<p> </p>
+<h3 id="32-删除操作">3.2 删除操作</h3>
+<p> </p>
+<p>和插入数据一样，如果想要删除位置k的数据，为了内存的连续性，也需要搬移数据，否则数组中间会有空洞，内存不连续。</p>
+<p> </p>
+<h4 id="321-复杂度分析">3.2.1 复杂度分析</h4>
+<p> </p>
+<p>和插入一样，如果删除最后一个位置的数据，则不需要搬移数据，为最好复杂度，O(1)</p>
+<p>如果删除第一个位置的元素，则剩下所有数据都需要搬移，为最坏复杂度，O(n)</p>
+<p>平均情况时间复杂度也为 O(n)</p>
+<p> </p>
+<h4 id="322-特殊场景">3.2.2 特殊场景</h4>
+<p> </p>
+<p>实际上，在某些特殊场景下，并不一定非得追求数组中数据的连续性，如果将多次删除操作集中到一起执行，删除的效率会如何呢？</p>
+<p>例如：</p>
+<p>数组 a[10]中存储了 8 个元素：a，b，c，d，e，f，g，h， 依次删除 a，b，c 三个元素</p>
+<p>为了避免 d，e，f，g，h 这几个数据会被搬移三次， 可以先记录下已经删除的数据。每次的删除操作并不是真正地搬移数据，只是记录数据已经被删除。当数组没有更多空间存储数据时， 再触发执行一次真正的删除操作，这样就大大减少了删除操作导致的数据搬移。</p>
+<p>上面的删除逻辑，其实就是JVM 标记清除垃圾回收算法的核心思想。</p>
+<p>数据结构和算法的魅力就在于此，很多时候我们并不是要去死记硬背某个数据结构或者算法，而是要学习它背后的思想和处理技巧，这些东西才是最有价值的</p>
+<hr>
+<p> </p>
+<h2 id="四访问越界问题">四、访问越界问题</h2>
+<p> </p>
+<p> </p>
+<h3 id="41-c语言中的数组越界">4.1 c语言中的数组越界</h3>
+<p> </p>
+<p>数组越界在C语言中是一种未决行为，并没有规定当数组越界时候，编译器应该如何处理，因为，访问数组的本质就是访问一段连续内存，只要数组通过偏移计算得到的内存地址是可用的，那么程序就可能不会报任何错误</p>
+<p>这种情况下，一般都会出现莫名其妙的逻辑错误，debug 的难度非常的大。而且，很多计算机病毒也正是利用到了代码中的数组越界可以访问非法地址的漏洞，来攻击系统，所以写代码的时候一定要警惕数组越界</p>
+<p> </p>
+<h3 id="42-java语言中的数组越界">4.2 java语言中的数组越界</h3>
+<p> </p>
+<p>但并非所有的语言都像 C 一样，把数组越界检查的工作丢给程序员来做，像 Java 本身就会做越界检查</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">
+<span class="c1">// package learn;
+</span><span class="c1"></span><span class="kn">package</span> <span class="nn">t1</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">C1</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">10</span><span class="o">];</span> <span class="c1">// 保存数据
+</span><span class="c1"></span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printArray</span><span class="o">(){</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="n">a</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">a</span><span class="o">[</span><span class="n">10</span><span class="o">]</span> <span class="o">=</span> <span class="n">10</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// error log
+</span><span class="c1"></span>
+<span class="n">Exception</span> <span class="n">in</span> <span class="n">thread</span> <span class="s">&#34;main&#34;</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ArrayIndexOutOfBoundsException</span><span class="o">:</span> <span class="n">10</span>
+        <span class="n">at</span> <span class="n">t1</span><span class="o">.</span><span class="na">C1</span><span class="o">.</span><span class="na">main</span><span class="o">(</span><span class="n">C1</span><span class="o">.</span><span class="na">java</span><span class="o">:</span><span class="n">15</span><span class="o">)</span>
+
+</code></pre></div><p> </p>
+<hr>
+<p> </p>
+<h2 id="五容器与数组">五、容器与数组</h2>
+<p> </p>
+<p>针对数组类型，很多语言都提供了容器类，比如 Java 中的 ArrayList、C++ STL 中的 vector。在项目开发中，什么时候适合用数组，什么时候适合用容器呢</p>
+<p> </p>
+<h3 id="51-容器的优势">5.1 容器的优势</h3>
+<p> </p>
+<p>如果你是 Java 工程师，几乎天天都在用 ArrayList，对它应该非常熟悉。那它与数组相比，到底有哪些优势呢</p>
+<p>ArrayList 最大的优势就是可以将很多数组操作的细节封装起来。比如前面提到的数组插入、删除数据时需要搬移其他数据等。另外，它还有一个优势，就是支持动态扩容</p>
+<p>数组本身在定义的时候需要预先指定大小，因为需要分配连续的内存空间。如果我们申请了大小为 10 的数组，当第 11 个数据需要存储到数组中时，我们就需要重新分配一块更大的空间，将原来的数据复制过去，然后再将新的数据插入</p>
+<p>如果使用 ArrayList，我们就完全不需要关心底层的扩容逻辑，ArrayList 已经帮我们实现好了。每次存储空间不够的时候，它都会将空间自动扩容为 1.5 倍大小</p>
+<p>不过，这里需要注意一点，因为扩容操作涉及内存申请和数据搬移，是比较耗时的。所以，如果事先能确定需要存储的数据大小，最好在创建 ArrayList 的时候事先指定数据大小</p>
+<p> </p>
+<h3 id="52-数组的使用场景">5.2 数组的使用场景</h3>
+<p> </p>
+<p>(1) Java ArrayList 无法存储基本类型，比如 int、long，需要封装为 Integer、Long 类，而 Autoboxing、Unboxing 则有一定的性能消耗，所以如果特别关注性能，或者希望使用基本类型，就可以选用数组</p>
+<p>(2) 如果数据大小事先已知，并且对数据的操作非常简单，用不到 ArrayList 提供的大部分方法，也可以直接使用数组</p>
+<p>(3) 要表示多维数组时，用数组往往会更加直观。比如 Object[][] array；而用容器的话则需要这样定义：ArrayList &gt; array</p>
+<p>对于业务开发，直接使用容器就足够了，省时省力。毕竟损耗一丢丢性能，完全不会影响到系统整体的性能。但如果你是做一些非常底层的开发，比如开发网络框架，性能的优化需要做到极致，这个时候数组就会优于容器，成为首选</p>
+<hr>
+<p> </p>
+<h2 id="六数组的下标">六、数组的下标</h2>
+<p> </p>
+<p>为什么大多数编程语言中，数组要从 0 开始编号，而不是从 1 开始呢？</p>
+<p>从数组存储的内存模型上来看，“下标”最确切的定义应该是“偏移（offset）”。如果用 a 来表示数组的首地址，a[0]就是偏移为 0 的位置，也就是首地址，a[k]就表示偏移 k 个 type_size 的位置，所以计算 a[k]的内存地址只需要用这个公式</p>
+<p>a[k]_address = base_address + k * type_size</p>
+<p>但是，如果数组从 1 开始计数，则计算数组元素 a[k]的内存地址就会变为：</p>
+<p>a[k]_address = base_address + (k-1)*type_size</p>
+<p>对比两个公式，我们不难发现，从 1 开始编号，每次随机访问数组元素都多了一次减法运算，对于 CPU 来说，就是多了一次减法指令</p>
+<p>数组作为非常基础的数据结构，通过下标随机访问数组元素又是其非常基础的编程操作，效率的优化就要尽可能做到极致。所以为了减少一次减法操作，数组选择了从 0 开始编号，而不是从 1 开始</p>
+<p>上面解释得再多其实都算不上压倒性的证明，说数组起始编号非 0 开始不可。所以最主要的原因可能是历史原因</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2020-06-10</span>
+                <span>更新于 2020-06-24</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -125,8 +324,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" class="prev" rel="prev" title="最短路径"><i class="fas fa-angle-left fa-fw"></i>最短路径</a>
-            <a href="/posts/%E5%AD%98%E5%82%A8_%E5%88%86%E5%B8%83%E5%BC%8F/%E6%95%B0%E6%8D%AE%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9C%AA%E6%9D%A5/" class="next" rel="next" title="数据系统的未来">数据系统的未来<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/cisc%E5%92%8Crisc/" class="prev" rel="prev" title="CISC和RISC"><i class="fas fa-angle-left fa-fw"></i>CISC和RISC</a>
+            <a href="/posts/%E7%BD%91%E7%BB%9C_http/http%E5%AE%9E%E4%BD%93%E6%95%B0%E6%8D%AE/" class="next" rel="next" title="http实体数据">http实体数据<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
@@ -142,5 +341,5 @@
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
                 <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["yzthewind"],"clientID":"8e70465ecd960275a174","clientSecret":"32c54e1095f64e2ac3dcfa4afed2e61d5444bc0d","id":"2020-06-10T10:00:00+08:00","owner":"yzthewind","repo":"blog_gitalk","title":"数组"}},"data":{"id-1":"一曲广陵散","id-2":"一曲广陵散"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["yzthewind"],"clientID":"8e70465ecd960275a174","clientSecret":"32c54e1095f64e2ac3dcfa4afed2e61d5444bc0d","id":"2020-06-24T09:00:00+08:00","owner":"yzthewind","repo":"blog_gitalk","title":"1. 数组"}},"data":{"id-1":"一曲广陵散","id-2":"一曲广陵散"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>
