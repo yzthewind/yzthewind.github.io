@@ -4,8 +4,17 @@
         <link>https://yzthewind.github.io/posts/</link>
         <description>所有文章 | </description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1126978661@qq.com (yz)</managingEditor>
-            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Mon, 29 Jun 2020 10:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>http实体数据</title>
+            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Mon, 29 Jun 2020 11:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>19. http cookie机制</title>
+    <link>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http_cookie%E6%9C%BA%E5%88%B6/</link>
+    <pubDate>Mon, 29 Jun 2020 11:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http_cookie%E6%9C%BA%E5%88%B6/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/http/http_cookie%e6%9c%ba%e5%88%b6.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 透视HTTP协议 二、什么是 Cookie？ HTTP 是“无状态”的，这既是优点也是缺点。优点是服务器没有状态差异，可以很容易地组成集群，而缺点]]></description>
+</item><item>
+    <title>15. http实体数据</title>
     <link>https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/http%E5%AE%9E%E4%BD%93%E6%95%B0%E6%8D%AE/</link>
     <pubDate>Mon, 29 Jun 2020 10:00:00 &#43;0800</pubDate>
     <author>作者</author>
@@ -84,15 +93,6 @@
     <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/simd/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/os/SIMD.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 深入浅出计算机组成原理]]></description>
-</item><item>
-    <title>SSD硬盘</title>
-    <link>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/ssd%E7%A1%AC%E7%9B%98/</link>
-    <pubDate>Tue, 23 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/ssd%E7%A1%AC%E7%9B%98/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/os/SSD%e7%a1%ac%e7%9b%98.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 深入浅出计算机组成原理]]></description>
 </item></channel>
 </rss>
