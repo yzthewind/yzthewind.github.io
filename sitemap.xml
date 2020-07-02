@@ -2,11 +2,14 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://yzthewind.github.io/</loc><lastmod>2020-06-24T09:00:00&#43;08:00</lastmod></url><url>
+            <loc>https://yzthewind.github.io/</loc><lastmod>2020-07-01T09:00:00&#43;08:00</lastmod></url><url>
+            <loc>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/1.-%E7%B3%BB%E7%BB%9F%E5%88%9D%E5%A7%8B%E5%8C%96/</loc><lastmod>2020-07-01T09:00:00&#43;08:00</lastmod></url><url>
+            <loc>https://yzthewind.github.io/categories/</loc><lastmod>2020-07-01T09:00:00&#43;08:00</lastmod></url><url>
+            <loc>https://yzthewind.github.io/tags/linux/</loc><lastmod>2020-07-01T09:00:00&#43;08:00</lastmod></url><url>
+            <loc>https://yzthewind.github.io/posts/</loc><lastmod>2020-07-01T09:00:00&#43;08:00</lastmod></url><url>
+            <loc>https://yzthewind.github.io/tags/</loc><lastmod>2020-07-01T09:00:00&#43;08:00</lastmod></url><url>
+            <loc>https://yzthewind.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc><lastmod>2020-07-01T09:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/</loc><lastmod>2020-06-24T09:00:00&#43;08:00</lastmod></url><url>
-            <loc>https://yzthewind.github.io/categories/</loc><lastmod>2020-06-24T09:00:00&#43;08:00</lastmod></url><url>
-            <loc>https://yzthewind.github.io/posts/</loc><lastmod>2020-06-24T09:00:00&#43;08:00</lastmod></url><url>
-            <loc>https://yzthewind.github.io/tags/</loc><lastmod>2020-06-24T09:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/categories/%E6%95%B0%E5%AD%A6/</loc><lastmod>2020-06-24T09:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/tags/%E7%AE%97%E6%B3%95/</loc><lastmod>2020-06-24T09:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/cisc%E5%92%8Crisc/</loc><lastmod>2020-06-23T10:00:00&#43;08:00</lastmod></url><url>
@@ -31,7 +34,6 @@
             <loc>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/%E5%BC%82%E5%B8%B8%E5%92%8C%E4%B8%AD%E6%96%AD/</loc><lastmod>2020-06-23T10:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/%E6%80%BB%E7%BA%BF/</loc><lastmod>2020-06-23T10:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/%E6%8C%87%E4%BB%A4%E8%B7%B3%E8%BD%AC/</loc><lastmod>2020-06-23T10:00:00&#43;08:00</lastmod></url><url>
-            <loc>https://yzthewind.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc><lastmod>2020-06-23T10:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/%E6%95%B0%E6%8D%AE%E5%AE%8C%E6%95%B4%E6%80%A7/</loc><lastmod>2020-06-23T10:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98/</loc><lastmod>2020-06-23T10:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/%E6%B5%AE%E7%82%B9%E6%95%B0%E5%92%8C%E5%AE%9A%E7%82%B9%E6%95%B0/</loc><lastmod>2020-06-23T10:00:00&#43;08:00</lastmod></url><url>
@@ -52,7 +54,6 @@
             <loc>https://yzthewind.github.io/tags/java/</loc><lastmod>2020-06-19T19:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/posts/%E8%AF%AD%E8%A8%80_java/java%E5%9F%BA%E7%A1%80/</loc><lastmod>2020-06-19T19:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/categories/%E8%AF%AD%E8%A8%80/</loc><lastmod>2020-06-19T19:00:00&#43;08:00</lastmod></url><url>
-            <loc>https://yzthewind.github.io/tags/linux/</loc><lastmod>2020-06-19T09:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/</loc><lastmod>2020-06-19T09:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/tags/kafka/</loc><lastmod>2020-06-18T15:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/categories/%E6%B6%88%E6%81%AF%E5%BC%95%E6%93%8E/</loc><lastmod>2020-06-18T15:00:00&#43;08:00</lastmod></url><url>
@@ -60,7 +61,6 @@
             <loc>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc><lastmod>2020-06-17T09:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E5%AE%B9%E5%99%A8%E5%8C%96/</loc><lastmod>2020-06-17T09:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/</loc><lastmod>2020-06-17T09:00:00&#43;08:00</lastmod></url><url>
-            <loc>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E7%B3%BB%E7%BB%9F%E5%88%9D%E5%A7%8B%E5%8C%96/</loc><lastmod>2020-06-17T09:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E8%99%9A%E6%8B%9F%E5%8C%96/</loc><lastmod>2020-06-17T09:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F/</loc><lastmod>2020-06-17T09:00:00&#43;08:00</lastmod></url><url>
             <loc>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/</loc><lastmod>2020-06-17T09:00:00&#43;08:00</lastmod></url><url>

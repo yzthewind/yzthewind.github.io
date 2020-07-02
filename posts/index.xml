@@ -4,7 +4,16 @@
         <link>https://yzthewind.github.io/posts/</link>
         <description>所有文章 | </description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1126978661@qq.com (yz)</managingEditor>
-            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Wed, 24 Jun 2020 09:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Wed, 01 Jul 2020 09:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>1. 系统初始化</title>
+    <link>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/1.-%E7%B3%BB%E7%BB%9F%E5%88%9D%E5%A7%8B%E5%8C%96/</link>
+    <pubDate>Wed, 01 Jul 2020 09:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/1.-%E7%B3%BB%E7%BB%9F%E5%88%9D%E5%A7%8B%E5%8C%96/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/linux/%e7%b3%bb%e7%bb%9f%e5%88%9d%e5%a7%8b%e5%8c%96.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 趣谈linux操作系统 二、 为什么要学习Linux操作系统 打开 Linux 操作系统这扇门，你才是合格的软件工程师 研究 Linux 内核代码，你能学到数据结构]]></description>
+</item><item>
     <title>1. 数组</title>
     <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/</link>
     <pubDate>Wed, 24 Jun 2020 09:00:00 &#43;0800</pubDate>
@@ -84,15 +93,6 @@
     <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/ssd%E7%A1%AC%E7%9B%98/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/os/SSD%e7%a1%ac%e7%9b%98.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 深入浅出计算机组成原理]]></description>
-</item><item>
-    <title>Superscalar和VLIW</title>
-    <link>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/superscalar%E5%92%8Cvliw/</link>
-    <pubDate>Tue, 23 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/superscalar%E5%92%8Cvliw/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/os/Superscalar%e5%92%8cVLIW.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 深入浅出计算机组成原理]]></description>
 </item></channel>
 </rss>
