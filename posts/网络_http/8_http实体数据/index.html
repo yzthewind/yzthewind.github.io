@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>8. http实体数据 - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="8. http实体数据" />
+<meta property="og:description" content="一、 参考 透视HTTP协议 二、数据类型和编码 在TCP/IP协议栈中，传输数据基本上都是使用 header&#43;body 的格式，TCP/UDP传输层协议，不关心body数" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/8_http%E5%AE%9E%E4%BD%93%E6%95%B0%E6%8D%AE/" />
+<meta property="og:image" content="https://yzthewind.github.io/logo.png"/>
+<meta property="article:published_time" content="2020-05-08T10:00:00+08:00" />
+<meta property="article:modified_time" content="2020-05-08T10:00:00+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://yzthewind.github.io/logo.png"/>
+
+<meta name="twitter:title" content="8. http实体数据"/>
+<meta name="twitter:description" content="一、 参考 透视HTTP协议 二、数据类型和编码 在TCP/IP协议栈中，传输数据基本上都是使用 header&#43;body 的格式，TCP/UDP传输层协议，不关心body数"/>
+<meta name="application-name" content="一曲广陵散">
+<meta name="apple-mobile-web-app-title" content="一曲广陵散"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/8_http%E5%AE%9E%E4%BD%93%E6%95%B0%E6%8D%AE/" /><link rel="prev" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/7_http%E4%BC%98%E7%82%B9%E4%B8%8E%E7%BC%BA%E7%82%B9/" /><link rel="next" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/9_http%E4%BC%A0%E8%BE%93%E5%A4%A7%E6%96%87%E4%BB%B6/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "8. http实体数据",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/yzthewind.github.io\/posts\/%E7%BD%91%E7%BB%9C_http\/8_http%E5%AE%9E%E4%BD%93%E6%95%B0%E6%8D%AE\/"
+        },"genre": "posts","keywords": "http","wordcount":  2980 ,
+        "url": "https:\/\/yzthewind.github.io\/posts\/%E7%BD%91%E7%BB%9C_http\/8_http%E5%AE%9E%E4%BD%93%E6%95%B0%E6%8D%AE\/","datePublished": "2020-05-08T10:00:00+08:00","dateModified": "2020-05-08T10:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "yz"},"author": {
+                "@type": "Person",
+                "name": "yz"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title=""><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title=""><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">8. http实体数据</h1><h2 class="single-subtitle">http协议</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>网络</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-08">2020-05-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2980 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/http/http%e5%ae%9e%e4%bd%93%e6%95%b0%e6%8d%ae.jpg"
+        data-srcset="/images/http/http%E5%AE%9E%E4%BD%93%E6%95%B0%E6%8D%AE.jpg, /images/http/http%e5%ae%9e%e4%bd%93%e6%95%b0%e6%8d%ae.jpg 1.5x, /images/http/http%E5%AE%9E%E4%BD%93%E6%95%B0%E6%8D%AE.jpg 2x"
+        data-sizes="auto"
+        alt="/images/http/http%E5%AE%9E%E4%BD%93%E6%95%B0%E6%8D%AE.jpg"
+        title="/images/http/http%E5%AE%9E%E4%BD%93%E6%95%B0%E6%8D%AE.jpg" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一-参考">一、 参考</a></li>
+    <li><a href="#二数据类型和编码">二、数据类型和编码</a>
+      <ul>
+        <li><a href="#21-数据类型-mime">2.1 数据类型 MIME</a></li>
+        <li><a href="#22-编码-encoding">2.2 编码 Encoding</a></li>
+      </ul>
+    </li>
+    <li><a href="#三数据类型使用的头字段">三、数据类型使用的头字段</a>
+      <ul>
+        <li><a href="#31-accept头字段">3.1 accept头字段</a></li>
+        <li><a href="#32-content头字段">3.2 content头字段</a></li>
+      </ul>
+    </li>
+    <li><a href="#四语言类型与编码">四、语言类型与编码</a>
+      <ul>
+        <li><a href="#41-语言类型">4.1 语言类型</a></li>
+        <li><a href="#42-字符集">4.2 字符集</a></li>
+        <li><a href="#43-语言类型使用的头字段">4.3 语言类型使用的头字段</a></li>
+      </ul>
+    </li>
+    <li><a href="#五内容协商的质量值">五、内容协商的质量值</a></li>
+    <li><a href="#六内容协商的结果">六、内容协商的结果</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><hr>
+<p> </p>
+<h2 id="一-参考">一、 参考</h2>
+<p> </p>
+<blockquote>
+<p><a href="https://time.geekbang.org/column/intro/189?utm_source=website&amp;utm_medium=geektime&amp;utm_term=pc_interstitial_331&amp;utm_campaign=314-presell&amp;utm_content=pc0601" target="_blank" rel="noopener noreffer">透视HTTP协议</a></p>
+</blockquote>
+<hr>
+<p> </p>
+<h2 id="二数据类型和编码">二、数据类型和编码</h2>
+<p> </p>
+<p>在<code>TCP/IP</code>协议栈中，传输数据基本上都是使用 <code>header+body</code> 的格式，<code>TCP/UD</code>P传输层协议，不关心<code>body</code>数据，只要将数据发送到目标即完成了传输任务；</p>
+<p>但是，<code>http</code>不同，是应用层的协议，还需要告知上层的应用程序（例如：浏览器），传输的是什么数据</p>
+<p>假设，<code>http</code>没有告知浏览器数据类型，服务器将数据发送到浏览器，浏览器将看到一个黑盒子，此时，浏览器无法判断数据类型？</p>
+<p>浏览器可以猜测数据类型，因为很多数据都是有固定格式的，所以通过检查数据的前几个字节也许就能知道这是个 <code>GIF</code> 图片、或者是个 <code>MP3</code> 音乐文件，但这种方式无疑十分低效，而且有很大几率会检查不出来文件类型</p>
+<p> </p>
+<h3 id="21-数据类型-mime">2.1 数据类型 MIME</h3>
+<p> </p>
+<p>早在 <code>HTTP</code> 协议诞生之前就已经有了针对这种问题的解决方案，不过它是用在电子邮件系统里的，让电子邮件可以发送 <code>ASCII</code> 码以外的任意数据，方案的名字叫做多用途互联网邮件扩展 <code>multipurpose internet mail extentsions</code>， 简称为<code>MIME</code></p>
+<p><code>MIME</code> 是一个很大的标准规范，但 <code>HTTP</code> 只“顺手牵羊”取了其中的一部分，用来标记 <code>body</code> 的数据类型，这就是我们平常总能听到的<code>“MIME type”</code></p>
+<p><code>MIME</code> 把数据分成了八大类，每个大类下再细分出多个子类，形式是<code>“type/subtype”</code>的字符串， 这个字符串被纳入到<code>http</code>的头字段中</p>
+<p> </p>
+<h4 id="211-text">2.1.1 text</h4>
+<p> </p>
+<p>即文本格式的可读数据，我们最熟悉的应该就是 <code>text/html</code> 了，表示超文本文档，此外还有纯文本 <code>text/plain</code>、样式表 <code>text/css</code> 等</p>
+<p> </p>
+<h4 id="212-image">2.1.2 image</h4>
+<p> </p>
+<p>即图像文件，有 <code>image/gif</code>、<code>image/jpeg</code>、<code>image/png</code> 等</p>
+<p> </p>
+<h4 id="213-audiovideo">2.1.3 audio/video</h4>
+<p> </p>
+<p>音频和视频数据，例如 <code>audio/mpeg</code>、<code>video/mp4</code> 等</p>
+<p> </p>
+<h4 id="214-application">2.1.4 application</h4>
+<p> </p>
+<p>数据格式不固定，可能是文本也可能是二进制，必须由上层应用程序来解释。常见的有 <code>application/json</code>，<code>application/javascript</code>、<code>application/pdf</code> 等，另外，如果实在是不知道数据是什么类型，像刚才说的“黑盒”，就会是 <code>application/octet-stream</code>，即不透明的二进制数据</p>
+<p> </p>
+<h3 id="22-编码-encoding">2.2 编码 Encoding</h3>
+<p> </p>
+<p>仅有<code>MIME type</code>还不够，因为<code>http</code>在传输过程中为了节省带宽，有时候会压缩数据，为了让浏览器不用猜测，需要通过字段 <code>Encoding type</code> 指定编码格式，告知浏览器，数据使用的编码格式，这样才可以得到原始数据。</p>
+<p> </p>
+<h4 id="221-gzip">2.2.1 gzip</h4>
+<p> </p>
+<p><code>GNU zip </code>压缩格式，也是互联网上最流行的压缩格式</p>
+<p> </p>
+<h4 id="222-deflate">2.2.2 deflate</h4>
+<p> </p>
+<p><code>zlib（deflate）</code>压缩格式，流行程度仅次于 <code>gzip</code></p>
+<p> </p>
+<h4 id="223-br">2.2.3 br</h4>
+<p> </p>
+<p>一种专门为 <code>HTTP</code> 优化的新压缩算法（<code>Brotli</code>）</p>
+<hr>
+<p> </p>
+<h2 id="三数据类型使用的头字段">三、数据类型使用的头字段</h2>
+<p> </p>
+<p>有了 <code>MIME type</code> 和 <code>Encoding type</code>，无论是浏览器还是服务器就都可以轻松识别出 <code>body</code> 的类型，也就能够正确处理数据了</p>
+<p><code>HTTP</code> 协议为此定义了两个 <code>Accept</code> 请求头字段和两个 <code>Content</code> 实体头字段，用于客户端和服务器进行“内容协商”</p>
+<p>也就是说，客户端用 <code>Accept</code> 头告诉服务器希望接收什么样的数据，而服务器用 <code>Content</code> 头告诉客户端实际发送了什么样的数据</p>
+<p> </p>
+<h3 id="31-accept头字段">3.1 accept头字段</h3>
+<p> </p>
+<p> </p>
+<h4 id="311-accept">3.1.1 accept</h4>
+<p> </p>
+<p><code>Accept</code> 字段标记的是客户端可理解的 <code>MIME type</code>，可以用“,”做分隔符列出多个类型，让服务器有更多的选择余地</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nl">Accept:</span> <span class="n">text</span><span class="o">/</span><span class="n">html</span><span class="o">,</span><span class="n">application</span><span class="o">/</span><span class="n">xml</span><span class="o">,</span><span class="n">image</span><span class="o">/</span><span class="n">webp</span><span class="o">,</span><span class="n">image</span><span class="o">/</span><span class="n">png</span>
+</code></pre></div><p> </p>
+<p>这就是告诉服务器：“我能够看懂 <code>HTML、XML</code> 的文本，还有 <code>webp</code> 和 <code>png</code> 的图片，请给我这四类格式的数据”</p>
+<p> </p>
+<h4 id="312-accept-encoding">3.1.2 Accept-Encoding</h4>
+<p> </p>
+<p><code>Accept-Encoding</code> 字段标记的是客户端支持的压缩格式，例如上面说的 <code>gzip、deflate</code> 等，同样也可以用<code>“,”</code>列出多个，服务器可以选择其中一种来压缩数据</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">
+<span class="n">Accept</span><span class="o">-</span><span class="n">Encoding</span><span class="o">:</span> <span class="n">gzip</span><span class="o">,</span> <span class="n">deflate</span><span class="o">,</span> <span class="n">br</span>
+
+</code></pre></div><p>这就是告诉服务器：“我能接收<code>gzip, deflate, br</code>压缩格式的数据”</p>
+<p> </p>
+<h3 id="32-content头字段">3.2 content头字段</h3>
+<p> </p>
+<p> </p>
+<h4 id="321-content-type">3.2.1 Content-Type</h4>
+<p> </p>
+<p>服务器会在响应报文里用头字段 <code>Content-Type</code> 告诉实体数据的真实类型</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="o">:</span> <span class="n">text</span><span class="o">/</span><span class="n">html</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="o">:</span> <span class="n">image</span><span class="o">/</span><span class="n">png</span>
+
+</code></pre></div><p> </p>
+<p>这样浏览器看到报文里的类型是<code>“text/html”</code>就知道是 <code>HTML</code> 文件，会调用排版引擎渲染出页面，看到<code>“image/png”</code>就知道是一个 <code>PNG</code> 文件，就会在页面上显示出图像</p>
+<p> </p>
+<h4 id="322-content-encoding">3.2.2 Content-Encoding</h4>
+<p> </p>
+<p>实际使用的压缩格式放在响应头字段 <code>Content-Encoding</code> 里</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Content</span><span class="o">-</span><span class="n">Encoding</span><span class="o">:</span> <span class="n">gzip</span>
+</code></pre></div><p> </p>
+<p><code>Accept-Encoding</code> 和 <code>Content-Encoding</code> 这两个字段是可以省略的，如果请求报文里没有 <code>Accept-Encoding</code> 字段，就表示客户端不支持压缩数据；如果响应报文里没有 <code>Content-Encoding</code> 字段，就表示响应数据没有被压缩。</p>
+<hr>
+<p> </p>
+<h2 id="四语言类型与编码">四、语言类型与编码</h2>
+<p> </p>
+<p><code>MIME type</code> 和 <code>Encoding type</code> 解决了计算机理解 <code>body</code> 数据的问题，但互联网遍布全球，不同国家不同地区的人使用了很多不同的语言，虽然都是 <code>text/html</code>，但如何让浏览器显示出每个人都可理解可阅读的语言文字呢？</p>
+<p> </p>
+<h3 id="41-语言类型">4.1 语言类型</h3>
+<p> </p>
+<p>所谓的“语言类型”就是人类使用的自然语言，例如英语、汉语、日语等，而这些自然语言可能还有下属的地区性方言，所以在需要明确区分的时候也要使用<code>“type-subtype”</code>的形式，不过这里的格式与数据类型不同，分隔符不是<code>“/”</code>，而是<code>“-”</code></p>
+<p>举几个例子：<code>en</code> 表示任意的英语，<code>en-US</code> 表示美式英语，<code>en-GB</code> 表示英式英语，而 <code>zh-CN</code> 就表示我们最常使用的汉语</p>
+<p> </p>
+<h3 id="42-字符集">4.2 字符集</h3>
+<p> </p>
+<p>在计算机发展的早期，各个国家和地区的人们“各自为政”，发明了许多字符编码方式来处理文字，比如英语世界用的 <code>ASCII</code>、汉语世界用的 <code>GBK、BIG5</code>，日语世界用的 <code>Shift_JIS</code> 等。同样的一段文字，用一种编码显示正常，换另一种编码后可能就会变得一团糟</p>
+<p>所以后来就出现了 <code>Unicode</code> 和 <code>UTF-8</code>，把世界上所有的语言都容纳在一种编码方案里，遵循 <code>UTF-8</code> 字符编码方式的 <code>Unicode</code> 字符集也成为了互联网上的标准字符集</p>
+<p> </p>
+<h3 id="43-语言类型使用的头字段">4.3 语言类型使用的头字段</h3>
+<p> </p>
+<p>和数据类型相同， 同样的，<code>HTTP</code> 协议也使用 <code>Accept</code> 请求头字段和 <code>Content</code> 实体头字段，用于客户端和服务器就语言与编码进行“内容协商”</p>
+<p> </p>
+<h4 id="431-accept-language">4.3.1 Accept-Language</h4>
+<p> </p>
+<p><code>Accept-Language</code> 字段标记了客户端可理解的自然语言，也允许用<code>“,”</code>做分隔符列出多个类型</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">
+<span class="n">Accept</span><span class="o">-</span><span class="n">Language</span><span class="o">:</span> <span class="n">zh</span><span class="o">-</span><span class="n">CN</span><span class="o">,</span> <span class="n">zh</span><span class="o">,</span> <span class="n">en</span>
+</code></pre></div><p> </p>
+<p> </p>
+<h4 id="432-accept-charset">4.3.2 Accept-Charset</h4>
+<p> </p>
+<p>字符集在 <code>HTTP</code> 里使用的请求头字段是 <code>Accept-Charset</code>，但响应头里却没有对应的 <code>Content-Charset</code>，而是在 <code>Content-Type</code> 字段的数据类型后面用<code>“charset=xxx”</code>来表示</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">
+<span class="n">Accept</span><span class="o">-</span><span class="n">Charset</span><span class="o">:</span> <span class="n">gbk</span><span class="o">,</span> <span class="n">utf</span><span class="o">-</span><span class="n">8</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="o">:</span> <span class="n">text</span><span class="o">/</span><span class="n">html</span><span class="o">;</span> <span class="n">charset</span><span class="o">=</span><span class="n">utf</span><span class="o">-</span><span class="n">8</span>
+</code></pre></div><p> </p>
+<h4 id="433-content-language">4.3.3 Content-Language</h4>
+<p> </p>
+<p>服务器在响应报文里用头字段 <code>Content-Language</code> 告诉客户端实体数据使用的实际语言类型</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Content</span><span class="o">-</span><span class="n">Language</span><span class="o">:</span> <span class="n">zh</span><span class="o">-</span><span class="n">CN</span>
+</code></pre></div><p> </p>
+<p>不过现在的浏览器都支持多种字符集，通常不会发送 <code>Accept-Charset</code>，而服务器也不会发送 <code>Content-Language</code>，因为使用的语言完全可以由字符集推断出来，所以在请求头里一般只会有 <code>Accept-Language</code> 字段，响应头里只会有 <code>Content-Type</code> 字段</p>
+<hr>
+<p> </p>
+<h2 id="五内容协商的质量值">五、内容协商的质量值</h2>
+<p> </p>
+<p>在 <code>HTTP</code> 协议里用 <code>Accept、Accept-Encoding、Accept-Language</code> 等请求头字段进行内容协商的时候，还可以用一种特殊的<code>“q”</code>参数表示权重来设定优先级，这里的<code>“q”</code>是<code>“quality factor”</code>的意思</p>
+<p>权重的最大值是 <code>1</code>，最小值是 <code>0.01</code>，默认值是<code> 1</code>，如果值是<code> 0</code> 就表示拒绝。具体的形式是在数据类型或语言代码后面加一个<code>“;”</code>，然后是<code>“q=value”</code></p>
+<p>这里要提醒的是<code>“;”</code>的用法，在大多数编程语言里<code>“;”</code>的断句语气要强于<code>“,”</code>，而在 <code>HTTP</code> 的内容协商里却恰好反了过来，<code>“;”</code>的意义是小于<code>“,”</code>的</p>
+<p>例如：</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nl">
+</span><span class="nl">
+</span><span class="nl">Accept:</span> <span class="n">text</span><span class="o">/</span><span class="n">html</span><span class="o">,</span><span class="n">application</span><span class="o">/</span><span class="n">xml</span><span class="o">;</span><span class="n">q</span><span class="o">=</span><span class="n">0</span><span class="o">.</span><span class="na">9</span><span class="o">,*/*;</span><span class="n">q</span><span class="o">=</span><span class="n">0</span><span class="o">.</span><span class="na">8</span>
+</code></pre></div><p> </p>
+<p>表示浏览器最希望使用的是 <code>HTML</code> 文件，权重是 <code>1</code>，其次是 <code>XML</code> 文件，权重是 <code>0.9</code>，最后是任意数据类型，权重是 <code>0.8</code>。服务器收到请求头后，就会计算权重，再根据自己的实际情况优先输出 <code>HTML</code> 或者 <code>XML</code></p>
+<hr>
+<p> </p>
+<h2 id="六内容协商的结果">六、内容协商的结果</h2>
+<p> </p>
+<p>内容协商的过程是不透明的，每个 <code>Web</code> 服务器使用的算法都不一样。但有的时候，服务器会在响应头里多加一个 <code>Vary</code> 字段，记录服务器在内容协商时参考的请求头字段，给出一点信息</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nl">
+</span><span class="nl">Vary:</span> <span class="n">Accept</span><span class="o">-</span><span class="n">Encoding</span><span class="o">,</span><span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="o">,</span><span class="n">Accept</span>
+</code></pre></div><p> </p>
+<p><code>Vary</code> 字段表示服务器依据了 <code>Accept-Encoding、User-Agent</code> 和 <code>Accept</code> 这三个头字段，然后决定了发回的响应报文</p>
+<p><code>Vary </code>字段可以认为是响应报文的一个特殊的“版本标记”。每当 <code>Accept</code> 等请求头变化时，<code>Vary</code> 也会随着响应报文一起变化。也就是说，同一个 <code>URI </code>可能会有多个不同的“版本”，主要用在传输链路中间的代理服务器实现缓存服务</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-05-08</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/http/">http</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/%E7%BD%91%E7%BB%9C_http/7_http%E4%BC%98%E7%82%B9%E4%B8%8E%E7%BC%BA%E7%82%B9/" class="prev" rel="prev" title="7. http优点与缺点"><i class="fas fa-angle-left fa-fw"></i>7. http优点与缺点</a>
+            <a href="/posts/%E7%BD%91%E7%BB%9C_http/9_http%E4%BC%A0%E8%BE%93%E5%A4%A7%E6%96%87%E4%BB%B6/" class="next" rel="next" title="9. http传输大文件">9. http传输大文件<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.70.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">yz</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["yzthewind"],"clientID":"8e70465ecd960275a174","clientSecret":"32c54e1095f64e2ac3dcfa4afed2e61d5444bc0d","id":"2020-05-08T10:00:00+08:00","owner":"yzthewind","repo":"blog_gitalk","title":"8. http实体数据"}},"data":{"id-1":"一曲广陵散","id-2":"一曲广陵散"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

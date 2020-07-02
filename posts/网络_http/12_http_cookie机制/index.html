@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>12. http cookie机制 - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="12. http cookie机制" />
+<meta property="og:description" content="一、 参考 透视HTTP协议 二、什么是 Cookie？ HTTP 是“无状态”的，这既是优点也是缺点。优点是服务器没有状态差异，可以很容易地组成集群，而缺点" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/12_http_cookie%E6%9C%BA%E5%88%B6/" />
+<meta property="og:image" content="https://yzthewind.github.io/logo.png"/>
+<meta property="article:published_time" content="2020-05-12T11:00:00+08:00" />
+<meta property="article:modified_time" content="2020-05-12T11:00:00+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://yzthewind.github.io/logo.png"/>
+
+<meta name="twitter:title" content="12. http cookie机制"/>
+<meta name="twitter:description" content="一、 参考 透视HTTP协议 二、什么是 Cookie？ HTTP 是“无状态”的，这既是优点也是缺点。优点是服务器没有状态差异，可以很容易地组成集群，而缺点"/>
+<meta name="application-name" content="一曲广陵散">
+<meta name="apple-mobile-web-app-title" content="一曲广陵散"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/12_http_cookie%E6%9C%BA%E5%88%B6/" /><link rel="prev" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/11_http%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E8%B7%B3%E8%BD%AC/" /><link rel="next" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/13_http%E7%BC%93%E5%AD%98%E9%85%8D%E7%BD%AE/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "12. http cookie机制",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/yzthewind.github.io\/posts\/%E7%BD%91%E7%BB%9C_http\/12_http_cookie%E6%9C%BA%E5%88%B6\/"
+        },"genre": "posts","keywords": "http","wordcount":  2333 ,
+        "url": "https:\/\/yzthewind.github.io\/posts\/%E7%BD%91%E7%BB%9C_http\/12_http_cookie%E6%9C%BA%E5%88%B6\/","datePublished": "2020-05-12T11:00:00+08:00","dateModified": "2020-05-12T11:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "yz"},"author": {
+                "@type": "Person",
+                "name": "yz"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title=""><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title=""><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">12. http cookie机制</h1><h2 class="single-subtitle">http协议</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>网络</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-12">2020-05-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2333 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/http/http_cookie%e6%9c%ba%e5%88%b6.jpg"
+        data-srcset="/images/http/http_cookie%E6%9C%BA%E5%88%B6.jpg, /images/http/http_cookie%e6%9c%ba%e5%88%b6.jpg 1.5x, /images/http/http_cookie%E6%9C%BA%E5%88%B6.jpg 2x"
+        data-sizes="auto"
+        alt="/images/http/http_cookie%E6%9C%BA%E5%88%B6.jpg"
+        title="/images/http/http_cookie%E6%9C%BA%E5%88%B6.jpg" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一-参考">一、 参考</a></li>
+    <li><a href="#二什么是-cookie">二、什么是 Cookie？</a></li>
+    <li><a href="#三-cookie-的工作过程">三、 Cookie 的工作过程</a>
+      <ul>
+        <li><a href="#31-响应头字段-set-cookie">3.1 响应头字段 Set-Cookie</a></li>
+        <li><a href="#32-请求头字段-cookie">3.2 请求头字段 Cookie</a></li>
+        <li><a href="#33-cookie的存储">3.3 Cookie的存储</a></li>
+      </ul>
+    </li>
+    <li><a href="#四cookie的属性">四、Cookie的属性</a>
+      <ul>
+        <li><a href="#41--设置-cookie-的生存周期">4.1  设置 Cookie 的生存周期</a></li>
+        <li><a href="#42-设置-cookie-的作用域">4.2 设置 Cookie 的作用域</a></li>
+        <li><a href="#43-安全性">4.3 安全性</a></li>
+      </ul>
+    </li>
+    <li><a href="#五cookie-的应用">五、Cookie 的应用</a>
+      <ul>
+        <li><a href="#51-身份识别">5.1 身份识别</a></li>
+        <li><a href="#52-广告跟踪">5.2 广告跟踪</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><hr>
+<p> </p>
+<h2 id="一-参考">一、 参考</h2>
+<p> </p>
+<blockquote>
+<p><a href="https://time.geekbang.org/column/intro/189?utm_source=website&amp;utm_medium=geektime&amp;utm_term=pc_interstitial_331&amp;utm_campaign=314-presell&amp;utm_content=pc0601" target="_blank" rel="noopener noreffer">透视HTTP协议</a></p>
+</blockquote>
+<hr>
+<p> </p>
+<h2 id="二什么是-cookie">二、什么是 Cookie？</h2>
+<p> </p>
+<p><code>HTTP</code> 是“无状态”的，这既是优点也是缺点。优点是服务器没有状态差异，可以很容易地组成集群，而缺点就是无法支持需要记录状态的事务操作。</p>
+<p><code>HTTP</code> 协议是可扩展的，后来发明的 <code>Cookie</code> 技术，给 <code>HTTP</code> 增加了“记忆能力”</p>
+<p><code>HTTP</code> 的 <code>Cookie</code> 机制，相当于是服务器给每个客户端都贴上一张小纸条，上面写了一些只有服务器才能理解的数据，需要的时候客户端把这些信息发给服务器，服务器看到 <code>Cookie</code>，就能够认出对方是谁了</p>
+<hr>
+<p> </p>
+<h2 id="三-cookie-的工作过程">三、 Cookie 的工作过程</h2>
+<p> </p>
+<p><code>Cookie</code> 这张小纸条是怎么传递的呢？</p>
+<p> </p>
+<h3 id="31-响应头字段-set-cookie">3.1 响应头字段 Set-Cookie</h3>
+<p> </p>
+<p>当用户通过浏览器第一次访问服务器的时候，服务器肯定是不知道他的身份的。所以，就要创建一个独特的身份标识数据，格式是<code>“key=value”</code>，然后放进 <code>Set-Cookie</code> 字段里，随着响应报文一同发给浏览器</p>
+<p>不过因为服务器的“记忆能力”实在是太差，一张小纸条经常不够用。所以，服务器有时会在响应头里添加多个 <code>Set-Cookie</code>，存储多个<code>“key=value”</code>。但浏览器这边发送时不需要用多个 <code>Cookie</code> 字段，只要在一行里用<code>“;”</code>隔开就行</p>
+<p> </p>
+<h3 id="32-请求头字段-cookie">3.2 请求头字段 Cookie</h3>
+<p> </p>
+<p>浏览器收到响应报文，看到里面有 <code>Set-Cookie</code>，知道这是服务器给的身份标识，于是就保存起来，下次再请求的时候就自动把这个值放进 <code>Cookie</code> 字段里发给服务器</p>
+<p>因为第二次请求里面有了 <code>Cookie</code> 字段，服务器就知道这个用户不是新人，之前来过，就可以拿出 <code>Cookie</code> 里的值，识别出用户的身份，然后提供个性化的服务</p>
+<p> </p>
+<h3 id="33-cookie的存储">3.3 Cookie的存储</h3>
+<p> </p>
+<p><code>Cookie </code>是由浏览器负责存储的，而不是操作系统。所以，它是“浏览器绑定”的，只能在本浏览器内生效</p>
+<p>如果你换个浏览器或者换台电脑，新的浏览器里没有服务器对应的 <code>Cookie</code>，就好像是脱掉了贴着纸条的衣服，“健忘”的服务器也就认不出来了，只能再走一遍 <code>Set-Cookie</code> 流程</p>
+<hr>
+<p> </p>
+<h2 id="四cookie的属性">四、Cookie的属性</h2>
+<p> </p>
+<p><code>Cookie</code> 就是服务器委托浏览器存储在客户端里的一些数据，而这些数据通常都会记录用户的关键识别信息。所以，就需要在<code>“key=value</code>”外再用一些手段来保护，防止外泄或窃取，这些手段就是 <code>Cookie</code> 的属性</p>
+<p> </p>
+<h3 id="41--设置-cookie-的生存周期">4.1  设置 Cookie 的生存周期</h3>
+<p> </p>
+<p>首先，我们应该设置 <code>Cookie</code> 的生存周期，也就是它的有效期，让它只能在一段时间内可用，就像是食品的“保鲜期”，一旦超过这个期限浏览器就认为是 <code>Cookie </code>失效，在存储里删除，也不会发送给服务器</p>
+<p><code>Cookie </code>的有效期可以使用 <code>Expires</code> 和 <code>Max-Age</code> 两个属性来设置</p>
+<p> </p>
+<h4 id="411-expires">4.1.1 Expires</h4>
+<p> </p>
+<p><code>“Expires”</code>俗称“过期时间”，用的是绝对时间点，可以理解为“截止日期”<code>（deadline）</code></p>
+<p> </p>
+<h4 id="412-max-age">4.1.2 Max-Age</h4>
+<p> </p>
+<p><code>“Max-Age”</code>用的是相对时间，单位是秒，浏览器用收到报文的时间点再加上 <code>Max-Age</code>，就可以得到失效的绝对时间</p>
+<p><code>Expires</code> 和 <code>Max-Age</code> 可以同时出现，两者的失效时间可以一致，也可以不一致，但浏览器会优先采用 <code>Max-Age</code> 计算失效期</p>
+<p>例如，<code>Expires</code> 标记的过期时间是<code>“GMT 2020 年 6 月 7 号 8 点 19 分”</code>，而 <code>Max-Age</code> 则只有 <code>10</code> 秒，如果现在是 <code>6 月 6 号零点</code>，那么 Cookie 的实际有效期就是<code>“6 月 6 号零点过 10 秒</code></p>
+<p> </p>
+<h3 id="42-设置-cookie-的作用域">4.2 设置 Cookie 的作用域</h3>
+<p> </p>
+<p>设置 <code>Cookie</code> 的作用域，让浏览器仅发送给特定的服务器和 <code>URI</code>，避免被其他网站盗</p>
+<p> </p>
+<h4 id="421-domain">4.2.1 Domain</h4>
+<p> </p>
+<p><code>domain</code> 指定了 <code>Cookie</code> 所属的域名,浏览器在发送 <code>Cookie</code> 前会从 <code>URI</code> 中提取出 <code>host</code> 部分，对比 <code>Cookie</code> 的属性。如果不满足条件，就不会在请求头里发送 <code>Cookie</code>。</p>
+<p> </p>
+<h4 id="422-path">4.2.2 Path</h4>
+<p> </p>
+<p><code>Path</code>指定了 <code>Cookie</code> 所属的路径,浏览器在发送 <code>Cookie</code> 前会从 <code>URI</code> 中提取出 <code>path </code>部分，对比 <code>Cookie</code> 的属性。如果不满足条件，就不会在请求头里发送 <code>Cookie</code>。</p>
+<p>使用这两个属性可以为不同的域名和路径分别设置各自的 <code>Cookie</code>，比如<code>“/test1”</code>用一个 <code>Cookie</code>，<code>“/test2”</code>再用另外一个 <code>Cookie</code>，两者互不干扰。不过现实中为了省事，通常 <code>Path</code> 就用一个<code>“/”</code>或者直接省略，表示域名下的任意路径都允许使用 <code>Cookie</code>，让服务器自己去挑</p>
+<p> </p>
+<h3 id="43-安全性">4.3 安全性</h3>
+<p> </p>
+<p> </p>
+<h4 id="431-httponly">4.3.1 HttpOnly</h4>
+<p> </p>
+<p>在 <code>JS </code>脚本里可以用 <code>document.cookie</code> 来读写 <code>Cookie</code> 数据，这就带来了安全隐患，有可能会导致“跨站脚本”<code>（XSS）</code>攻击窃取数据</p>
+<p>属性<code>“HttpOnly”</code>会告诉浏览器，此 <code>Cookie</code> 只能通过浏览器 <code>HTTP</code> 协议传输，禁止其他方式访问，浏览器的 <code>JS</code> 引擎就会禁用 <code>document.cookie</code> 等一切相关的 <code>API</code>，脚本攻击也就无从谈起了</p>
+<p> </p>
+<h4 id="432-samesite">4.3.2 SameSite</h4>
+<p> </p>
+<p>属性<code>“SameSite”</code>可以防范“跨站请求伪造”<code>（XSRF）</code>攻击，设置成<code>“SameSite=Strict”</code>可以严格限定 <code>Cookie</code> 不能随着跳转链接跨站发送</p>
+<p><code>“SameSite=Lax”</code>则略宽松一点，允许 <code>GET/HEAD</code> 等安全方法，但禁止 <code>POST</code> 跨站发送</p>
+<p> </p>
+<h4 id="433-secure">4.3.3 Secure</h4>
+<p> </p>
+<p><code>“Secure”</code>，表示这个 <code>Cookie </code>仅能用 <code>HTTPS</code> 协议加密传输，明文的 <code>HTTP</code> 协议会禁止发送。但 <code>Cookie</code> 本身不是加密的，浏览器里还是以明文的形式存在</p>
+<hr>
+<p> </p>
+<h2 id="五cookie-的应用">五、Cookie 的应用</h2>
+<p> </p>
+<p>有了 <code>Cookie</code>，服务器就有了“记忆能力”，能够保存“状态”，那么应该如何使用<code>Cookie</code>呢？</p>
+<p> </p>
+<h3 id="51-身份识别">5.1 身份识别</h3>
+<p> </p>
+<p><code>Cookie</code> 最基本的一个用途就是身份识别，保存用户的登录信息，实现会话事务</p>
+<p>比如，你用账号和密码登录某电商，登录成功后网站服务器就会发给浏览器一个 <code>Cookie</code>，内容大概是<code>“name=yourid”</code>，这样就成功地把身份标签贴在了你身上</p>
+<p>之后你在网站里随便访问哪件商品的页面，浏览器都会自动把身份 <code>Cookie</code> 发给服务器，所以服务器总会知道你的身份，一方面免去了重复登录的麻烦，另一方面也能够自动记录你的浏览记录和购物下单（在后台数据库或者也用 <code>Cookie</code>），实现了“状态保持”</p>
+<p> </p>
+<h3 id="52-广告跟踪">5.2 广告跟踪</h3>
+<p> </p>
+<p>上网的时候肯定看过很多的广告图片，这些图片背后都是广告商网站（例如<code> Google</code>），它会“偷偷地”给你贴上 <code>Cookie </code>小纸条，这样你上其他的网站，别的广告就能用 <code>Cookie</code> 读出你的身份，然后做行为分析，再推给你广告</p>
+<p>这种 <code>Cookie</code> 不是由访问的主站存储的，所以又叫<code>“第三方 Cookie”</code>（<code>third-party cookie</code>）。如果广告商势力很大，广告到处都是，那么就比较“恐怖”了，无论你走到哪里它都会通过 <code>Cookie</code> 认出你来，实现广告“精准打击”</p>
+<p>为了防止滥用 <code>Cookie</code> 搜集用户隐私，互联网组织相继提出了 <code>DNT（Do Not Track）</code>和 <code>P3P（Platform for Privacy Preferences Project）</code>，但实际作用不大</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-05-12</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/http/">http</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/%E7%BD%91%E7%BB%9C_http/11_http%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E8%B7%B3%E8%BD%AC/" class="prev" rel="prev" title="11. http重定向与跳转"><i class="fas fa-angle-left fa-fw"></i>11. http重定向与跳转</a>
+            <a href="/posts/%E7%BD%91%E7%BB%9C_http/13_http%E7%BC%93%E5%AD%98%E9%85%8D%E7%BD%AE/" class="next" rel="next" title="13. http缓存配置">13. http缓存配置<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.70.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">yz</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["yzthewind"],"clientID":"8e70465ecd960275a174","clientSecret":"32c54e1095f64e2ac3dcfa4afed2e61d5444bc0d","id":"2020-05-12T11:00:00+08:00","owner":"yzthewind","repo":"blog_gitalk","title":"12. http cookie机制"}},"data":{"id-1":"一曲广陵散","id-2":"一曲广陵散"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

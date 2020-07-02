@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>16. http ssl与tls - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="16. http ssl与tls" />
+<meta property="og:description" content="一、 参考 透视HTTP协议 二、 为什么要有https？ 因为http是不安全的，由于http天生明文传输，整个传输过程中完全透明，任何人都可以在链" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/16_http_ssl_tls/" />
+<meta property="og:image" content="https://yzthewind.github.io/logo.png"/>
+<meta property="article:published_time" content="2020-05-16T10:00:00+08:00" />
+<meta property="article:modified_time" content="2020-05-16T10:00:00+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://yzthewind.github.io/logo.png"/>
+
+<meta name="twitter:title" content="16. http ssl与tls"/>
+<meta name="twitter:description" content="一、 参考 透视HTTP协议 二、 为什么要有https？ 因为http是不安全的，由于http天生明文传输，整个传输过程中完全透明，任何人都可以在链"/>
+<meta name="application-name" content="一曲广陵散">
+<meta name="apple-mobile-web-app-title" content="一曲广陵散"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/16_http_ssl_tls/" /><link rel="prev" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/15_http%E7%BC%93%E5%AD%98%E4%BB%A3%E7%90%86/" /><link rel="next" href="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/17_http%E5%8A%A0%E5%AF%86/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "16. http ssl与tls",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/yzthewind.github.io\/posts\/%E7%BD%91%E7%BB%9C_http\/16_http_ssl_tls\/"
+        },"genre": "posts","keywords": "http","wordcount":  1909 ,
+        "url": "https:\/\/yzthewind.github.io\/posts\/%E7%BD%91%E7%BB%9C_http\/16_http_ssl_tls\/","datePublished": "2020-05-16T10:00:00+08:00","dateModified": "2020-05-16T10:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "yz"},"author": {
+                "@type": "Person",
+                "name": "yz"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title=""><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title=""><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">16. http ssl与tls</h1><h2 class="single-subtitle">http协议</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>网络</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-16">2020-05-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1909 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/http/http_ssl_tls.jpg"
+        data-srcset="/images/http/http_ssl_tls.jpg, /images/http/http_ssl_tls.jpg 1.5x, /images/http/http_ssl_tls.jpg 2x"
+        data-sizes="auto"
+        alt="/images/http/http_ssl_tls.jpg"
+        title="/images/http/http_ssl_tls.jpg" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一-参考">一、 参考</a></li>
+    <li><a href="#二-为什么要有https">二、 为什么要有https？</a></li>
+    <li><a href="#三-什么是安全">三、 什么是安全？</a>
+      <ul>
+        <li><a href="#31-机密性">3.1 机密性</a></li>
+        <li><a href="#32-完整性">3.2 完整性</a></li>
+        <li><a href="#33-身份认证">3.3 身份认证</a></li>
+        <li><a href="#34-不可否认">3.4 不可否认</a></li>
+      </ul>
+    </li>
+    <li><a href="#四什么是https">四、什么是https？</a></li>
+    <li><a href="#五-ssltls">五、 SSL/TLS</a>
+      <ul>
+        <li><a href="#51-openssl">5.1 OpenSSL</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><hr>
+<p> </p>
+<h2 id="一-参考">一、 参考</h2>
+<p> </p>
+<blockquote>
+<p><a href="https://time.geekbang.org/column/intro/189?utm_source=website&amp;utm_medium=geektime&amp;utm_term=pc_interstitial_331&amp;utm_campaign=314-presell&amp;utm_content=pc0601" target="_blank" rel="noopener noreffer">透视HTTP协议</a></p>
+</blockquote>
+<hr>
+<p> </p>
+<h2 id="二-为什么要有https">二、 为什么要有https？</h2>
+<p> </p>
+<p>因为<code>http</code>是不安全的，由于<code>http</code>天生明文传输，整个传输过程中完全透明，任何人都可以在链路中截获、修改和伪造请求/响应报文，数据不具有可靠性。</p>
+<p>中间代理人可以添加修改部分头字段，可以修改请求数据<code>body</code>字段</p>
+<hr>
+<p> </p>
+<h2 id="三-什么是安全">三、 什么是安全？</h2>
+<p> </p>
+<p>通常认为，通信过程具备了四个特性，就可以认为是安全的</p>
+<p> </p>
+<h3 id="31-机密性">3.1 机密性</h3>
+<p> </p>
+<p>``Secrecy/Confidentiality`， 是指对数据的保密，即只能由可信的人访问，对于其他人是不可见的秘密，例如：</p>
+<p>A和B中间通信，但是被C偷听到了，这就是没有机密性，<code>wireshark</code>也是利用了<code>http</code>的特点，捕获了传输过程中的数据。</p>
+<p> </p>
+<h3 id="32-完整性">3.2 完整性</h3>
+<p> </p>
+<p><code>Integrity</code>，也叫一致性，是指数据在传输过程中，没有被篡改，不多也不少，完整的保持着原状。</p>
+<p>机密性虽然可以让，数据成为机密，但不能防止黑客对数据的修改，黑客可以替换数据、调整数据的顺序、增加删除部分数据、破坏通信过程；</p>
+<p>比如，小明给小红写了张纸条：“明天公园见”。小强把“公园”划掉，模仿小明的笔迹把这句话改成了“明天广场见”。小红收到后无法验证完整性，信以为真，第二天的约会就告吹了。</p>
+<p> </p>
+<h3 id="33-身份认证">3.3 身份认证</h3>
+<p> </p>
+<p><code>Authentication</code>, 是指确认对方的真实身份，证明“你真的是你”， 保证信息只能发送给可信的人。如果通信的时候，另外一方是假冒的网站，那么数据再怎么加密都没有作用，黑客完全可以使用假冒的身份获取用户信息。</p>
+<p>比如，小明给小红写了封情书：“我喜欢你”，但不留心发给了小强。小强将错就错，假冒小红回复了一个“白日做梦”，小明不知道这其实是小强的话，误以为是小红的，后果可想而知。</p>
+<p> </p>
+<h3 id="34-不可否认">3.4 不可否认</h3>
+<p> </p>
+<p><code>Non-repudiation/Undeniable</code>， 不可抵赖，即不能否认已经发生过的行为，不能抵赖。</p>
+<p>使用前面的机密性、完整性、身份认证，可以解决通信安全的大部分问题，但是如果缺少了不可否认，通信的事务的真实性无法得到保证，有可能出现抵赖。</p>
+<p>比如，小明借了小红一千元，没写借条，第二天矢口否认，小红也确实拿不出借钱的证据，只能认倒霉。另一种情况是小明借钱后还了小红，但没写收条，小红于是不承认小明还钱的事，说根本没还，要小明再掏出一千元。</p>
+<hr>
+<p> </p>
+<h2 id="四什么是https">四、什么是https？</h2>
+<p> </p>
+<p><code>https</code>是一个非常简单的协议，<code>RFC</code>中规定了新的协议名<code> https</code>， 默认端口号是 <code>443</code>， 至于其他的 （1）请求-应答模式；（2）报文结构；（3）请求方法；（4）<code>URI</code>；（5）头字段；（6）连接管理，都完全沿用<code>http</code>， 没有任何新的东西。</p>
+<p>也即，<code>https</code>与<code>http</code>除了协议名称和端口号，不相同，<code>https</code>与<code>http</code>在语法和语义完全一样，优缺点都一样。</p>
+<p><code>https</code>是如何做到机密性和完整性这些安全特性呢？</p>
+<p><code>https</code>把<code>http</code>下层的传输协议由<code>TCP/IP</code>， 换成了<code>SSL/TLS</code>，收发报文不再使用<code>socket api</code>， 而是调用专门的安全接口。</p>
+<hr>
+<p> </p>
+<h2 id="五-ssltls">五、 SSL/TLS</h2>
+<p> </p>
+<p><code>SSL</code>, <code>secure sockets layer</code>, 安全套接层，处于第五层（会话层），由网景公司于 1994 年发明，有 v2 和 v3 两个版本，而 v1 因为有严重的缺陷从未公开过。</p>
+<p><code>TLS</code>，<code>transport layer security</code>，传输层安全，<code>SSL</code> 发展到 v3 时已经证明了它自身是一个非常好的安全通信协议，于是互联网工程组 <code>IETF</code> 在 1999 年把它改名为 <code>TLS</code>，正式标准化，版本号从 1.0 重新算起，所以 <code>TLS1.0</code> 实际上就是 <code>SSLv3.1</code>。</p>
+<p>到今天 <code>TLS</code> 已经发展出了三个版本，分别是 2006 年的 1.1、2008 年的 1.2 和去年（2018）的 1.3，每个新版本都紧跟密码学的发展和互联网的现状，持续强化安全和性能，已经成为了信息安全领域中的权威标准</p>
+<p>目前应用的最广泛的 <code>TLS</code> 是 1.2，而之前的协议（<code>TLS1.1/1.0</code>、<code>SSLv3/v2</code>）都已经被认为是不安全的，各大浏览器即将在 2020 年左右停止支持</p>
+<p><code>TLS</code>由记录协议、握手协议、警告协议、变更密码规范协议、扩展协议等几个子协议组成，综合使用了对称加密、非对称加密、身份认证等密码学技术。</p>
+<p>浏览器和服务器在使用 <code>TLS</code> 建立连接时需要选择一组恰当的加密算法来实现安全通信，这些算法的组合被称为“密码套件”（<code>cipher suite</code>，也叫加密套件）</p>
+<p><code>TLS </code>的密码套件命名非常规范，格式很固定。基本的形式是“密钥交换算法 + 签名算法 + 对称加密算法 + 摘要算法”，例如：</p>
+<p><code>ECDHE-RSA-AES256-GCM-SHA384</code>， 表示：</p>
+<p>握手时候使用<code>ECDHE</code> 算法进行密钥交换，用 <code>RSA</code> 签名和身份认证，握手后的通信使用 <code>AES</code> 对称算法，密钥长度 256 位，分组模式是 <code>GCM</code>，摘要算法 <code>SHA384</code> 用于消息认证和产生随机数。</p>
+<p> </p>
+<h3 id="51-openssl">5.1 OpenSSL</h3>
+<p> </p>
+<p><code>OpenSSL</code>是一个著名的开源密码学程序库和工具包，几乎支持所有公开的加密算法和协议，已经成为了事实上的标准，许多应用软件都会使用它作为底层库来实现 <code>TLS </code>功能，包括常用的<code>Web</code>服务器 <code>Apache</code>、<code>Nginx</code> 等</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-05-16</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/http/">http</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/%E7%BD%91%E7%BB%9C_http/15_http%E7%BC%93%E5%AD%98%E4%BB%A3%E7%90%86/" class="prev" rel="prev" title="15. http缓存代理"><i class="fas fa-angle-left fa-fw"></i>15. http缓存代理</a>
+            <a href="/posts/%E7%BD%91%E7%BB%9C_http/17_http%E5%8A%A0%E5%AF%86/" class="next" rel="next" title="17. http加密">17. http加密<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.70.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">yz</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["yzthewind"],"clientID":"8e70465ecd960275a174","clientSecret":"32c54e1095f64e2ac3dcfa4afed2e61d5444bc0d","id":"2020-05-16T10:00:00+08:00","owner":"yzthewind","repo":"blog_gitalk","title":"16. http ssl与tls"}},"data":{"id-1":"一曲广陵散","id-2":"一曲广陵散"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
