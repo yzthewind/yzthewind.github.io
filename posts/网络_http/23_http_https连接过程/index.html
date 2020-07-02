@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>23. https连接过程 - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="23. https连接过程" />
-<meta property="og:description" content="一、 参考 透视HTTP协议 二、 https建立连接 当你在浏览器地址栏里键入“https”开头的 URI，再按下回车，会发生什么呢？ 浏览器首先要从 URI" />
+<meta property="og:description" content="一、 参考 透视HTTP协议 趣谈网络协议 二、 https建立连接 当你在浏览器地址栏里键入“https”开头的 URI，再按下回车，会发生什么呢？ 浏览" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yzthewind.github.io/posts/%E7%BD%91%E7%BB%9C_http/23_http_https%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B/" />
 <meta property="og:image" content="https://yzthewind.github.io/logo.png"/>
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://yzthewind.github.io/logo.png"/>
 
 <meta name="twitter:title" content="23. https连接过程"/>
-<meta name="twitter:description" content="一、 参考 透视HTTP协议 二、 https建立连接 当你在浏览器地址栏里键入“https”开头的 URI，再按下回车，会发生什么呢？ 浏览器首先要从 URI"/>
+<meta name="twitter:description" content="一、 参考 透视HTTP协议 趣谈网络协议 二、 https建立连接 当你在浏览器地址栏里键入“https”开头的 URI，再按下回车，会发生什么呢？ 浏览"/>
 <meta name="application-name" content="一曲广陵散">
 <meta name="apple-mobile-web-app-title" content="一曲广陵散"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/yzthewind.github.io\/posts\/%E7%BD%91%E7%BB%9C_http\/23_http_https%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B\/"
-        },"genre": "posts","keywords": "http","wordcount":  2840 ,
+        },"genre": "posts","keywords": "http","wordcount":  3714 ,
         "url": "https:\/\/yzthewind.github.io\/posts\/%E7%BD%91%E7%BB%9C_http\/23_http_https%E8%BF%9E%E6%8E%A5%E8%BF%87%E7%A8%8B\/","datePublished": "2020-05-23T16:00:00+08:00","dateModified": "2020-05-23T16:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": "yz"},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">23. https连接过程</h1><h2 class="single-subtitle">http协议</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>网络</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-23">2020-05-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2840 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-05-23">2020-05-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3714 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -117,42 +117,45 @@
 <blockquote>
 <p><a href="https://time.geekbang.org/column/intro/189?utm_source=website&amp;utm_medium=geektime&amp;utm_term=pc_interstitial_331&amp;utm_campaign=314-presell&amp;utm_content=pc0601" target="_blank" rel="noopener noreffer">透视HTTP协议</a></p>
 </blockquote>
+<blockquote>
+<p><a href="https://time.geekbang.org/column/article/9492" target="_blank" rel="noopener noreffer">趣谈网络协议</a></p>
+</blockquote>
 <hr>
 <p> </p>
 <h2 id="二-https建立连接">二、 https建立连接</h2>
 <p> </p>
-<p>当你在浏览器地址栏里键入“https”开头的 URI，再按下回车，会发生什么呢？</p>
-<p>浏览器首先要从 URI 里提取出协议名和域名。因为协议名是“https”，所以浏览器就知道了端口号是默认的 443，它再用 DNS 解析域名，得到目标的 IP 地址，然后就可以使用三次握手与网站建立 TCP 连接了</p>
-<p>在 HTTP 协议里，建立连接后，浏览器会立即发送请求报文。但现在是 HTTPS 协议，它需要再用另外一个“握手”过程，在 TCP 上建立安全连接，之后才是收发 HTTP 报文</p>
+<p>当你在浏览器地址栏里键入“<code>https</code>”开头的 <code>URI</code>，再按下回车，会发生什么呢？</p>
+<p>浏览器首先要从 <code>URI</code> 里提取出协议名和域名。因为协议名是“<code>https</code>”，所以浏览器就知道了端口号是默认的 <code>443</code>，它再用 <code>DNS</code> 解析域名，得到目标的 <code>IP</code> 地址，然后就可以使用三次握手与网站建立 <code>TCP</code> 连接了</p>
+<p>在 <code>HTTP</code> 协议里，建立连接后，浏览器会立即发送请求报文。但现在是 <code>HTTPS</code> 协议，它需要再用另外一个“握手”过程，在 <code>TCP</code> 上建立安全连接，之后才是收发 <code>HTTP</code> 报文</p>
 <hr>
 <p> </p>
 <h2 id="三tls协议的组成">三、TLS协议的组成</h2>
 <p> </p>
-<p>TLS 包含几个子协议，你也可以理解为它是由几个不同职责的模块组成，比较常用的有记录协议、警报协议、握手协议、变更密码规范协议等</p>
+<p><code>TLS</code> 包含几个子协议，你也可以理解为它是由几个不同职责的模块组成，比较常用的有<code>记录协议</code>、<code>警报协议</code>、<code>握手协议</code>、<code>变更密码规范协议</code>等</p>
 <p> </p>
 <h3 id="31-记录协议">3.1 记录协议</h3>
 <p> </p>
-<p>记录协议，record protocol，规定了TLS收发数据的基本单位：记录record，</p>
-<p>记录像是tcp中的segment， 所有其他的子协议都需要通过记录协议发出，但是多个记录数据可以在一个tcp包中一次性发出，也并不需要像 TCP 那样返回 ACK</p>
+<p>记录协议，<code>record protocol</code>，规定了<code>TLS</code>收发数据的基本单位：<code>记录record</code>，</p>
+<p>记录像是<code>tcp</code>中的<code>segment</code>， 所有其他的子协议都需要通过记录协议发出，但是多个记录数据可以在一个<code>tcp</code>包中一次性发出，也并不需要像<code>TCP</code> 那样返回 <code>ACK</code></p>
 <p> </p>
 <h3 id="32-警报协议">3.2 警报协议</h3>
 <p> </p>
-<p>警报协议（Alert Protocol）的职责是向对方发出警报信息，有点像是 HTTP 协议里的状态码。比如，protocol_version 就是不支持旧版本，bad_certificate 就是证书有问题，收到警报后另一方可以选择继续，也可以立即终止连接</p>
+<p>警报协议（<code>Alert Protocol</code>）的职责是向对方发出警报信息，有点像是 <code>HTTP</code> 协议里的状态码。比如，<code>protocol_version</code> 就是不支持旧版本，<code>bad_certificate</code> 就是证书有问题，收到警报后另一方可以选择继续，也可以立即终止连接</p>
 <p> </p>
 <h3 id="33-握手协议">3.3 握手协议</h3>
 <p> </p>
-<p>握手协议（Handshake Protocol）是 TLS 里最复杂的子协议，要比 TCP 的 SYN/ACK 复杂的多，浏览器和服务器会在握手过程中协商 TLS 版本号、随机数、密码套件等信息，然后交换证书和密钥参数，最终双方协商得到会话密钥，用于后续的混合加密系统。</p>
+<p>握手协议（<code>Handshake Protocol</code>）是 <code>TLS </code>里最复杂的子协议，要比 <code>TCP</code> 的 <code>SYN/ACK </code>复杂的多，浏览器和服务器会在握手过程中协商 <code>TLS</code> 版本号、随机数、密码套件等信息，然后交换证书和密钥参数，最终双方协商得到会话密钥，用于后续的混合加密系统。</p>
 <p> </p>
 <h3 id="34-变更密码规范协议">3.4 变更密码规范协议</h3>
 <p> </p>
-<p>变更密码规范协议（Change Cipher Spec Protocol），它非常简单，就是一个“通知”，告诉对方，后续的数据都将使用加密保护。那么反过来，在它之前，数据都是明文的。</p>
+<p>变更密码规范协议（<code>Change Cipher Spec Protocol</code>），它非常简单，就是一个<code>“通知”</code>，告诉对方，后续的数据都将使用加密保护。那么反过来，在它之前，数据都是明文的。</p>
 <hr>
 <p> </p>
 <h2 id="四ecdhe握手过程">四、ECDHE握手过程</h2>
 <p> </p>
 <p>握手过程如下：</p>
 <p> </p>
-<p>(1) 在TCP建立连接过后，浏览器会首先发送一个“Client Hello”消息，也即与服务器打招呼，里面包含客户端的版本号、支持的密码套件，还有一个随机数，client random, 用于后续生成会话密钥</p>
+<p>(1) 在<code>TCP</code>建立连接过后，浏览器会首先发送一个<code>“Client Hello”</code>消息，也即与服务器打招呼，里面包含客户端的版本号、支持的密码套件，还有一个随机数，<code>client random</code>, 用于后续生成会话密钥</p>
 <p> </p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">
 <span class="n">Handshake</span> <span class="n">Protocol</span><span class="o">:</span> <span class="n">Client</span> <span class="n">Hello</span> <span class="c1">// 打招呼内容
@@ -164,7 +167,7 @@
 
 </code></pre></div><p>可以理解为客户端向服务器通信，&ldquo;我这边有这些这些信息，你看看哪些是可用的，关键的随机数可得留着&rdquo;</p>
 <p> </p>
-<p>(2) 作为“礼尚往来”，服务器收到“Client Hello”后，会返回一个“Server Hello”消息。把版本号对一下，也给出一个随机数（Server Random），然后从客户端的列表里选一个作为本次通信使用的密码套件，在这里它选择了“TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384”</p>
+<p>(2) 作为“礼尚往来”，服务器收到<code>“Client Hello”</code>后，会返回一个<code>“Server Hello”</code>消息。把版本号对一下，也给出一个随机数（<code>Server Random</code>），然后从客户端的列表里选一个作为本次通信使用的密码套件，在这里它选择了<code>“TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384”</code></p>
 <p> </p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">
 <span class="n">Handshake</span> <span class="n">Protocol</span><span class="o">:</span> <span class="n">Server</span> <span class="n">Hello</span> <span class="c1">//服务器发送内容
@@ -173,12 +176,12 @@
 </span><span class="c1"></span>    <span class="n">Cipher</span> <span class="n">Suite</span><span class="o">:</span> <span class="n">TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</span> <span class="o">(</span><span class="n">0xc030</span><span class="o">)</span> <span class="c1">// 服务端决定的通信密码套件
 </span><span class="c1"></span>
 </code></pre></div><p> </p>
-<p>可以理解为服务端向客户端通信，&ldquo;我这边版本对上了，可以加密，你的密码套件还挺多的呀，就使用这个吧，用椭圆曲线加 RSA、AES、SHA384， 我这边也有一个随机数，你先留着吧&rdquo;</p>
+<p>可以理解为服务端向客户端通信，&ldquo;我这边版本对上了，可以加密，你的密码套件还挺多的呀，就使用这个吧，用椭圆曲线加 <code>RSA、AES、SHA384</code>， 我这边也有一个随机数，你先留着吧&rdquo;</p>
 <p> </p>
-<p>(3) 服务端为了证明自己的身份，把自身证书（Server Certificate）发给了客户端， 服务端证书是CA使用私钥对服务端的公钥的签名结果，即是说，通过服务端证书可以获得服务端的公钥。</p>
+<p>(3) 服务端为了证明自己的身份，把自身证书（<code>Server Certificate</code>）发给了客户端， 服务端证书是<code>CA</code>使用私钥对服务端的公钥的签名结果，即是说，通过服务端证书可以获得服务端的公钥。</p>
 <p> </p>
 <p> </p>
-<p>(4) 这个步骤是关键，因为服务器选择了ECDHE算法，所以，服务端会在发送证书后，发送 server key exchange消息，里面是椭圆曲线的公钥 server params, 用于实现密钥交换算法，在加上自己的私钥签名认证</p>
+<p>(4) 这个步骤是关键，因为服务器选择了<code>ECDHE</code>算法，所以，服务端会在发送证书后，发送 <code>server key exchange</code>消息，里面是椭圆曲线的公钥 <code>server params</code>, 用于实现密钥交换算法，在加上自己的私钥签名认证</p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">
 
 <span class="n">Handshake</span> <span class="n">Protocol</span><span class="o">:</span> <span class="n">Server</span> <span class="n">Key</span> <span class="n">Exchange</span>
@@ -193,14 +196,14 @@
 <p>这相当于说，刚才我选的密码套件有点复杂，所以再给你个算法的参数，和刚才的随机数一样，要保留着，别丢了，为了防止别人冒充我，我又盖了一个章，因为(3)中客户端已经可以得到服务端的公钥，所以（服务端私钥加密椭圆曲线的公钥, 服务端公钥解密）客户端可以得到椭圆曲线的公钥</p>
 <p> </p>
 <p> </p>
-<p>(5) 服务端发送Server Hello Done， 表示我的信息就是这些，打招呼完毕</p>
-<p>上述，（1）到（5）表示第一个消息往返已经完成，（两个TCP包），结果是客户端和服务端通过明文共享了三个信息：</p>
-<p>Client Random、Server Random 和 Server Params</p>
+<p>(5) 服务端发送<code>Server Hello Done</code>， 表示我的信息就是这些，打招呼完毕</p>
+<p>上述，（1）到（5）表示第一个消息往返已经完成，（两个<code>TCP包</code>），结果是客户端和服务端通过明文共享了三个信息：</p>
+<p><code>Client Random</code>、<code>Server Random</code> 和 <code>Server Params</code></p>
 <p>客户端此时拿到了服务端的证书，那这个证书是不是有效的呢？</p>
 <p>客户端开始走证书链逐级验证，确认证书的真实性，再用证书公钥验证签名，就确认了服务端的真实性，刚才跟我打招呼的不是骗子，可以接着往下走</p>
 <p> </p>
 <p> </p>
-<p>(6) 客户端按照密码套件的要求，生成一个椭圆曲线的公钥（Client Params），用“Client Key Exchange”消息发给服务器</p>
+<p>(6) 客户端按照密码套件的要求，生成一个椭圆曲线的公钥（<code>Client Params</code>），用<code>“Client Key Exchange”</code>消息发给服务器</p>
 <p> </p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">
 <span class="n">Handshake</span> <span class="n">Protocol</span><span class="o">:</span> <span class="n">Client</span> <span class="n">Key</span> <span class="n">Exchange</span>
@@ -208,12 +211,12 @@
         <span class="n">Pubkey</span><span class="o">:</span> <span class="n">8c674d0e08dc27b5eaa</span><span class="err">…</span> <span class="c1">//客户端生成的公钥
 </span><span class="c1"></span>
 </code></pre></div><p> </p>
-<p>现在客户端和服务器手里都拿到了密钥交换算法的两个参数（Client Params、Server Params），就用 ECDHE 算法一阵算，算出了一个新的东西，叫“Pre-Master”，其实也是一个随机数</p>
+<p>现在客户端和服务器手里都拿到了密钥交换算法的两个参数（<code>Client Params、Server Params</code>），就用 <code>ECDHE</code> 算法一阵算，算出了一个新的东西，叫<code>“Pre-Master”</code>，其实也是一个随机数</p>
 <p>至于具体的计算原理和过程，因为太复杂就不细说了，但算法可以保证即使黑客截获了之前的参数，也是绝对算不出这个随机数的</p>
-<p>现在客户端和服务器手里有了三个随机数：Client Random、Server Random 和 Pre-Master。用这三个作为原始材料，就可以生成用于加密会话的主密钥，叫“Master Secret”。而黑客因为拿不到“Pre-Master”，所以也就得不到主密钥</p>
+<p>现在客户端和服务器手里有了三个随机数：<code>Client Random</code>、<code>Server Random</code> 和 <code>Pre-Master</code>。用这三个作为原始材料，就可以生成用于加密会话的主密钥，叫“<code>Master Secret</code>”。而黑客因为拿不到“<code>Pre-Master</code>”，所以也就得不到主密钥</p>
 <p>为什么非得这么麻烦，非要三个随机数呢？</p>
-<p>这就必须说 TLS 的设计者考虑得非常周到了，他们不信任客户端或服务器伪随机数的可靠性，为了保证真正的“完全随机”“不可预测”，把三个不可靠的随机数混合起来，那么“随机”的程度就非常高了，足够让黑客难以猜测</p>
-<p>“Master Secret”究竟是怎么算出来的呢？</p>
+<p>这就必须说 <code>TLS</code> 的设计者考虑得非常周到了，他们不信任客户端或服务器伪随机数的可靠性，为了保证真正的“完全随机”“不可预测”，把三个不可靠的随机数混合起来，那么“随机”的程度就非常高了，足够让黑客难以猜测</p>
+<p>“<code>Master Secret</code>”究竟是怎么算出来的呢？</p>
 <p> </p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">
 
@@ -221,18 +224,42 @@
                     <span class="n">ClientHello</span><span class="o">.</span><span class="na">random</span> <span class="o">+</span> <span class="n">ServerHello</span><span class="o">.</span><span class="na">random</span><span class="o">)</span>
 
 </code></pre></div><p> </p>
-<p>这里的“PRF”就是伪随机数函数，它基于密码套件里的最后一个参数，比如这次的 SHA384，通过摘要算法来再一次强化“Master Secret”的随机性</p>
-<p>主密钥有 48 字节，但它也不是最终用于通信的会话密钥，还会再用 PRF 扩展出更多的密钥，比如客户端发送用的会话密钥（client_write_key）、服务器发送用的会话密钥（server_write_key）等等，避免只用一个密钥带来的安全隐患</p>
+<p>这里的“<code>PRF</code>”就是伪随机数函数，它基于密码套件里的最后一个参数，比如这次的 <code>SHA384</code>，通过摘要算法来再一次强化“<code>Master Secret</code>”的随机性</p>
+<p>主密钥有<code> 48</code> 字节，但它也不是最终用于通信的会话密钥，还会再用 <code>PRF</code> 扩展出更多的密钥，比如客户端发送用的会话密钥（<code>client_write_key</code>）、服务器发送用的会话密钥（<code>server_write_key</code>）等等，避免只用一个密钥带来的安全隐患</p>
 <p> </p>
-<p>(7) 有了主密钥和派生的会话密钥，握手就快结束了。客户端发一个“Change Cipher Spec”，然后再发一个“Finished”消息，把之前所有发送的数据做个摘要，再加密一下，让服务器做个验证. 意思就是告诉服务器：“后面都改用对称算法加密通信了啊，用的就是打招呼时说的 AES，加密对不对还得你测一下。”</p>
+<p>(7) 有了主密钥和派生的会话密钥，握手就快结束了。客户端发一个<code>“Change Cipher Spec”</code>，然后再发一个<code>“Finished”</code>消息，把之前所有发送的数据做个摘要，再加密一下，让服务器做个验证. 意思就是告诉服务器：“后面都改用对称算法加密通信了啊，用的就是打招呼时说的 <code>AES</code>，加密对不对还得你测一下。”</p>
 <p> </p>
 <p> </p>
-<p>(8) 服务器也是同样的操作，发“Change Cipher Spec”和“Finished”消息，双方都验证加密解密 OK，握手正式结束，后面就收发被加密的 HTTP 请求和响应了</p>
+<p>(8) 服务器也是同样的操作，发<code>“Change Cipher Spec”</code>和<code>“Finished”</code>消息，双方都验证加密解密 <code>OK</code>，握手正式结束，后面就收发被加密的 <code>HTTP</code> 请求和响应了</p>
 <p> </p>
 <hr>
 <p> </p>
 <h2 id="五rsa握手过程">五、RSA握手过程</h2>
 <p> </p>
+<p> 
+(1) 当你登录一个外卖网站的时候，由于是 <code>HTTPS</code>，客户端会发送 <code>Client Hello</code> 消息到服务器，以明文传输 <code>TLS</code> 版本信息、加密套件候选列表、压缩算法候选列表等信息。另外，还会有<code>一个随机数</code>，在协商对称密钥的时候使用;</p>
+<p>这就类似在说：“您好，我想定外卖，但你要保密我吃的是什么。这是我的加密套路，再给你个随机数，你留着。”
+ </p>
+<p> 
+(2) 然后，外卖网站返回 <code>Server Hello</code> 消息, 告诉客户端，服务器选择使用的协议版本、加密套件、压缩算法等，还有<code>一个随机数</code>，用于后续的密钥协商</p>
+<p>这就类似在说：“您好，保密没问题，你的加密套路还挺多，咱们就按套路 2 来吧，我这里也有个随机数，你也留着。”
+ </p>
+<p> 
+(3) 然后，外卖网站会给你一个服务器端的证书，然后说：“<code>Server Hello Done</code>，我这里就这些信息了。”</p>
+<p>你当然不相信这个证书，于是你从自己信任的 <code>CA</code> 仓库中，拿 <code>CA</code> 的证书里面的公钥去解密外卖网站的证书。如果能够成功，则说明外卖网站是可信的。这个过程中，你可能会不断往上追溯 <code>CA</code>、<code>CA 的 CA</code>、<code>CA 的 CA 的 CA</code>，反正直到一个授信的 <code>CA</code>，就可以了</p>
+<p> </p>
+<p> 
+(4) 证书验证完毕之后，觉得这个外卖网站可信，于是客户端计算产生随机数字 <code>Pre-master</code>，发送 <code>Client Key Exchange</code>，用证书中的公钥加密，再发送给服务器，服务器可以通过私钥解密出来</p>
+<p>到目前为止，无论是客户端还是服务器，都有了三个随机数，分别是：自己的、对端的，以及刚生成的 <code>Pre-Master</code> 随机数。通过这三个随机数，可以在客户端和服务器产生相同的对称密钥。
+ </p>
+<p> 
+有了对称密钥，客户端就可以说：“<code>Change Cipher Spec</code>，咱们以后都采用协商的通信密钥和加密算法进行加密通信了。”
+然后发送一个 <code>Encrypted Handshake Message</code>，将已经商定好的参数等，采用协商密钥进行加密，发送给服务器用于数据与握手验证
+ </p>
+<p> 
+同样，服务器也可以发送 <code>Change Cipher Spec</code>，说：“没问题，咱们以后都采用协商的通信密钥和加密算法进行加密通信了”，并且也发送 <code>Encrypted Handshake Message</code> 的消息试试。当双方握手结束之后，就可以通过对称密钥进行加密传输了。</p>
+<p>上面的过程只包含了 <code>HTTPS</code> 的单向认证，也即客户端验证服务端的证书，是大部分的场景，也可以在更加严格安全要求的情况下，启用双向认证，双方互相验证证书
+ </p>
 <hr>
 <p> </p>
 <h2 id="六-双向认证">六、 双向认证</h2>
