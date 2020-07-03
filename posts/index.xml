@@ -14,6 +14,15 @@
                 <img src="/images/linux/%e7%b3%bb%e7%bb%9f%e5%88%9d%e5%a7%8b%e5%8c%96.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 趣谈linux操作系统 二、 为什么要学习Linux操作系统 打开 Linux 操作系统这扇门，你才是合格的软件工程师 研究 Linux 内核代码，你能学到数据结构]]></description>
 </item><item>
+    <title>权威指南</title>
+    <link>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/0_%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/</link>
+    <pubDate>Wed, 01 Jul 2020 09:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/0_%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/elasticsearch/%e6%9d%83%e5%a8%81%e6%8c%87%e5%8d%97.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 elasticsearch权威指南 二、基础入门 2.1 面向文档 在面向对象中，对象很少只是一个简单的键和值的列表，通常，对象有更加复杂的数据]]></description>
+</item><item>
     <title>1. 数组</title>
     <link>https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/</link>
     <pubDate>Wed, 24 Jun 2020 09:00:00 &#43;0800</pubDate>
@@ -84,15 +93,6 @@
     <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/simd/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/os/SIMD.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 深入浅出计算机组成原理]]></description>
-</item><item>
-    <title>SSD硬盘</title>
-    <link>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/ssd%E7%A1%AC%E7%9B%98/</link>
-    <pubDate>Tue, 23 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90_os/ssd%E7%A1%AC%E7%9B%98/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/os/SSD%e7%a1%ac%e7%9b%98.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 深入浅出计算机组成原理]]></description>
 </item></channel>
 </rss>

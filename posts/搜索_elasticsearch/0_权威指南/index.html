@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>权威指南 - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="权威指南" />
+<meta property="og:description" content="一、 参考 elasticsearch权威指南 二、基础入门 2.1 面向文档 在面向对象中，对象很少只是一个简单的键和值的列表，通常，对象有更加复杂的数据" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/0_%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/" />
+<meta property="og:image" content="https://yzthewind.github.io/logo.png"/>
+<meta property="article:published_time" content="2020-07-01T09:00:00+08:00" />
+<meta property="article:modified_time" content="2020-07-01T09:00:00+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://yzthewind.github.io/logo.png"/>
+
+<meta name="twitter:title" content="权威指南"/>
+<meta name="twitter:description" content="一、 参考 elasticsearch权威指南 二、基础入门 2.1 面向文档 在面向对象中，对象很少只是一个简单的键和值的列表，通常，对象有更加复杂的数据"/>
+<meta name="application-name" content="一曲广陵散">
+<meta name="apple-mobile-web-app-title" content="一曲广陵散"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/0_%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/" /><link rel="prev" href="https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/" /><link rel="next" href="https://yzthewind.github.io/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/1.-%E7%B3%BB%E7%BB%9F%E5%88%9D%E5%A7%8B%E5%8C%96/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "权威指南",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/yzthewind.github.io\/posts\/%E6%90%9C%E7%B4%A2_elasticsearch\/0_%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97\/"
+        },"genre": "posts","keywords": "elasticsearch","wordcount":  3573 ,
+        "url": "https:\/\/yzthewind.github.io\/posts\/%E6%90%9C%E7%B4%A2_elasticsearch\/0_%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97\/","datePublished": "2020-07-01T09:00:00+08:00","dateModified": "2020-07-01T09:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "yz"},"author": {
+                "@type": "Person",
+                "name": "yz"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title=""><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title=""><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">权威指南</h1><h2 class="single-subtitle">elasticsearch权威指南</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%90%9C%E7%B4%A2/"><i class="far fa-folder fa-fw"></i>搜索</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-01">2020-07-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3573 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/elasticsearch/%e6%9d%83%e5%a8%81%e6%8c%87%e5%8d%97.jpg"
+        data-srcset="/images/elasticsearch/%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97.jpg, /images/elasticsearch/%e6%9d%83%e5%a8%81%e6%8c%87%e5%8d%97.jpg 1.5x, /images/elasticsearch/%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97.jpg 2x"
+        data-sizes="auto"
+        alt="/images/elasticsearch/%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97.jpg"
+        title="/images/elasticsearch/%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97.jpg" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一-参考">一、 参考</a></li>
+    <li><a href="#二基础入门">二、基础入门</a>
+      <ul>
+        <li><a href="#21-面向文档">2.1 面向文档</a></li>
+        <li><a href="#22-索引">2.2 索引</a></li>
+        <li><a href="#23-分布式特性">2.3 分布式特性</a></li>
+      </ul>
+    </li>
+    <li><a href="#三检索实践">三、检索实践</a>
+      <ul>
+        <li><a href="#31-通过id检索">3.1 通过ID检索</a></li>
+        <li><a href="#32-轻量搜索">3.2 轻量搜索</a></li>
+        <li><a href="#33-使用查询表达式搜索">3.3 使用查询表达式搜索</a></li>
+        <li><a href="#34-过滤器">3.4 过滤器</a></li>
+        <li><a href="#35-全文搜索">3.5 全文搜索</a></li>
+        <li><a href="#36-短语搜索">3.6 短语搜索</a></li>
+        <li><a href="#37-高亮搜索">3.7 高亮搜索</a></li>
+        <li><a href="#38-聚合初试">3.8 聚合初试</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><hr>
+<p> </p>
+<h2 id="一-参考">一、 参考</h2>
+<p> </p>
+<blockquote>
+<p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html" target="_blank" rel="noopener noreffer">elasticsearch权威指南</a></p>
+</blockquote>
+<hr>
+<p> </p>
+<h2 id="二基础入门">二、基础入门</h2>
+<p> </p>
+<p> </p>
+<h3 id="21-面向文档">2.1 面向文档</h3>
+<p> </p>
+<p>在面向对象中，对象很少只是一个简单的键和值的列表，通常，对象有更加复杂的数据结构，可能会包含日期、地理信息、其他对象、数组等。</p>
+<p> </p>
+<p>(1) 如果保存到传统的关系型数据库中：</p>
+<p>也许有一天你想把这些对象存储在数据库中。使用关系型数据库的行和列存储，这相当于是把一个表现力丰富的对象塞到一个非常大的电子表格中：为了适应表结构，你必须设法将这个对象扁平化—​通常一个字段对应一列—​而且每次查询时又需要将其重新构造为对象</p>
+<p> </p>
+<p>(2) 如果是<code>ES</code>保存对象呢？</p>
+<p><code>Elasticsearch</code> 是 面向文档 的，意味着它存储整个对象或 文档。<code>Elasticsearch</code> 不仅存储文档，而且 索引 每个文档的内容，使之可以被检索。在 <code>Elasticsearch</code> 中，我们对文档进行索引、检索、排序和过滤—​而不是对行列数据。这是一种完全不同的思考数据的方式，也是 <code>Elasticsearch</code> 能支持复杂全文检索的原因</p>
+<p> </p>
+<p><code>Elasticsearch</code> 使用 <code>JavaScript Object Notation</code>（或者 <code>JSON</code>）作为文档的序列化格式。<code>JSON</code> 序列化为大多数编程语言所支持，并且已经成为 <code>NoSQL</code> 领域的标准格式。 它简单、简洁、易于阅读</p>
+<p> </p>
+<p><code>json</code> 示例：</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;email&#34;</span><span class="p">:</span> <span class="s2">&#34;john@smith.com&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;first_name&#34;</span><span class="p">:</span> <span class="s2">&#34;John&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;last_name&#34;</span><span class="p">:</span> <span class="s2">&#34;Smith&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;info&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;bio&#34;</span><span class="p">:</span> <span class="s2">&#34;Eco-warrior and defender of the weak&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;age&#34;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="nt">&#34;interests&#34;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&#34;dolphins&#34;</span><span class="p">,</span>
+      <span class="s2">&#34;whales&#34;</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;join_date&#34;</span><span class="p">:</span> <span class="s2">&#34;2014/05/01&#34;</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p>虽然原始的 <code>user</code> 对象很复杂，但这个对象的结构和含义在 <code>JSON</code> 版本中都得到了体现和保留。在 <code>Elasticsearch</code> 中将对象转化为 <code>JSON</code> 后构建索引要比在一个扁平的表结构中要简单的多</p>
+<p>几乎所有的语言都有可以将任意的数据结构或对象转化成 <code>JSON</code> 格式的模块，只是细节各不相同。具体请查看 <code>serialization</code> 或者 <code>marshalling</code> 这两个处理 <code>JSON</code> 的模块</p>
+<p>对象通过序列化，变为字节流，例如:</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&#34;email&#34;</span><span class="p">:</span> <span class="s2">&#34;john@smith.com&#34;</span><span class="p">,</span>
+  <span class="s2">&#34;first_name&#34;</span><span class="p">:</span> <span class="s2">&#34;John&#34;</span><span class="p">,</span>
+  <span class="s2">&#34;last_name&#34;</span><span class="p">:</span> <span class="s2">&#34;Smith&#34;</span><span class="p">,</span>
+  <span class="s2">&#34;info&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&#34;bio&#34;</span><span class="p">:</span> <span class="s2">&#34;Eco-warrior and defender of the weak&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;age&#34;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s2">&#34;interests&#34;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&#34;dolphins&#34;</span><span class="p">,</span>
+      <span class="s2">&#34;whales&#34;</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">&#34;join_date&#34;</span><span class="p">:</span> <span class="s2">&#34;2014/05/01&#34;</span>
+<span class="p">}</span>
+
+<span class="n">str_user</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+<span class="n">obj_user</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">str_user</span><span class="p">)</span>
+
+<span class="n">is_equal</span> <span class="o">=</span> <span class="n">obj_user</span> <span class="o">==</span> <span class="n">user</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">user</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">str_user</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">obj_user</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">is_equal</span><span class="p">)</span>
+
+<span class="c1"># 返回值</span>
+<span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;dict&#39;</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;str&#39;</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;dict&#39;</span><span class="o">&gt;</span>
+<span class="bp">True</span>
+</code></pre></div><p> </p>
+<hr>
+<p> </p>
+<h3 id="22-索引">2.2 索引</h3>
+<p> </p>
+<p> </p>
+<h4 id="221-名词索引">2.2.1 名词索引</h4>
+<p> </p>
+<p>一个 索引 类似于传统关系数据库中的一个 数据库 ，是一个存储关系型文档的地方。 索引 (<code>index</code>) 的复数词为<code> indices</code> 或 <code>indexes</code></p>
+<p> </p>
+<h4 id="222-动词索引">2.2.2 动词索引</h4>
+<p> </p>
+<p>索引一个文档 就是存储一个文档到一个 索引 （名词）中以便被检索和查询。这非常类似于 <code>SQL</code> 语句中的 <code>INSERT</code> 关键词，除了文档已存在时，新文档会替换旧文档情况之外</p>
+<p> </p>
+<h4 id="223-倒排索引">2.2.3 倒排索引</h4>
+<p> </p>
+<p>关系型数据库通过增加一个 索引 比如一个<code> B树（B-tree）</code>索引 到指定的列上，以便提升数据检索速度。<code>Elasticsearch</code> 和 <code>Lucene</code> 使用了一个叫做 倒排索引 的结构来达到相同的目的</p>
+<p>默认的，一个文档中的每一个属性都是 被索引 的（有一个倒排索引）和可搜索的。一个没有倒排索引的属性是不能被搜索到的</p>
+<p> </p>
+<h4 id="224-索引示例">2.2.4 索引示例</h4>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="err">PUT</span> <span class="err">megacorp/_doc/</span><span class="mi">1</span>
+<span class="p">{</span>
+  <span class="nt">&#34;first_name&#34;</span><span class="p">:</span> <span class="s2">&#34;John&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;last_name&#34;</span><span class="p">:</span> <span class="s2">&#34;Smith&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;age&#34;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+  <span class="nt">&#34;about&#34;</span><span class="p">:</span> <span class="s2">&#34;I love to go rock climbing&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;interests&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&#34;sports&#34;</span><span class="p">,</span>
+    <span class="s2">&#34;music&#34;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="err">PUT</span> <span class="err">/megacorp/_doc/</span><span class="mi">2</span>
+<span class="p">{</span>
+  <span class="nt">&#34;first_name&#34;</span><span class="p">:</span> <span class="s2">&#34;Jane&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;last_name&#34;</span><span class="p">:</span> <span class="s2">&#34;Smith&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;age&#34;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+  <span class="nt">&#34;about&#34;</span><span class="p">:</span> <span class="s2">&#34;I like to collect rock albums&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;interests&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&#34;music&#34;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="err">PUT</span> <span class="err">/megacorp/_doc/</span><span class="mi">3</span>
+<span class="p">{</span>
+  <span class="nt">&#34;first_name&#34;</span><span class="p">:</span> <span class="s2">&#34;Douglas&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;last_name&#34;</span><span class="p">:</span> <span class="s2">&#34;Fir&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;age&#34;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span>
+  <span class="nt">&#34;about&#34;</span><span class="p">:</span> <span class="s2">&#34;I like to build cabinets&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;interests&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&#34;forestry&#34;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p> </p>
+<h3 id="23-分布式特性">2.3 分布式特性</h3>
+<p> </p>
+<p>Elasticsearch 尽可能地屏蔽了分布式系统的复杂性。这里列举了一些在后台自动执行的操作</p>
+<p>(1) 分配文档到不同的容器 或 分片 中，文档可以储存在一个或多个节点中</p>
+<p>(2) 按集群节点来均衡分配这些分片，从而对索引和搜索过程进行负载均衡</p>
+<p>(3) 复制每个分片以支持数据冗余，从而防止硬件故障导致的数据丢失</p>
+<p>(4) 将集群中任一节点的请求路由到存有相关数据的节点</p>
+<p>(5) 集群扩容时无缝整合新节点，重新分配分片以便从离群节点恢复</p>
+<hr>
+<p> </p>
+<h2 id="三检索实践">三、检索实践</h2>
+<p> </p>
+<p> </p>
+<h3 id="31-通过id检索">3.1 通过ID检索</h3>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="err">GET</span> <span class="err">megacorp/_doc/</span><span class="mi">1</span>
+
+<span class="err">#</span> <span class="err">返回值</span>
+
+<span class="p">{</span>
+  <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;megacorp&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_version&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="nt">&#34;_seq_no&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&#34;_primary_term&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="nt">&#34;found&#34;</span> <span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&#34;_source&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;first_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;John&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;last_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Smith&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;age&#34;</span> <span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="nt">&#34;about&#34;</span> <span class="p">:</span> <span class="s2">&#34;I love to go rock climbing&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;interests&#34;</span> <span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&#34;sports&#34;</span><span class="p">,</span>
+      <span class="s2">&#34;music&#34;</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div><p> </p>
+<p>返回结果包含了文档的一些元数据，以及 <code>_source</code> 属性，内容是 <code>John Smith</code> 雇员的原始 <code>JSON</code> 文档;</p>
+<p>将 <code>HTTP</code> 命令由 <code>PUT</code> 改为 <code>GET</code> 可以用来检索文档，同样的，可以使用 <code>DELETE</code> 命令来删除文档，以及使用 <code>HEAD</code> 指令来检查文档是否存在。如果想更新已存在的文档，只需再次 <code>PUT</code></p>
+<p> </p>
+<h3 id="32-轻量搜索">3.2 轻量搜索</h3>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="err">GET</span> <span class="err">megacorp/_search</span>
+
+<span class="err">#</span> <span class="err">返回值</span>
+
+<span class="p">{</span>
+  <span class="nt">&#34;took&#34;</span> <span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+  <span class="nt">&#34;timed_out&#34;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;skipped&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;value&#34;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="nt">&#34;relation&#34;</span> <span class="p">:</span> <span class="s2">&#34;eq&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;max_score&#34;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;megacorp&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;3&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_score&#34;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="nt">&#34;_source&#34;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;first_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Douglas&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;last_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Fir&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;age&#34;</span> <span class="p">:</span> <span class="mi">35</span><span class="p">,</span>
+          <span class="nt">&#34;about&#34;</span> <span class="p">:</span> <span class="s2">&#34;I like to build cabinets&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;interests&#34;</span> <span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&#34;forestry&#34;</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;megacorp&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;2&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_score&#34;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="nt">&#34;_source&#34;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;first_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Jane&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;last_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Smith&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;age&#34;</span> <span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+          <span class="nt">&#34;about&#34;</span> <span class="p">:</span> <span class="s2">&#34;I like to collect rock albums&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;interests&#34;</span> <span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&#34;music&#34;</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;megacorp&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_score&#34;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="nt">&#34;_source&#34;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;first_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;John&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;last_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Smith&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;age&#34;</span> <span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+          <span class="nt">&#34;about&#34;</span> <span class="p">:</span> <span class="s2">&#34;I love to go rock climbing&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;interests&#34;</span> <span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&#34;sports&#34;</span><span class="p">,</span>
+            <span class="s2">&#34;music&#34;</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p>返回结果包括了所有三个文档，放在数组 <code>hits</code> 中。一个搜索默认返回十条结果</p>
+<p>⚠️ 注意：返回结果不仅告知匹配了哪些文档，还包含了整个文档本身：显示搜索结果给最终用户所需的全部信息</p>
+<p>下面使用<code>q</code>参数，搜索满足具体字段值的文档</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="err">GET</span> <span class="err">megacorp/_search?q=last_name:Smith</span>
+
+<span class="err">#</span> <span class="err">返回值</span>
+
+<span class="p">{</span>
+  <span class="nt">&#34;took&#34;</span> <span class="p">:</span> <span class="mi">19</span><span class="p">,</span>
+  <span class="nt">&#34;timed_out&#34;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;skipped&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;value&#34;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="nt">&#34;relation&#34;</span> <span class="p">:</span> <span class="s2">&#34;eq&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;max_score&#34;</span> <span class="p">:</span> <span class="mf">0.2876821</span><span class="p">,</span>
+    <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;megacorp&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;2&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_score&#34;</span> <span class="p">:</span> <span class="mf">0.2876821</span><span class="p">,</span>
+        <span class="nt">&#34;_source&#34;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;first_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Jane&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;last_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Smith&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;age&#34;</span> <span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+          <span class="nt">&#34;about&#34;</span> <span class="p">:</span> <span class="s2">&#34;I like to collect rock albums&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;interests&#34;</span> <span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&#34;music&#34;</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;megacorp&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_score&#34;</span> <span class="p">:</span> <span class="mf">0.2876821</span><span class="p">,</span>
+        <span class="nt">&#34;_source&#34;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;first_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;John&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;last_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Smith&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;age&#34;</span> <span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+          <span class="nt">&#34;about&#34;</span> <span class="p">:</span> <span class="s2">&#34;I love to go rock climbing&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;interests&#34;</span> <span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&#34;sports&#34;</span><span class="p">,</span>
+            <span class="s2">&#34;music&#34;</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p>上面语句，尝试搜索姓氏为 <code>Smith</code> 的雇员</p>
+<p> </p>
+<h3 id="33-使用查询表达式搜索">3.3 使用查询表达式搜索</h3>
+<p> </p>
+<p><code>Query-string</code> 搜索通过命令非常方便地进行临时性的即席搜索 ，但它有自身的局限性</p>
+<p><code>Elasticsearch</code> 提供一个丰富灵活的查询语言叫做 查询表达式 ， 它支持构建更加复杂和健壮的查询</p>
+<p>领域特定语言 <code>（DSL）</code>， 使用 <code>JSON</code> 构造了一个请求。我们可以像这样重写之前的查询所有名为 <code>Smith</code> 的搜索</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="err">GET</span> <span class="err">megacorp/_search</span>
+<span class="p">{</span>
+  <span class="nt">&#34;query&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;match&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;last_name&#34;</span><span class="p">:</span> <span class="s2">&#34;Smith&#34;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p>返回结果与之前的查询一样</p>
+<hr>
+<p> </p>
+<h3 id="34-过滤器">3.4 过滤器</h3>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="err">GET</span> <span class="err">/megacorp/_search</span>
+<span class="p">{</span>
+  <span class="nt">&#34;query&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;bool&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;must&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;match&#34;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;last_name&#34;</span><span class="p">:</span> <span class="s2">&#34;smith&#34;</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="nt">&#34;filter&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;range&#34;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;age&#34;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&#34;gt&#34;</span><span class="p">:</span> <span class="mi">30</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">#</span> <span class="err">返回值</span>
+<span class="p">{</span>
+  <span class="nt">&#34;took&#34;</span> <span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+  <span class="nt">&#34;timed_out&#34;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;skipped&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;value&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&#34;relation&#34;</span> <span class="p">:</span> <span class="s2">&#34;eq&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;max_score&#34;</span> <span class="p">:</span> <span class="mf">0.2876821</span><span class="p">,</span>
+    <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;megacorp&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;2&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_score&#34;</span> <span class="p">:</span> <span class="mf">0.2876821</span><span class="p">,</span>
+        <span class="nt">&#34;_source&#34;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;first_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Jane&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;last_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Smith&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;age&#34;</span> <span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+          <span class="nt">&#34;about&#34;</span> <span class="p">:</span> <span class="s2">&#34;I like to collect rock albums&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;interests&#34;</span> <span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&#34;music&#34;</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div><p> </p>
+<p>添加了一个 过滤器 用于执行一个范围查询，并复用之前的 <code>match</code> 查询。现在结果只返回了一名员工，叫 <code>Jane Smith</code>，32 岁</p>
+<p> </p>
+<h3 id="35-全文搜索">3.5 全文搜索</h3>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json">
+<span class="err">GET</span> <span class="err">/megacorp/_search</span>
+<span class="p">{</span>
+  <span class="nt">&#34;query&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;match&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;about&#34;</span><span class="p">:</span> <span class="s2">&#34;rock climbing&#34;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">#</span> <span class="err">返回值</span>
+<span class="p">{</span>
+  <span class="nt">&#34;took&#34;</span> <span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+  <span class="nt">&#34;timed_out&#34;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;skipped&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;value&#34;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="nt">&#34;relation&#34;</span> <span class="p">:</span> <span class="s2">&#34;eq&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;max_score&#34;</span> <span class="p">:</span> <span class="mf">0.5753642</span><span class="p">,</span>
+    <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;megacorp&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_score&#34;</span> <span class="p">:</span> <span class="mf">0.5753642</span><span class="p">,</span>
+        <span class="nt">&#34;_source&#34;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;first_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;John&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;last_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Smith&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;age&#34;</span> <span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+          <span class="nt">&#34;about&#34;</span> <span class="p">:</span> <span class="s2">&#34;I love to go rock climbing&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;interests&#34;</span> <span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&#34;sports&#34;</span><span class="p">,</span>
+            <span class="s2">&#34;music&#34;</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;megacorp&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;2&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_score&#34;</span> <span class="p">:</span> <span class="mf">0.2876821</span><span class="p">,</span>
+        <span class="nt">&#34;_source&#34;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;first_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Jane&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;last_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Smith&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;age&#34;</span> <span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+          <span class="nt">&#34;about&#34;</span> <span class="p">:</span> <span class="s2">&#34;I like to collect rock albums&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;interests&#34;</span> <span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&#34;music&#34;</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+
+</code></pre></div><p> </p>
+<p>搜索下所有喜欢攀岩（<code>rock climbing</code>）的员工, 这是一个全文搜索——一项 传统数据库确实很难搞定的任务。</p>
+<p>依旧使用之前的 <code>match</code> 查询在<code>about</code> 属性上搜索 “<code>rock climbing</code>” 。得到两个匹配的文档</p>
+<p><code>Elasticsearch </code>默认按照相关性得分排序，即每个文档跟查询的匹配程度。第一个最高得分的结果很明显：<code>John Smith</code> 的 <code>about</code> 属性清楚地写着 <code>“rock climbing”</code></p>
+<p>但为什么 <code>Jane Smith</code> 也作为结果返回了呢？原因是她的 <code>about</code> 属性里提到了 <code>“rock”</code> 。因为只有 <code>“rock”</code> 而没有 <code>“climbing”</code> ，所以她的相关性得分低于 <code>John</code> 的</p>
+<p>这是一个很好的案例，阐明了<code> Elasticsearch</code> 如何 在 全文属性上搜索并返回相关性最强的结果。<code>Elasticsearch</code>中的 相关性 概念非常重要，也是完全区别于传统关系型数据库的一个概念，数据库中的一条记录要么匹配要么不匹配</p>
+<p> </p>
+<h3 id="36-短语搜索">3.6 短语搜索</h3>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="err">GET</span> <span class="err">megacorp/_search</span>
+<span class="p">{</span>
+  <span class="nt">&#34;query&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;match_phrase&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;about&#34;</span><span class="p">:</span> <span class="s2">&#34;rock climbing&#34;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">#</span> <span class="err">返回值</span>
+
+<span class="p">{</span>
+  <span class="nt">&#34;took&#34;</span> <span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="nt">&#34;timed_out&#34;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;skipped&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;value&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&#34;relation&#34;</span> <span class="p">:</span> <span class="s2">&#34;eq&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;max_score&#34;</span> <span class="p">:</span> <span class="mf">0.5753642</span><span class="p">,</span>
+    <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;megacorp&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_score&#34;</span> <span class="p">:</span> <span class="mf">0.5753642</span><span class="p">,</span>
+        <span class="nt">&#34;_source&#34;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;first_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;John&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;last_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Smith&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;age&#34;</span> <span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+          <span class="nt">&#34;about&#34;</span> <span class="p">:</span> <span class="s2">&#34;I love to go rock climbing&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;interests&#34;</span> <span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&#34;sports&#34;</span><span class="p">,</span>
+            <span class="s2">&#34;music&#34;</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p>有时候想要精确匹配一系列单词或者短语 。 比如，我们想执行这样一个查询，仅匹配同时包含 <code>“rock”</code> 和 <code>“climbing”</code> ，并且 二者以短语 <code>“rock climbing”</code> 的形式紧挨着的雇员记录</p>
+<p> </p>
+<h3 id="37-高亮搜索">3.7 高亮搜索</h3>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="err">GET</span> <span class="err">megacorp/_search</span>
+<span class="p">{</span>
+  <span class="nt">&#34;query&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;match_phrase&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;about&#34;</span><span class="p">:</span> <span class="s2">&#34;rock climbing&#34;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;highlight&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;fields&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;about&#34;</span><span class="p">:</span> <span class="p">{}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">#</span> <span class="err">返回值</span>
+<span class="p">{</span>
+  <span class="nt">&#34;took&#34;</span> <span class="p">:</span> <span class="mi">134</span><span class="p">,</span>
+  <span class="nt">&#34;timed_out&#34;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;skipped&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;value&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&#34;relation&#34;</span> <span class="p">:</span> <span class="s2">&#34;eq&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;max_score&#34;</span> <span class="p">:</span> <span class="mf">0.5753642</span><span class="p">,</span>
+    <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;megacorp&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_score&#34;</span> <span class="p">:</span> <span class="mf">0.5753642</span><span class="p">,</span>
+        <span class="nt">&#34;_source&#34;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;first_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;John&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;last_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;Smith&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;age&#34;</span> <span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+          <span class="nt">&#34;about&#34;</span> <span class="p">:</span> <span class="s2">&#34;I love to go rock climbing&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;interests&#34;</span> <span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&#34;sports&#34;</span><span class="p">,</span>
+            <span class="s2">&#34;music&#34;</span>
+          <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="nt">&#34;highlight&#34;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;about&#34;</span> <span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&#34;I love to go &lt;em&gt;rock&lt;/em&gt; &lt;em&gt;climbing&lt;/em&gt;&#34;</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p>许多应用都倾向于在每个搜索结果中 高亮 部分文本片段，以便让用户知道为何该文档符合查询条件</p>
+<p>再次执行前面的查询，并增加一个新的 <code>highlight</code> 参数</p>
+<p>当执行该查询时，返回结果与之前一样，与此同时结果中还多了一个叫做 <code>highlight</code> 的部分。这个部分包含了 <code>about</code> 属性匹配的文本片段，并以 <code>HTML</code> 标签 <code>&lt;em&gt;&lt;/em&gt;</code> 封装</p>
+<p> </p>
+<h3 id="38-聚合初试">3.8 聚合初试</h3>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="err">GET</span> <span class="err">/megacorp/_search</span>
+<span class="p">{</span>
+  <span class="nt">&#34;size&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> 
+  <span class="nt">&#34;aggs&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;all_interests&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;terms&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;field&#34;</span><span class="p">:</span> <span class="s2">&#34;interests.keyword&#34;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="err">#</span> <span class="err">返回值</span>
+<span class="p">{</span>
+  <span class="nt">&#34;took&#34;</span> <span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+  <span class="nt">&#34;timed_out&#34;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;skipped&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;value&#34;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="nt">&#34;relation&#34;</span> <span class="p">:</span> <span class="s2">&#34;eq&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;max_score&#34;</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">[</span> <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;aggregations&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;all_interests&#34;</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;doc_count_error_upper_bound&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="nt">&#34;sum_other_doc_count&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="nt">&#34;buckets&#34;</span> <span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&#34;key&#34;</span> <span class="p">:</span> <span class="s2">&#34;music&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;doc_count&#34;</span> <span class="p">:</span> <span class="mi">2</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&#34;key&#34;</span> <span class="p">:</span> <span class="s2">&#34;forestry&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;doc_count&#34;</span> <span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&#34;key&#34;</span> <span class="p">:</span> <span class="s2">&#34;sports&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;doc_count&#34;</span> <span class="p">:</span> <span class="mi">1</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p><code>Elasticsearch</code> 有一个功能叫聚合（<code>aggregations</code>），允许我们基于数据生成一些精细的分析结果。聚合与 <code>SQL</code> 中的 <code>GROUP BY</code> 类似但更强大</p>
+<p>举个例子，挖掘出员工中最受欢迎的兴趣爱好</p>
+<p>可以看到，两位员工对音乐感兴趣，一位对林业感兴趣，一位对运动感兴趣。这些聚合的结果数据并非预先统计，而是根据匹配当前查询的文档即时生成的</p>
+<p>聚合还支持分级汇总 。比如，查询特定兴趣爱好员工的平均年龄</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="err">GET</span> <span class="err">/megacorp/_search</span>
+<span class="p">{</span>
+  <span class="nt">&#34;size&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&#34;aggs&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;agg_1&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;terms&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;field&#34;</span><span class="p">:</span> <span class="s2">&#34;interests.keyword&#34;</span>
+      <span class="p">},</span>
+      <span class="nt">&#34;aggs&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;agg_2&#34;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;avg&#34;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&#34;field&#34;</span><span class="p">:</span> <span class="s2">&#34;age&#34;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="err">#</span> <span class="err">返回值</span>
+<span class="p">{</span>
+  <span class="nt">&#34;took&#34;</span> <span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="nt">&#34;timed_out&#34;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;skipped&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;value&#34;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="nt">&#34;relation&#34;</span> <span class="p">:</span> <span class="s2">&#34;eq&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;max_score&#34;</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">[</span> <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;aggregations&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;agg_1&#34;</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;doc_count_error_upper_bound&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="nt">&#34;sum_other_doc_count&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="nt">&#34;buckets&#34;</span> <span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&#34;key&#34;</span> <span class="p">:</span> <span class="s2">&#34;music&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;doc_count&#34;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nt">&#34;agg_2&#34;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&#34;value&#34;</span> <span class="p">:</span> <span class="mf">28.5</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&#34;key&#34;</span> <span class="p">:</span> <span class="s2">&#34;forestry&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;doc_count&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&#34;agg_2&#34;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&#34;value&#34;</span> <span class="p">:</span> <span class="mf">35.0</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&#34;key&#34;</span> <span class="p">:</span> <span class="s2">&#34;sports&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;doc_count&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&#34;agg_2&#34;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&#34;value&#34;</span> <span class="p">:</span> <span class="mf">25.0</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p>输出基本是第一次聚合的加强版。依然有一个兴趣及数量的列表，只不过每个兴趣都有了一个附加的 <code>agg_2</code> 属性，代表有这个兴趣爱好的所有员工的平均年龄</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-07-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/elasticsearch/">elasticsearch</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E6%95%B0%E7%BB%84/" class="prev" rel="prev" title="1. 数组"><i class="fas fa-angle-left fa-fw"></i>1. 数组</a>
+            <a href="/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_linux/1.-%E7%B3%BB%E7%BB%9F%E5%88%9D%E5%A7%8B%E5%8C%96/" class="next" rel="next" title="1. 系统初始化">1. 系统初始化<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.70.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">yz</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["yzthewind"],"clientID":"8e70465ecd960275a174","clientSecret":"32c54e1095f64e2ac3dcfa4afed2e61d5444bc0d","id":"2020-07-01T09:00:00+08:00","owner":"yzthewind","repo":"blog_gitalk","title":"权威指南"}},"data":{"id-1":"一曲广陵散","id-2":"一曲广陵散"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
