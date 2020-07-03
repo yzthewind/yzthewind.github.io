@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>1. 集群内的原理 - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="1. 集群内的原理" />
+<meta property="og:description" content="一、 参考 elasticsearch权威指南 节点类型 Integer大小 二、 概要 ElasticSearch 的主旨是随时可用和按需扩容 (1) 垂直扩容：通过购买性能更强大（ 垂直" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/1_%E9%9B%86%E7%BE%A4%E5%86%85%E7%9A%84%E5%8E%9F%E7%90%86/" />
+<meta property="og:image" content="https://yzthewind.github.io/logo.png"/>
+<meta property="article:published_time" content="2020-07-01T10:00:00+08:00" />
+<meta property="article:modified_time" content="2020-07-01T10:00:00+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://yzthewind.github.io/logo.png"/>
+
+<meta name="twitter:title" content="1. 集群内的原理"/>
+<meta name="twitter:description" content="一、 参考 elasticsearch权威指南 节点类型 Integer大小 二、 概要 ElasticSearch 的主旨是随时可用和按需扩容 (1) 垂直扩容：通过购买性能更强大（ 垂直"/>
+<meta name="application-name" content="一曲广陵散">
+<meta name="apple-mobile-web-app-title" content="一曲广陵散"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/1_%E9%9B%86%E7%BE%A4%E5%86%85%E7%9A%84%E5%8E%9F%E7%90%86/" /><link rel="prev" href="https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/0_%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "1. 集群内的原理",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/yzthewind.github.io\/posts\/%E6%90%9C%E7%B4%A2_elasticsearch\/1_%E9%9B%86%E7%BE%A4%E5%86%85%E7%9A%84%E5%8E%9F%E7%90%86\/"
+        },"genre": "posts","keywords": "elasticsearch","wordcount":  2305 ,
+        "url": "https:\/\/yzthewind.github.io\/posts\/%E6%90%9C%E7%B4%A2_elasticsearch\/1_%E9%9B%86%E7%BE%A4%E5%86%85%E7%9A%84%E5%8E%9F%E7%90%86\/","datePublished": "2020-07-01T10:00:00+08:00","dateModified": "2020-07-01T10:00:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": "yz"},"author": {
+                "@type": "Person",
+                "name": "yz"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title=""><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title=""><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">1. 集群内的原理</h1><h2 class="single-subtitle">elasticsearch权威指南</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%90%9C%E7%B4%A2/"><i class="far fa-folder fa-fw"></i>搜索</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-01">2020-07-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2305 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/elasticsearch/%e9%9b%86%e7%be%a4%e5%86%85%e7%9a%84%e5%8e%9f%e7%90%86.jpg"
+        data-srcset="/images/elasticsearch/%E9%9B%86%E7%BE%A4%E5%86%85%E7%9A%84%E5%8E%9F%E7%90%86.jpg, /images/elasticsearch/%e9%9b%86%e7%be%a4%e5%86%85%e7%9a%84%e5%8e%9f%e7%90%86.jpg 1.5x, /images/elasticsearch/%E9%9B%86%E7%BE%A4%E5%86%85%E7%9A%84%E5%8E%9F%E7%90%86.jpg 2x"
+        data-sizes="auto"
+        alt="/images/elasticsearch/%E9%9B%86%E7%BE%A4%E5%86%85%E7%9A%84%E5%8E%9F%E7%90%86.jpg"
+        title="/images/elasticsearch/%E9%9B%86%E7%BE%A4%E5%86%85%E7%9A%84%E5%8E%9F%E7%90%86.jpg" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一-参考">一、 参考</a></li>
+    <li><a href="#二-概要">二、 概要</a></li>
+    <li><a href="#三-空集群">三、 空集群</a>
+      <ul>
+        <li><a href="#31-一个节点">3.1 一个节点</a></li>
+        <li><a href="#32-一个集群">3.2 一个集群</a></li>
+        <li><a href="#33-主节点">3.3 主节点</a></li>
+        <li><a href="#34-协调节点">3.4 协调节点</a></li>
+      </ul>
+    </li>
+    <li><a href="#四集群健康">四、集群健康</a></li>
+    <li><a href="#五添加索引">五、添加索引</a>
+      <ul>
+        <li><a href="#51-索引">5.1 索引</a></li>
+        <li><a href="#52-分片">5.2 分片</a></li>
+        <li><a href="#53-索引容量">5.3 索引容量</a></li>
+        <li><a href="#54-副本分片">5.4 副本分片</a></li>
+      </ul>
+    </li>
+    <li><a href="#六添加故障转移">六、添加故障转移</a></li>
+    <li><a href="#七水平扩容">七、水平扩容</a>
+      <ul>
+        <li><a href="#71-更多的节点提高吞吐量">7.1 更多的节点提高吞吐量</a></li>
+        <li><a href="#72-更多的副本提高冗余量">7.2 更多的副本提高冗余量</a></li>
+      </ul>
+    </li>
+    <li><a href="#八应对故障">八、应对故障</a>
+      <ul>
+        <li><a href="#81-重新选举主节点">8.1 重新选举主节点</a></li>
+        <li><a href="#82-副本分片提升为主分片">8.2 副本分片提升为主分片</a></li>
+        <li><a href="#83-故障节点恢复">8.3 故障节点恢复</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><hr>
+<p> </p>
+<h2 id="一-参考">一、 参考</h2>
+<p> </p>
+<blockquote>
+<p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html" target="_blank" rel="noopener noreffer">elasticsearch权威指南</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-node.html" target="_blank" rel="noopener noreffer">节点类型</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Integer.html" target="_blank" rel="noopener noreffer">Integer大小</a></p>
+</blockquote>
+<hr>
+<p> </p>
+<h2 id="二-概要">二、 概要</h2>
+<p> </p>
+<p><code>ElasticSearch</code> 的主旨是随时可用和按需扩容</p>
+<p>(1) 垂直扩容：通过购买性能更强大（ 垂直扩容 ，或 纵向扩容 ）</p>
+<p>(2) 水平扩容：数量更多的服务器（ 水平扩容 ，或 横向扩容 ）</p>
+<p>虽然 <code>Elasticsearch</code> 可以获益于更强大的硬件设备，但是垂直扩容是有极限的。 真正的扩容能力是来自于水平扩容—​为集群添加更多的节点，并且将负载压力和稳定性分散到这些节点中</p>
+<p>对于大多数的数据库而言，通常需要对应用程序进行非常大的改动，才能利用横向扩容的新增资源。 与之相反的是，<code>ElastiSearch</code>天生就是 分布式的 ，它知道如何通过管理多节点来提高扩容性和可用性。 这也意味着你的应用无需关注这个问题</p>
+<hr>
+<p> </p>
+<h2 id="三-空集群">三、 空集群</h2>
+<p> </p>
+<p>如果我们启动了一个单独的节点，里面不包含任何的数据和索引，那我们的集群看起来就是一个空集群</p>
+<p> </p>
+<h3 id="31-一个节点">3.1 一个节点</h3>
+<p> </p>
+<p>一个节点：一个运行中的 <code>Elasticsearch 实例</code>称为一个节点</p>
+<p> </p>
+<h3 id="32-一个集群">3.2 一个集群</h3>
+<p> </p>
+<p>一个集群：集群是由一个或者多个拥有相同 <code>cluster.name</code> 配置的节点组成， 它们共同承担数据和负载的压力，当有节点加入集群中或者从集群中移除节点时，集群将会重新平均分布所有的数据</p>
+<p> </p>
+<h3 id="33-主节点">3.3 主节点</h3>
+<p> </p>
+<p>管理：将负责管理集群范围内的所有变更，例如增加、删除索引，或者增加、删除节点等；</p>
+<p>不管理：而主节点并不需要涉及到文档级别的变更和搜索等操作。</p>
+<p>所以当集群只拥有一个主节点 (<code>master node</code>) 的情况下，即使流量的增加，它也不会成为瓶颈。 任何节点都可以成为主节点</p>
+<p> </p>
+<h3 id="34-协调节点">3.4 协调节点</h3>
+<p> </p>
+<p>协调节点 (<code>coordinating node</code>)：作为用户，我们可以将请求发送到 集群中的任何节点 ，包括主节点。</p>
+<p>每个节点都知道任意文档所处的位置，并且能够将我们的请求直接转发到存储我们所需文档的节点。</p>
+<p>无论我们将请求发送到哪个节点，它都能负责从各个包含我们所需文档的节点收集回数据，并将最终结果返回給客户端。</p>
+<p><code>Elasticsearch </code>对这一切的管理都是透明的</p>
+<hr>
+<p> </p>
+<h2 id="四集群健康">四、集群健康</h2>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="err">GET</span> <span class="err">/_cluster/health</span>
+
+<span class="err">#</span> <span class="err">返回值</span>
+<span class="p">{</span>
+  <span class="nt">&#34;cluster_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;prs-cluster&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;status&#34;</span> <span class="p">:</span> <span class="s2">&#34;green&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;timed_out&#34;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&#34;number_of_nodes&#34;</span> <span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="nt">&#34;number_of_data_nodes&#34;</span> <span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="nt">&#34;active_primary_shards&#34;</span> <span class="p">:</span> <span class="mi">630</span><span class="p">,</span>
+  <span class="nt">&#34;active_shards&#34;</span> <span class="p">:</span> <span class="mi">689</span><span class="p">,</span>
+  <span class="nt">&#34;relocating_shards&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&#34;initializing_shards&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&#34;unassigned_shards&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&#34;delayed_unassigned_shards&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&#34;number_of_pending_tasks&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&#34;number_of_in_flight_fetch&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&#34;task_max_waiting_in_queue_millis&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&#34;active_shards_percent_as_number&#34;</span> <span class="p">:</span> <span class="mf">100.0</span>
+<span class="p">}</span>
+</code></pre></div><p> </p>
+<p><code>Elasticsearch</code> 的集群监控信息中包含了许多的统计数据，其中最为重要的一项就是 集群健康 ， 它在 <code>status</code> 字段中展示为 <code>green</code> 、 <code>yellow</code> 或者 <code>red</code></p>
+<p>(1) <code>green</code>, 所有的主分片和副本分片都正常运行</p>
+<p>(2) <code>yellow</code>, 所有的主分片都正常运行，但不是所有的副本分片都正常运行</p>
+<p>(3) <code>red</code>, 有主分片没能正常运行</p>
+<hr>
+<p> </p>
+<h2 id="五添加索引">五、添加索引</h2>
+<p> </p>
+<p> </p>
+<h3 id="51-索引">5.1 索引</h3>
+<p> </p>
+<p>索引： Elasticsearch 添加数据时需要用到 索引 —— 保存相关数据的地方。 索引实际上是指向一个或者多个物理 分片 的 逻辑命名空间</p>
+<p> </p>
+<h3 id="52-分片">5.2 分片</h3>
+<p> </p>
+<p>分片： 一个 分片 是一个底层的 工作单元 ，它仅保存了全部数据中的一部分，一个分片是一个 Lucene 的实例，它本身就是一个完整的搜索引擎</p>
+<p>文档被存储和索引到分片内，但是应用程序是直接与索引而不是与分片进行交互</p>
+<p>Elasticsearch 是利用分片将数据分发到集群内各处的。</p>
+<p>分片是数据的容器，文档保存在分片内，分片又被分配到集群内的各个节点里。</p>
+<p>当你的集群规模扩大或者缩小时， Elasticsearch 会自动的在各节点中迁移分片，使得数据仍然均匀分布在集群里</p>
+<p> </p>
+<h3 id="53-索引容量">5.3 索引容量</h3>
+<p> </p>
+<p>一个分片可以是 主 分片或者 副本 分片。</p>
+<p>索引内任意一个文档都归属于一个主分片，所以主分片的数目决定着索引能够保存的最大数据量</p>
+<p>一个主分片最大能够存储 <code>Integer.MAX_VALUE - 128</code> 个文档，但是实际最大值还需要参考你的使用场景：</p>
+<p>包括你使用的硬件， 文档的大小和复杂程度，索引和查询文档的方式以及你期望的响应时长</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Class</span> <span class="n">Integer</span>
+<span class="cm">/**
+</span><span class="cm">
+</span><span class="cm">Fields
+</span><span class="cm">
+</span><span class="cm">static int	MAX_VALUE	
+</span><span class="cm">A constant holding the maximum value an int can have, 2**31-1, 2147483647
+</span><span class="cm">
+</span><span class="cm">static int	MIN_VALUE	
+</span><span class="cm">A constant holding the minimum value an int can have, -2**31, -2147483648
+</span><span class="cm">
+</span><span class="cm">**/</span>
+</code></pre></div><p> </p>
+<p> </p>
+<h3 id="54-副本分片">5.4 副本分片</h3>
+<p> </p>
+<p>一个副本分片只是一个主分片的拷贝。</p>
+<p>副本分片作为硬件故障时保护数据不丢失的冗余备份，并为搜索和返回文档等读操作提供服务</p>
+<p>在索引建立的时候就已经确定了主分片数，但是副本分片数可以随时修改</p>
+<hr>
+<p> </p>
+<h2 id="六添加故障转移">六、添加故障转移</h2>
+<p> </p>
+<p>当集群中只有一个节点在运行时，意味着会有一个单点故障问题——没有冗余，需要再启动一个节点即可防止数据丢失</p>
+<p>当你在同一台机器上启动了第二个节点时，只要它和第一个节点有同样的 <code>cluster.name</code> 配置，它就会自动发现集群并加入到其中。</p>
+<p>但是在不同机器上启动节点的时候，为了加入到同一集群，你需要配置一个可连接到的单播主机列表</p>
+<hr>
+<p> </p>
+<h2 id="七水平扩容">七、水平扩容</h2>
+<p> </p>
+<p> </p>
+<h3 id="71-更多的节点提高吞吐量">7.1 更多的节点提高吞吐量</h3>
+<p> </p>
+<p>分片是一个功能完整的搜索引擎，它拥有使用一个节点上的所有资源的能力</p>
+<p>当集群添加新的节点后，这表示每个节点的硬件资源（<code>CPU, RAM, I/O</code>）将被更少的分片所共享，每个分片的性能将会得到提升</p>
+<p>主分片的数目在索引创建时就已经确定了下来。实际上，这个数目定义了这个索引能够 存储 的最大数据量。（实际大小取决于你的数据、硬件和使用场景。）</p>
+<p>但是，读操作——搜索和返回数据——可以同时被主分片 或 副本分片所处理，所以当你拥有越多的副本分片时，也将拥有越高的吞吐量</p>
+<p> </p>
+<h3 id="72-更多的副本提高冗余量">7.2 更多的副本提高冗余量</h3>
+<p> </p>
+<p>如果只是在相同节点数目的集群上增加更多的副本分片并不能提高性能，因为每个分片从节点上获得的资源会变少。 你需要增加更多的硬件资源来提升吞吐量</p>
+<p>但是更多的副本分片数提高了数据冗余量</p>
+<hr>
+<p> </p>
+<h2 id="八应对故障">八、应对故障</h2>
+<p> </p>
+<p>假设有节点A，B，C，每个分别保存有3个分片（其中一个为主分片，另外两个为副本分片，即索引有3个主分片，6个副本分片）</p>
+<p> </p>
+<h3 id="81-重新选举主节点">8.1 重新选举主节点</h3>
+<p> </p>
+<p>如果关闭的节点是一个主节点。而集群必须拥有一个主节点来保证正常工作，所以发生的第一件事情就是选举一个新的主节点</p>
+<p> </p>
+<h3 id="82-副本分片提升为主分片">8.2 副本分片提升为主分片</h3>
+<p> </p>
+<p>关闭 节点 的同时也失去了主分片 ，并且在缺失主分片的时候索引也不能正常工作。</p>
+<p>如果此时来检查集群的状况，我们看到的状态将会为 red ：不是所有主分片都在正常工作</p>
+<p>在其它节点上存在着缺失主分片的完整副本， 所以新的主节点立即将这些缺失分片上对应的副本分片提升为主分片，</p>
+<p>此时集群的状态将会为 yellow ，这个提升主分片的过程是瞬间发生的，如同按下一个开关一般</p>
+<p> </p>
+<h3 id="83-故障节点恢复">8.3 故障节点恢复</h3>
+<p> </p>
+<p>如果故障节点恢复，重新加入集群 ，集群可以将缺失的分片再次进行分配</p>
+<p>如果新加入的节点依然拥有着之前的分片，它将尝试去重用它们，同时仅从主分片复制发生了修改的数据文件</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-07-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/elasticsearch/">elasticsearch</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/%E6%90%9C%E7%B4%A2_elasticsearch/0_%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/" class="prev" rel="prev" title="0. 权威指南"><i class="fas fa-angle-left fa-fw"></i>0. 权威指南</a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.70.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">yz</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["yzthewind"],"clientID":"8e70465ecd960275a174","clientSecret":"32c54e1095f64e2ac3dcfa4afed2e61d5444bc0d","id":"2020-07-01T10:00:00+08:00","owner":"yzthewind","repo":"blog_gitalk","title":"1. 集群内的原理"}},"data":{"id-1":"一曲广陵散","id-2":"一曲广陵散"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
