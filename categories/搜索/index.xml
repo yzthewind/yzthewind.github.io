@@ -4,7 +4,25 @@
         <link>https://yzthewind.github.io/categories/%E6%90%9C%E7%B4%A2/</link>
         <description>搜索 - 分类 - </description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1126978661@qq.com (yz)</managingEditor>
-            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Wed, 01 Jul 2020 10:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/categories/%E6%90%9C%E7%B4%A2/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1126978661@qq.com (yz)</webMaster><lastBuildDate>Wed, 01 Jul 2020 12:00:00 &#43;0800</lastBuildDate><atom:link href="https://yzthewind.github.io/categories/%E6%90%9C%E7%B4%A2/" rel="self" type="application/rss+xml" /><item>
+    <title>3. 乐观并发控制</title>
+    <link>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/3_%E4%B9%90%E8%A7%82%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6/</link>
+    <pubDate>Wed, 01 Jul 2020 12:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/3_%E4%B9%90%E8%A7%82%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/elasticsearch/%e4%b9%90%e8%a7%82%e5%b9%b6%e5%8f%91%e6%8e%a7%e5%88%b6.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 elasticsearch权威指南]]></description>
+</item><item>
+    <title>2. 数据输入和输出</title>
+    <link>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/2_%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA/</link>
+    <pubDate>Wed, 01 Jul 2020 11:00:00 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/2_%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/elasticsearch/%e6%95%b0%e6%8d%ae%e8%be%93%e5%85%a5%e5%92%8c%e8%be%93%e5%87%ba.jpg" referrerpolicy="no-referrer">
+            </div>一、 参考 elasticsearch权威指南 二、 概要 面向对象编程语言如此流行的原因之一是对象帮我们表示和处理现实世界具有潜在的复杂的数据结构的]]></description>
+</item><item>
     <title>1. 集群内的原理</title>
     <link>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/1_%E9%9B%86%E7%BE%A4%E5%86%85%E7%9A%84%E5%8E%9F%E7%90%86/</link>
     <pubDate>Wed, 01 Jul 2020 10:00:00 &#43;0800</pubDate>
@@ -76,23 +94,5 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/elasticsearch/elasticsearch%e6%90%9c%e7%b4%a2.jpg" referrerpolicy="no-referrer">
             </div>一、 参考 elasticsearch权威指南]]></description>
-</item><item>
-    <title>elasticsearch索引入库</title>
-    <link>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/elasticsearch%E7%B4%A2%E5%BC%95%E5%85%A5%E5%BA%93/</link>
-    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/elasticsearch%E7%B4%A2%E5%BC%95%E5%85%A5%E5%BA%93/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/elasticsearch/elasticsearch%e7%b4%a2%e5%bc%95%e5%85%a5%e5%ba%93.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 elasticsearch权威指南]]></description>
-</item><item>
-    <title>lucene基本扩展</title>
-    <link>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_lucene/lucene%E5%9F%BA%E6%9C%AC%E6%89%A9%E5%B1%95/</link>
-    <pubDate>Wed, 10 Jun 2020 10:00:00 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_lucene/lucene%E5%9F%BA%E6%9C%AC%E6%89%A9%E5%B1%95/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/lucene/lucene%e5%9f%ba%e6%9c%ac%e6%89%a9%e5%b1%95.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 lucene实战]]></description>
 </item></channel>
 </rss>
