@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/yzthewind.github.io\/posts\/%E6%90%9C%E7%B4%A2_elasticsearch\/2_%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA\/"
-        },"genre": "posts","keywords": "elasticsearch","wordcount":  3985 ,
+        },"genre": "posts","keywords": "elasticsearch","wordcount":  5164 ,
         "url": "https:\/\/yzthewind.github.io\/posts\/%E6%90%9C%E7%B4%A2_elasticsearch\/2_%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA\/","datePublished": "2020-07-01T11:00:00+08:00","dateModified": "2020-07-01T11:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": "yz"},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">2. 数据输入和输出</h1><h2 class="single-subtitle">elasticsearch权威指南</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%90%9C%E7%B4%A2/"><i class="far fa-folder fa-fw"></i>搜索</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-01">2020-07-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3985 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-01">2020-07-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5164 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 11 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -428,6 +428,305 @@
 <p>(3) 删除旧文档</p>
 <p>(4) 索引一个新文档</p>
 <p> </p>
+<h4 id="442-部分更新文档">4.4.2 部分更新文档</h4>
+<p> </p>
+<p>使用 <code>update API</code> 可以部分更新文档</p>
+<p> </p>
+<p>更新的原理：</p>
+<p>文档不能被修改，只能被替换, <code>update API</code> 必须遵循同样的规则</p>
+<p>(1) 从外部来看，我们在一个文档的某个位置进行部分更新</p>
+<p>然而在内部， <code>update API</code> 简单使用与之前描述相同的 检索-修改-重建索引 的处理过程</p>
+<p>(2) 区别在于这个过程发生在分片内部，这样就避免了多次请求的网络开销</p>
+<p>通过减少检索和重建索引步骤之间的时间，我们也减少了其他进程的变更带来冲突的可能性</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json">
+<span class="err">//</span> <span class="err">（</span><span class="mi">1</span><span class="err">）原有数据</span>
+
+<span class="err">GET</span> <span class="err">website/_search</span>
+<span class="err">//返回值</span>
+<span class="p">{</span>
+  <span class="nt">&#34;took&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="nt">&#34;timed_out&#34;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;skipped&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;value&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&#34;relation&#34;</span> <span class="p">:</span> <span class="s2">&#34;eq&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;max_score&#34;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;website&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_score&#34;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="nt">&#34;_source&#34;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;title&#34;</span> <span class="p">:</span> <span class="s2">&#34;My first blog entry&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;text&#34;</span> <span class="p">:</span> <span class="s2">&#34;Starting to get the hang of this...&#34;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">//（</span><span class="mi">2</span><span class="err">）更新</span>
+<span class="err">POST</span> <span class="err">/website/_doc/</span><span class="mi">1</span><span class="err">/_update</span>
+<span class="p">{</span>
+  <span class="nt">&#34;doc&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;tags&#34;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&#34;testing&#34;</span>
+    <span class="p">],</span>
+    <span class="nt">&#34;views&#34;</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">//</span> <span class="err">或者</span>
+
+<span class="err">POST</span> <span class="err">/website/_update/</span><span class="mi">1</span>
+<span class="p">{</span>
+  <span class="nt">&#34;doc&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;tags&#34;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&#34;testing&#34;</span>
+    <span class="p">],</span>
+    <span class="nt">&#34;views&#34;</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">//</span> <span class="err">返回值</span>
+
+<span class="p">{</span>
+  <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;website&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_version&#34;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="nt">&#34;result&#34;</span> <span class="p">:</span> <span class="s2">&#34;noop&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div><p> </p>
+<p>(1) <code>update</code> 请求最简单的一种形式是接收文档的一部分作为 <code>doc</code> 的参数，
+它只是与现有的文档进行合并。对象被合并到一起，覆盖现有的字段，增加新的字段</p>
+<p>(2) 脚本可以在 <code>update API</code>中用来改变 <code>_source</code> 的字段内容， 它在更新脚本中称为 <code>ctx._source</code></p>
+<p>对于那些 <code>API</code> 不能满足需求的情况，<code>Elasticsearch</code> 允许你使用脚本编写自定义的逻辑。</p>
+<p>许多<code>API</code>都支持脚本的使用，包括搜索、排序、聚合和文档更新</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json">
+<span class="err">//</span> <span class="err">(</span><span class="mi">1</span><span class="err">)</span> <span class="err">更新数值型字段值</span>
+<span class="err">POST</span> <span class="err">/website/_update/</span><span class="mi">1</span>
+<span class="p">{</span>
+  <span class="nt">&#34;script&#34;</span><span class="p">:</span> <span class="s2">&#34;ctx._source.views+=1&#34;</span>
+<span class="p">}</span>
+
+<span class="err">//</span> <span class="err">返回值</span>
+
+<span class="p">{</span>
+  <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;website&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_version&#34;</span> <span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="nt">&#34;result&#34;</span> <span class="p">:</span> <span class="s2">&#34;updated&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;_seq_no&#34;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="nt">&#34;_primary_term&#34;</span> <span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+<span class="err">//</span> <span class="err">（</span><span class="mi">2</span><span class="err">）</span> <span class="err">更新数值值</span>
+<span class="err">POST</span> <span class="err">website/_update/</span><span class="mi">1</span>
+<span class="p">{</span>
+  <span class="nt">&#34;script&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;ctx._source.tags.add(params.new_tag)&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;params&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;new_tag&#34;</span><span class="p">:</span> <span class="s2">&#34;search&#34;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">//</span> <span class="err">返回值</span>
+<span class="p">{</span>
+  <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;website&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_version&#34;</span> <span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="nt">&#34;result&#34;</span> <span class="p">:</span> <span class="s2">&#34;updated&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;_seq_no&#34;</span> <span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="nt">&#34;_primary_term&#34;</span> <span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+<span class="err">//</span> <span class="err">(</span><span class="mi">3</span><span class="err">)</span> <span class="err">删除文档</span>
+<span class="err">POST</span> <span class="err">/website/_update/</span><span class="mi">1</span>
+<span class="p">{</span>
+  <span class="nt">&#34;script&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;ctx.op = ctx._source.views == params.count ? &#39;delete&#39; : &#39;none&#39;&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;params&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;count&#34;</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">//</span> <span class="err">返回值</span>
+<span class="p">{</span>
+  <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;website&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_version&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="nt">&#34;result&#34;</span> <span class="p">:</span> <span class="s2">&#34;deleted&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;_seq_no&#34;</span> <span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+  <span class="nt">&#34;_primary_term&#34;</span> <span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+
+</code></pre></div><p> </p>
+<p>(3) 如果我们尝试更新一个不存在的文档，那么更新操作将会失败,
+在这样的情况下，我们可以使用 <code>upsert</code> 参数，指定如果文档不存在就应该先创建它</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="err">//</span> <span class="err">(</span><span class="mi">1</span><span class="err">)</span> <span class="err">不存在文档</span>
+<span class="err">GET</span> <span class="err">website/_search</span>
+
+<span class="err">//</span> <span class="err">返回值</span>
+<span class="p">{</span>
+  <span class="nt">&#34;took&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="nt">&#34;timed_out&#34;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;skipped&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;value&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="nt">&#34;relation&#34;</span> <span class="p">:</span> <span class="s2">&#34;eq&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;max_score&#34;</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">[</span> <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">//</span> <span class="err">（</span><span class="mi">2</span><span class="err">）第一次更新，文档不存在，即执行创建</span>
+<span class="err">POST</span> <span class="err">/website/_update/</span><span class="mi">3</span>
+<span class="p">{</span>
+  <span class="nt">&#34;script&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;ctx._source.views+=1&#34;</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;upsert&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;views&#34;</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">//</span> <span class="err">返回值</span>
+<span class="p">{</span>
+  <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;website&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;3&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_version&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="nt">&#34;result&#34;</span> <span class="p">:</span> <span class="s2">&#34;created&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;_seq_no&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&#34;_primary_term&#34;</span> <span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+<span class="err">//</span> <span class="err">（</span><span class="mi">3</span><span class="err">）文档存在，更新文档字段</span>
+<span class="err">POST</span> <span class="err">/website/_update/</span><span class="mi">3</span>
+<span class="p">{</span>
+  <span class="nt">&#34;script&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;ctx._source.views+=1&#34;</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;upsert&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;views&#34;</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">//</span> <span class="err">返回值</span>
+<span class="p">{</span>
+  <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;website&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;3&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_version&#34;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="nt">&#34;result&#34;</span> <span class="p">:</span> <span class="s2">&#34;updated&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;_seq_no&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="nt">&#34;_primary_term&#34;</span> <span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+<span class="err">//</span> <span class="err">（</span><span class="mi">4</span><span class="err">）更新后的文档信息</span>
+<span class="err">GET</span> <span class="err">website/_search</span>
+
+<span class="err">//</span> <span class="err">返回值</span>
+<span class="p">{</span>
+  <span class="nt">&#34;took&#34;</span> <span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="nt">&#34;timed_out&#34;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&#34;_shards&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;successful&#34;</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&#34;skipped&#34;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&#34;failed&#34;</span> <span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;total&#34;</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;value&#34;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">&#34;relation&#34;</span> <span class="p">:</span> <span class="s2">&#34;eq&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;max_score&#34;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="nt">&#34;hits&#34;</span> <span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&#34;_index&#34;</span> <span class="p">:</span> <span class="s2">&#34;website&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_type&#34;</span> <span class="p">:</span> <span class="s2">&#34;_doc&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_id&#34;</span> <span class="p">:</span> <span class="s2">&#34;3&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;_score&#34;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="nt">&#34;_source&#34;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;views&#34;</span> <span class="p">:</span> <span class="mi">2</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+
+
+</code></pre></div><p> </p>
+<p>(4) 如果两个进程都对页面访问量计数器进行递增操作，它们发生的先后顺序其实不太重要；</p>
+<p>如果冲突发生了，我们唯一需要做的就是尝试再次更新</p>
+<p>可以通过设置参数 <code>retry_on_conflict</code> 来自动完成， 这个参数规定了失败之前 <code>update</code> 应该重试的次数，它的默认值为 <code>0</code></p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="err">POST</span> <span class="err">/website/_update/</span><span class="mi">3</span><span class="err">?retry_on_conflict=</span><span class="mi">5</span>
+<span class="p">{</span>
+  <span class="nt">&#34;script&#34;</span><span class="p">:</span> <span class="s2">&#34;ctx._source.views+=1&#34;</span>
+<span class="p">}</span>
+
+</code></pre></div><p> </p>
+<p>(5) <code>update API</code> 默认采用 最终写入生效 的方案</p>
+<p> </p>
 <h3 id="45-创建新文档">4.5 创建新文档</h3>
 <p> </p>
 <p>问： 当索引一个文档，怎么确认我们正在创建一个完全新的文档，而不是覆盖现有的呢？</p>
@@ -557,12 +856,12 @@
 <h3 id="47-处理冲突">4.7 处理冲突</h3>
 <p> </p>
 <p>场景：</p>
-<p>如果使用 Elasticsearch 存储我们网上商城商品库存的数量，</p>
-<p>每次我们卖一个商品的时候，我们在 Elasticsearch 中将库存数量减少，</p>
+<p>如果使用 <code>Elasticsearch</code> 存储我们网上商城商品库存的数量，</p>
+<p>每次我们卖一个商品的时候，我们在 <code>Elasticsearch</code> 中将库存数量减少，</p>
 <p>有一天，管理层决定做一次促销。突然地，我们一秒要卖好几个商品。</p>
-<p>假设有两个 web 程序并行运行，每一个都同时处理所有商品的销售。</p>
-<p>web_1 对 stock_count 所做的更改已经丢失，</p>
-<p>因为 web_2 不知道它的 stock_count 的拷贝已经过期，</p>
+<p>假设有两个 <code>web</code> 程序并行运行，每一个都同时处理所有商品的销售。</p>
+<p><code>web_1</code> 对 <code>stock_count</code> 所做的更改已经丢失，</p>
+<p>因为 <code>web_2 </code>不知道它的 <code>stock_count</code> 的拷贝已经过期，</p>
 <p>结果我们会认为有超过商品的实际数量的库存，因为卖给顾客的库存商品并不存在，我们将让他们非常失望</p>
 <p> </p>
 <h4 id="471-悲观并发控制">4.7.1 悲观并发控制</h4>
@@ -572,19 +871,19 @@
 <p> </p>
 <h4 id="472-乐观并发控制">4.7.2 乐观并发控制</h4>
 <p> </p>
-<p>Elasticsearch 中使用的这种方法假定冲突是不可能发生的，并且不会阻塞正在尝试的操作。</p>
+<p><code>Elasticsearch</code> 中使用的这种方法假定冲突是不可能发生的，并且不会阻塞正在尝试的操作。</p>
 <p>然而，如果源数据在读写当中被修改，更新将会失败。</p>
 <p>应用程序接下来将决定该如何解决冲突。 例如，可以重试更新、使用新的数据、或者将相关情况报告给用户</p>
 <p> </p>
 <p>问:</p>
-<p>Elasticsearch 是分布式的。当文档创建、更新或删除时， 新版本的文档必须复制到集群中的其他节点</p>
-<p>Elasticsearch 也是异步和并发的，这意味着这些复制请求被并行发送，并且到达目的地时也许 顺序是乱的</p>
-<p>Elasticsearch 如何确保文档的旧版本不会覆盖新的版本？</p>
+<p><code>Elasticsearch</code> 是分布式的。当文档创建、更新或删除时， 新版本的文档必须复制到集群中的其他节点</p>
+<p><code>Elasticsearch</code> 也是异步和并发的，这意味着这些复制请求被并行发送，并且到达目的地时也许 顺序是乱的</p>
+<p><code>Elasticsearch</code> 如何确保文档的旧版本不会覆盖新的版本？</p>
 <p>老版本的回答：</p>
-<p>可以利用 _version 号来确保 应用中相互冲突的变更不会导致数据丢失</p>
-<p>(1) 每个文档都有一个 _version （版本）号，当文档被修改时版本号递增</p>
+<p>可以利用 <code>_version</code> 号来确保 应用中相互冲突的变更不会导致数据丢失</p>
+<p>(1) 每个文档都有一个 <code>_version</code> （版本）号，当文档被修改时版本号递增</p>
 <p>(2) 如果旧版本的文档在新版本之后到达，它可以被简单的忽略</p>
-<p>(3) 通过指定想要修改文档的 version 号来达到这个目的， 如果请求中版本不是当前版本号，请求将会失败</p>
+<p>(3) 通过指定想要修改文档的 <code>version</code> 号来达到这个目的， 如果请求中版本不是当前版本号，请求将会失败</p>
 <p> </p>
 <div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="err">//</span> <span class="err">(</span><span class="mi">1</span><span class="err">)</span> <span class="err">创建文档</span>
 <span class="err">PUT</span> <span class="err">/website/_doc/</span><span class="mi">1</span><span class="err">/_create</span>

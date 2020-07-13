@@ -6,21 +6,21 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>python内建对象 - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="python内建对象" />
-<meta property="og:description" content="一、 参考 python源码剖析" />
+<meta property="og:description" content="一、 参考 python源码剖析 Python核心技术与实战 二、元组和列表 (1) 列表和元组，都是一个可以放置任意数据类型的有序集合 (2) 列表是动态的，长度" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yzthewind.github.io/posts/%E8%AF%AD%E8%A8%80_python/python%E5%86%85%E5%BB%BA%E5%AF%B9%E8%B1%A1/" />
 <meta property="og:image" content="https://yzthewind.github.io/logo.png"/>
-<meta property="article:published_time" content="2020-06-10T10:00:00+08:00" />
-<meta property="article:modified_time" content="2020-06-10T10:00:00+08:00" />
+<meta property="article:published_time" content="2020-07-02T10:00:00+08:00" />
+<meta property="article:modified_time" content="2020-07-02T10:00:00+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://yzthewind.github.io/logo.png"/>
 
 <meta name="twitter:title" content="python内建对象"/>
-<meta name="twitter:description" content="一、 参考 python源码剖析"/>
+<meta name="twitter:description" content="一、 参考 python源码剖析 Python核心技术与实战 二、元组和列表 (1) 列表和元组，都是一个可以放置任意数据类型的有序集合 (2) 列表是动态的，长度"/>
 <meta name="application-name" content="一曲广陵散">
 <meta name="apple-mobile-web-app-title" content="一曲广陵散"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yzthewind.github.io/posts/%E8%AF%AD%E8%A8%80_python/python%E5%86%85%E5%BB%BA%E5%AF%B9%E8%B1%A1/" /><link rel="prev" href="https://yzthewind.github.io/posts/%E8%AF%AD%E8%A8%80_python/python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/" /><link rel="next" href="https://yzthewind.github.io/posts/%E8%AF%AD%E8%A8%80_python/python%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yzthewind.github.io/posts/%E8%AF%AD%E8%A8%80_python/python%E5%86%85%E5%BB%BA%E5%AF%B9%E8%B1%A1/" /><link rel="prev" href="https://yzthewind.github.io/posts/%E6%90%9C%E7%B4%A2_elasticsearch/3_%E4%B9%90%E8%A7%82%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6/" /><link rel="next" href="https://yzthewind.github.io/posts/%E8%AF%AD%E8%A8%80_python/python_%E9%9D%A2%E8%AF%95/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,8 +29,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/yzthewind.github.io\/posts\/%E8%AF%AD%E8%A8%80_python\/python%E5%86%85%E5%BB%BA%E5%AF%B9%E8%B1%A1\/"
-        },"genre": "posts","keywords": "python","wordcount":  14 ,
-        "url": "https:\/\/yzthewind.github.io\/posts\/%E8%AF%AD%E8%A8%80_python\/python%E5%86%85%E5%BB%BA%E5%AF%B9%E8%B1%A1\/","datePublished": "2020-06-10T10:00:00+08:00","dateModified": "2020-06-10T10:00:00+08:00","publisher": {
+        },"genre": "posts","keywords": "python","wordcount":  2457 ,
+        "url": "https:\/\/yzthewind.github.io\/posts\/%E8%AF%AD%E8%A8%80_python\/python%E5%86%85%E5%BB%BA%E5%AF%B9%E8%B1%A1\/","datePublished": "2020-07-02T10:00:00+08:00","dateModified": "2020-07-02T10:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": "yz"},"author": {
                 "@type": "Person",
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">python内建对象</h1><h2 class="single-subtitle">python源码剖析</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E8%AF%AD%E8%A8%80/"><i class="far fa-folder fa-fw"></i>语言</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-06-10">2020-06-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 14 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-02">2020-07-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2457 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -96,17 +96,263 @@
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#一-参考">一、 参考</a></li>
+    <li><a href="#二元组和列表">二、元组和列表</a>
+      <ul>
+        <li><a href="#21-列表和元组存储方式的差异">2.1 列表和元组存储方式的差异</a></li>
+        <li><a href="#22-列表和元组的使用场景">2.2 列表和元组的使用场景</a></li>
+      </ul>
+    </li>
+    <li><a href="#三字典和集合">三、字典和集合</a>
+      <ul>
+        <li><a href="#31-字典和集合性能">3.1 字典和集合性能</a></li>
+        <li><a href="#32-字典和集合的工作原理">3.2 字典和集合的工作原理</a></li>
+        <li><a href="#33-字典的操作">3.3 字典的操作</a></li>
+      </ul>
+    </li>
+    <li><a href="#四字符串">四、字符串</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="一-参考">一、 参考</h2>
+            </div><div class="content" id="content"><hr>
+<p> </p>
+<h2 id="一-参考">一、 参考</h2>
+<p> </p>
 <blockquote>
 <p><a href="https://book.douban.com/subject/3117898/" target="_blank" rel="noopener noreffer">python源码剖析</a></p>
 </blockquote>
+<blockquote>
+<p><a href="https://time.geekbang.org/column/intro/176" target="_blank" rel="noopener noreffer">Python核心技术与实战</a></p>
+</blockquote>
+<hr>
+<p> </p>
+<h2 id="二元组和列表">二、元组和列表</h2>
+<p> </p>
+<p>(1) 列表和元组，都是一个可以放置任意数据类型的有序集合</p>
+<p>(2) 列表是动态的，长度大小不固定，可以随意地增加、删减或者改变元素（<code>mutable</code>）</p>
+<p>(3) 元组是静态的，长度大小固定，无法增加删减或者改变（<code>immutable</code>）</p>
+<p> </p>
+<h3 id="21-列表和元组存储方式的差异">2.1 列表和元组存储方式的差异</h3>
+<p> </p>
+<p><code>list</code>和<code>tuple</code>的内部实现都是<code>array</code>的形式，<code>list</code>因为可变，所以是一个<code>over-allocate</code>的<code>array</code>，<code>tuple</code>因为不可变，所以长度大小固定</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">l</span><span class="o">.</span><span class="n">__sizeof__</span><span class="p">()</span> <span class="c1"># 40 </span>
+
+<span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 72</span>
+<span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 72</span>
+<span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># 72</span>
+<span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 72</span>
+
+<span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># 104</span>
+
+</code></pre></div><p> </p>
+<p><code>Python</code> 每次分配空间时都会额外多分配一些，这样的机制（<code>over-allocating</code>）保证了其操作的高效性：增加 / 删除的时间复杂度均为 <code>O(1)</code></p>
+<p>列表的内部实现方式：</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="cm">/*
+</span><span class="cm">Another generally useful object type is a list of object pointers.
+</span><span class="cm">This is a mutable type: the list items can be changed, and items can be
+</span><span class="cm">added or removed.  Out-of-range indices or non-list objects are ignored.
+</span><span class="cm">*** WARNING *** PyList_SetItem does not increment the new item&#39;s reference
+</span><span class="cm">count, but does decrement the reference count of the item it replaces,
+</span><span class="cm">if not nil.  It does *decrement* the reference count if it is *not*
+</span><span class="cm">inserted in the list.  Similarly, PyList_GetItem does not increment the
+</span><span class="cm">returned item&#39;s reference count.
+</span><span class="cm">*/</span>
+
+<span class="cp">#ifndef Py_LIMITED_API
+</span><span class="cp"></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">PyObject_VAR_HEAD</span>
+    <span class="cm">/* Vector of pointers to list elements.  list[0] is ob_item[0], etc. */</span>
+    <span class="n">PyObject</span> <span class="o">**</span><span class="n">ob_item</span><span class="p">;</span>
+
+    <span class="cm">/* ob_item contains space for &#39;allocated&#39; elements.  The number
+</span><span class="cm">     * currently in use is ob_size.
+</span><span class="cm">     * Invariants:
+</span><span class="cm">     *     0 &lt;= ob_size &lt;= allocated
+</span><span class="cm">     *     len(list) == ob_size
+</span><span class="cm">     *     ob_item == NULL implies ob_size == allocated == 0
+</span><span class="cm">     * list.sort() temporarily sets allocated to -1 to detect mutations.
+</span><span class="cm">     *
+</span><span class="cm">     * Items must normally not be NULL, except during construction when
+</span><span class="cm">     * the list is not yet visible outside the function that builds it.
+</span><span class="cm">     */</span>
+    <span class="n">Py_ssize_t</span> <span class="n">allocated</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">PyListObject</span><span class="p">;</span>
+<span class="cp">#endif
+</span></code></pre></div><p> </p>
+<p>元组的内部实现：</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="cm">/*
+</span><span class="cm">Another generally useful object type is a tuple of object pointers.
+</span><span class="cm">For Python, this is an immutable type.  C code can change the tuple items
+</span><span class="cm">(but not their number), and even use tuples as general-purpose arrays of
+</span><span class="cm">object references, but in general only brand new tuples should be mutated,
+</span><span class="cm">not ones that might already have been exposed to Python code.
+</span><span class="cm">*** WARNING *** PyTuple_SetItem does not increment the new item&#39;s reference
+</span><span class="cm">count, but does decrement the reference count of the item it replaces,
+</span><span class="cm">if not nil.  It does *decrement* the reference count if it is *not*
+</span><span class="cm">inserted in the tuple.  Similarly, PyTuple_GetItem does not increment the
+</span><span class="cm">returned item&#39;s reference count.
+</span><span class="cm">*/</span>
+
+<span class="cp">#ifndef Py_LIMITED_API
+</span><span class="cp"></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">PyObject_VAR_HEAD</span>
+    <span class="n">PyObject</span> <span class="o">*</span><span class="n">ob_item</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+    <span class="cm">/* ob_item contains space for &#39;ob_size&#39; elements.
+</span><span class="cm">     * Items must normally not be NULL, except during construction when
+</span><span class="cm">     * the tuple is not yet visible outside the function that builds it.
+</span><span class="cm">     */</span>
+<span class="p">}</span> <span class="n">PyTupleObject</span><span class="p">;</span>
+<span class="cp">#endif
+</span></code></pre></div><p> </p>
+<p> </p>
+<h3 id="22-列表和元组的使用场景">2.2 列表和元组的使用场景</h3>
+<p> </p>
+<p>(1) 如果存储的数据和数量不变，比如你有一个函数，需要返回的是一个地点的经纬度，然后直接传给前端渲染，那么肯定选用元组更合适</p>
+<p>(2) 如果存储的数据或数量是可变的，比如社交平台上的一个日志功能，是统计一个用户在一周之内看了哪些用户的帖子，那么则用列表更合适</p>
+<hr>
+<p> </p>
+<h2 id="三字典和集合">三、字典和集合</h2>
+<p> </p>
+<p>什么是字典?</p>
+<p>(1) 字典是一系列由键（<code>key</code>）和值（<code>value</code>）配对组成的元素的集合</p>
+<p>(2) 在 <code>Python3.7+</code>，字典被确定为有序, 而 <code>3.6</code> 之前是无序的</p>
+<p>(3) 长度大小可变，元素可以任意地删减和改变</p>
+<p>(4) 相比于列表和元组，字典的性能更优，特别是对于查找、添加和删除操作，字典都能在常数时间复杂度内完成</p>
+<p> </p>
+<p>什么是集合？</p>
+<p>(1) 集合和字典基本相同，唯一的区别，就是集合没有键和值的配对，是一系列无序的、唯一的元素组合</p>
+<p>(2) 集合并不支持索引操作，因为集合本质上是一个哈希表，和列表不一样</p>
+<p>(3) 集合的 <code>pop()</code> 操作是删除集合中最后一个元素，可是集合本身是无序的，你无法知道会删除哪个元素，因此这个操作得谨慎使用</p>
+<p> </p>
+<h3 id="31-字典和集合性能">3.1 字典和集合性能</h3>
+<p> </p>
+<p>字典的内部组成是一张哈希表, 可以直接通过键的哈希值，找到其对应的值</p>
+<p> </p>
+<h3 id="32-字典和集合的工作原理">3.2 字典和集合的工作原理</h3>
+<p> </p>
+<p>字典和集合为什么能够如此高效，特别是查找、插入和删除操作？</p>
+<p>这当然和字典、集合内部的数据结构密不可分。不同于其他数据结构，字典和集合的内部结构都是一张哈希表</p>
+<p> </p>
+<h4 id="321-字典的工作原理">3.2.1 字典的工作原理</h4>
+<p> </p>
+<p>对于字典而言，这张表存储了哈希值（hash）、键和值这 3 个元素</p>
+<p>(1) 之前的存储方式</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-markdown" data-lang="markdown">
+--+-------------------------------+
+  | 哈希值(hash)  键(key)  值(value)
+--+-------------------------------+
+0 |    hash0      key0    value0
+--+-------------------------------+
+1 |    hash1      key1    value1
+--+-------------------------------+
+2 |    hash2      key2    value2
+--+-------------------------------+
+. |           ...
+<span class="gs">__+_______________________________</span>+
+
+</code></pre></div><p> </p>
+<p>随着哈希表的扩张，它会变得越来越稀疏</p>
+<p>例如：</p>
+<p><code>{'name': 'mike', 'dob': '1999-01-01', 'gender': 'male'}</code>的内部存储为：</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
+<span class="n">entries</span> <span class="o">=</span> <span class="p">[</span>
+<span class="p">[</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mi">230273521</span><span class="p">,</span> <span class="s1">&#39;dob&#39;</span><span class="p">,</span> <span class="s1">&#39;1999-01-01&#39;</span><span class="p">],</span>
+<span class="p">[</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">],</span>
+<span class="p">[</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">],</span>
+<span class="p">[</span><span class="mi">1231236123</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;mike&#39;</span><span class="p">],</span>
+<span class="p">[</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">],</span>
+<span class="p">[</span><span class="mi">9371539127</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="s1">&#39;male&#39;</span><span class="p">]</span>
+<span class="p">]</span>
+</code></pre></div><p> </p>
+<p>(2) 为了提高存储空间的利用率，现在的哈希表除了字典本身的结构，会把索引和哈希值、键、值单独分开，也就是下面这样新的结构</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-markdown" data-lang="markdown">
+Indices
+----------------------------------------------------
+None | index | None | None | index | None | index ...
+----------------------------------------------------
+
+Entries
+--------------------
+hash0   key0  value0
+---------------------
+hash1   key1  value1
+---------------------
+hash2   key2  value2
+---------------------
+        ...
+---------------------
+</code></pre></div><p> </p>
+<p>同样是上面的字典，内部存储可能是：</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="n">entries</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">1231236123</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;mike&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="o">-</span><span class="mi">230273521</span><span class="p">,</span> <span class="s1">&#39;dob&#39;</span><span class="p">,</span> <span class="s1">&#39;1999-01-01&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">9371539127</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="s1">&#39;male&#39;</span><span class="p">]</span>
+<span class="p">]</span>
+
+</code></pre></div><p> </p>
+<p> </p>
+<h4 id="322-集合的工作原理">3.2.2 集合的工作原理</h4>
+<p> </p>
+<p>而对集合来说，区别就是哈希表内没有键和值的配对，只有单一的元素了</p>
+<p> </p>
+<h3 id="33-字典的操作">3.3 字典的操作</h3>
+<p> </p>
+<p> </p>
+<h4 id="331-插入操作">3.3.1 插入操作</h4>
+<p> </p>
+<p>每次向字典或集合插入一个元素时，<code>Python</code> 会首先计算键的哈希值（<code>hash(key)</code>），</p>
+<p>再和 <code>mask = PyDicMinSize - 1</code> 做与操作，计算这个元素应该插入哈希表的位置 <code>index = hash(key) &amp; mask</code></p>
+<p>如果哈希表中此位置是空的，那么这个元素就会被插入其中</p>
+<p>而如果此位置已被占用，<code>Python</code> 便会比较两个元素的哈希值和键是否相等</p>
+<p>(1) 若两者都相等，则表明这个元素已经存在</p>
+<p>(2) 如果<code>key</code>相同，<code>value</code>不同，则更新值</p>
+<p>(3) 若两者中有一个不相等，这种情况通常称为哈希冲突（<code>hash collision</code>），</p>
+<p>意思是两个元素的键不相等，但是哈希值相等。这种情况下，<code>Python</code> 便会继续寻找表中空余的位置，直到找到位置为止</p>
+<p> </p>
+<h4 id="332-查找操作">3.3.2 查找操作</h4>
+<p> </p>
+<p>和前面的插入操作类似，<code>Python</code> 会根据哈希值，找到其应该处于的位置；</p>
+<p>然后，比较哈希表这个位置中元素的哈希值和键，与需要查找的元素是否相等。</p>
+<p>如果相等，则直接返回；</p>
+<p>如果不等，则继续查找，直到找到空位或者抛出异常为止</p>
+<p> </p>
+<h4 id="333-删除操作">3.3.3 删除操作</h4>
+<p> </p>
+<p>对于删除操作，<code>Python</code> 会暂时对这个位置的元素，赋于一个特殊的值，等到重新调整哈希表的大小时，再将其删除</p>
+<p> </p>
+<h4 id="334-哈希冲突">3.3.4 哈希冲突</h4>
+<p> </p>
+<p>(1) 哈希冲突的发生，往往会降低字典和集合操作的速度。</p>
+<p>(2) 因此，为了保证其高效性，字典和集合内的哈希表，通常会保证其至少留有 <code>1/3 </code>的剩余空间。</p>
+<p>(3) 随着元素的不停插入，当剩余空间小于 <code>1/3</code> 时，</p>
+<p><code>Python</code> 会重新获取更大的内存空间，扩充哈希表。</p>
+<p>不过，这种情况下，表内所有的元素位置都会被重新排放</p>
+<p>(4) 虽然哈希冲突和哈希表大小的调整，都会导致速度减缓，但是这种情况发生的次数极少。</p>
+<p>所以，平均情况下，这仍能保证插入、查找和删除的时间复杂度为 <code>O(1)</code></p>
+<p> </p>
+<h2 id="四字符串">四、字符串</h2>
+<p> </p>
+<p>什么是字符串呢？</p>
+<p>(1) 字符串是由独立字符组成的一个序列，通常包含在单引号（<code>''</code>）双引号（<code>&quot;&quot;</code>）或者三引号之中（<code>''' '''</code>或<code>&quot;&quot;&quot; &quot;&quot;&quot;</code>，两者一样）</p>
+<p>(2) <code>Python</code> 的字符串是不可变的（<code>immutable</code>）</p>
+<p>(3) 对于字符串拼接问题，除了使用加法操作符，还可以使用字符串内置的 <code>join</code> 函数。</p>
+<p><code>string.join(iterable)</code>，表示把每个元素都按照指定的格式连接起来</p>
+<p>(4) <code>string.format()</code> 是最新的字符串格式函数与规范, 常常用在输出、日志的记录等场景</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2020-06-10</span>
+                <span>更新于 2020-07-02</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -125,8 +371,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/%E8%AF%AD%E8%A8%80_python/python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/" class="prev" rel="prev" title="python多线程机制"><i class="fas fa-angle-left fa-fw"></i>python多线程机制</a>
-            <a href="/posts/%E8%AF%AD%E8%A8%80_python/python%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/" class="next" rel="next" title="python内存管理机制">python内存管理机制<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/%E6%90%9C%E7%B4%A2_elasticsearch/3_%E4%B9%90%E8%A7%82%E5%B9%B6%E5%8F%91%E6%8E%A7%E5%88%B6/" class="prev" rel="prev" title="3. 乐观并发控制"><i class="fas fa-angle-left fa-fw"></i>3. 乐观并发控制</a>
+            <a href="/posts/%E8%AF%AD%E8%A8%80_python/python_%E9%9D%A2%E8%AF%95/" class="next" rel="next" title="python面试问题汇总与思考">python面试问题汇总与思考<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
@@ -142,5 +388,5 @@
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
                 <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["yzthewind"],"clientID":"8e70465ecd960275a174","clientSecret":"32c54e1095f64e2ac3dcfa4afed2e61d5444bc0d","id":"2020-06-10T10:00:00+08:00","owner":"yzthewind","repo":"blog_gitalk","title":"python内建对象"}},"data":{"id-1":"一曲广陵散","id-2":"一曲广陵散"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["yzthewind"],"clientID":"8e70465ecd960275a174","clientSecret":"32c54e1095f64e2ac3dcfa4afed2e61d5444bc0d","id":"2020-07-02T10:00:00+08:00","owner":"yzthewind","repo":"blog_gitalk","title":"python内建对象"}},"data":{"id-1":"一曲广陵散","id-2":"一曲广陵散"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>
