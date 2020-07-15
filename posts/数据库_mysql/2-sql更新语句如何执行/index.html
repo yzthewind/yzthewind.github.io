@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>2. sql更新语句执行过程  - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="2. sql更新语句执行过程 " />
-<meta property="og:description" content="一、 参考 mysql实战 binlog的类型 redolog的持久化方式 MySQL写优化,关于 innodb_flush_log_at_trx_commit 和 sync_binlog 二、引言 一条查询语句的执行过程一般是经过连接器" />
+<meta property="og:description" content="一、 参考 mysql实战 binlog的类型 redolog的持久化方式 MySQL写优化,关于 innodb_flush_log_at_trx_commit 和 sync_binlog sync_binlog MySQL - binlog日志简介及设置 二、引言 一条查" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yzthewind.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql/2-sql%E6%9B%B4%E6%96%B0%E8%AF%AD%E5%8F%A5%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C/" />
 <meta property="og:image" content="https://yzthewind.github.io/logo.png"/>
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://yzthewind.github.io/logo.png"/>
 
 <meta name="twitter:title" content="2. sql更新语句执行过程 "/>
-<meta name="twitter:description" content="一、 参考 mysql实战 binlog的类型 redolog的持久化方式 MySQL写优化,关于 innodb_flush_log_at_trx_commit 和 sync_binlog 二、引言 一条查询语句的执行过程一般是经过连接器"/>
+<meta name="twitter:description" content="一、 参考 mysql实战 binlog的类型 redolog的持久化方式 MySQL写优化,关于 innodb_flush_log_at_trx_commit 和 sync_binlog sync_binlog MySQL - binlog日志简介及设置 二、引言 一条查"/>
 <meta name="application-name" content="一曲广陵散">
 <meta name="apple-mobile-web-app-title" content="一曲广陵散"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/yzthewind.github.io\/posts\/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql\/2-sql%E6%9B%B4%E6%96%B0%E8%AF%AD%E5%8F%A5%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C\/"
-        },"genre": "posts","keywords": "mysql","wordcount":  9666 ,
+        },"genre": "posts","keywords": "mysql","wordcount":  10581 ,
         "url": "https:\/\/yzthewind.github.io\/posts\/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql\/2-sql%E6%9B%B4%E6%96%B0%E8%AF%AD%E5%8F%A5%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C\/","datePublished": "2020-07-06T11:00:00+08:00","dateModified": "2020-07-06T11:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": "yz"},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">2. sql更新语句执行过程 </h1><h2 class="single-subtitle">mysql</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%98%E5%82%A8/"><i class="far fa-folder fa-fw"></i>存储</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-06">2020-07-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 9666 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 20 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-06">2020-07-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 10581 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 22 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -125,7 +125,15 @@
         <li><a href="#56-binlog总结">5.6 binlog总结</a></li>
       </ul>
     </li>
-    <li><a href="#六本文涉及的mysql参数">六、本文涉及的mysql参数</a></li>
+    <li><a href="#六本文涉及的mysql参数">六、本文涉及的mysql参数</a>
+      <ul>
+        <li><a href="#61-binlog_format">6.1 binlog_format</a></li>
+        <li><a href="#62-sync_binlog">6.2 sync_binlog</a></li>
+        <li><a href="#63-innodb_flush_log_at_trx_commit">6.3 innodb_flush_log_at_trx_commit</a></li>
+        <li><a href="#64-expire_logs_daysbinlog_expire_logs_seconds">6.4 expire_logs_days/binlog_expire_logs_seconds</a></li>
+        <li><a href="#65-log_bin">6.5 log_bin</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><hr>
@@ -143,6 +151,12 @@
 </blockquote>
 <blockquote>
 <p><a href="https://blog.csdn.net/wenniuwuren/article/details/89265251" target="_blank" rel="noopener noreffer">MySQL写优化,关于 innodb_flush_log_at_trx_commit 和 sync_binlog</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_sync_binlog" target="_blank" rel="noopener noreffer">sync_binlog</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://www.cnblogs.com/hongdada/p/10983768.html" target="_blank" rel="noopener noreffer">MySQL - binlog日志简介及设置</a></p>
 </blockquote>
 <hr>
 <p> </p>
@@ -336,7 +350,7 @@
 <p>（1）要设置大一点的<code>innodb redolog</code>的大小</p>
 <p>（2）用好点的磁盘</p>
 <p> </p>
-<p>🔖问：在一个大事物或长事物里，一边执行<code>sql</code>一边写<code>redo log</code>吗？未提交的事物也会写到<code>redo log file</code>吗？</p>
+<p>🔖问：在一个大事务或长事务里，一边执行<code>sql</code>一边写<code>redo log</code>吗？未提交的事物也会写到<code>redo log file</code>吗？</p>
 <p>📝答：会先写一块内存，叫做<code>log_buffer</code>里面，在提交的时候再一次性写到磁盘</p>
 <p> </p>
 <p>🔖问： 请问<code>redo log</code>等系统不忙更新数据的时候，也是需要先从磁盘读出数据到内存，然后用<code>redolog</code>里面的记录更新内存，最后再一起写入磁盘吗？</p>
@@ -357,7 +371,7 @@
 <p> </p>
 <p>因为最开始 <code>MySQL</code> 里并没有 <code>InnoDB</code> 引擎</p>
 <p><code>MySQL</code> 自带的引擎是 <code>MyISAM</code>，但是 <code>MyISAM</code> 没有 <code>crash-safe</code> 的能力，<code>binlog</code> 日志只能用于归档</p>
-<p>而 <code>InnoDB</code> 是另一个公司以插件形式引入 <code>MySQL</code> 的</p>
+<p>而 <code>InnoDB</code> 是另一个公司（<code>Innobase</code>， 一家芬兰的公司，已经被<code>Oracle</code>收购）以插件形式引入 <code>MySQL</code> 的</p>
 <p>既然只依靠 <code>binlog</code> 是没有 <code>crash-safe</code> 能力的，所以 <code>InnoDB</code> 使用另外一套日志系统——也就是 <code>redo log</code> 来实现 <code>crash-safe</code> 能力</p>
 <p> </p>
 <h3 id="52-binlog-和-redolog的不同之处">5.2 binlog 和 redolog的不同之处</h3>
@@ -561,11 +575,11 @@
 <p>📝答：&ldquo;但是如果业务系统请求认为数据库异常，所以业务系统认为此次处理未生效，&rdquo;</p>
 <p>不应该这么认为，如果业务系统这么认为，那属于业务系统的<code>bug</code>; 正常应该是等重连成功以后再查一次，去确认事务状态</p>
 <p> </p>
-<p>🔖问： 在<code>redo log commit</code>的时候，想我一下，是追加写呢，还是找到<code>prepare</code>的地方进行修改呢？</p>
+<p>🔖问： 在<code>redo log commit</code>的时候，是追加写呢，还是找到<code>prepare</code>的地方进行修改呢？</p>
 <p>📝答： <code>prepare</code>写日志的最后一个<code>512字节</code>，会在<code>commit</code>的时候被改掉</p>
 <p> </p>
-<p>🔖问：如果没有开启binlog的更新操作是怎么样的？是否也有两段提交？</p>
-<p>📝答：就只有redo，没有两阶段了</p>
+<p>🔖问：如果没有开启<code>binlog</code>的更新操作是怎么样的？是否也有两段提交？</p>
+<p>📝答：就只有<code>redo</code>，没有两阶段了</p>
 <p> </p>
 <h3 id="55-恢复临时库的场景">5.5 恢复临时库的场景</h3>
 <p> </p>
@@ -605,7 +619,7 @@
 <p>📝答： 一个事务的完整<code>binlog</code>是有固定格式，也就是说有固定结尾的</p>
 <p> </p>
 <p>🔖问： <code>redo</code> 和 <code>binlog</code>是在内存中还是磁盘？要是在磁盘上每次写的时候会不会影响性能？还是内存和磁盘上都有？如果都有的话怎么保持在突然断电的时候数据一致性？</p>
-<p>📝答： <code>redo log</code>有<code>redo log buffer</code>; <code>binlog </code>有<code>binlog cache</code>； 保持数据的问题，后面涉及到</p>
+<p>📝答： <code>redo log</code>有<code>redo log buffer</code>; <code>binlog </code>有<code>binlog cache</code>； 保持数据一致性的问题，后面涉及到</p>
 <p> </p>
 <p>🔖问： <code>innodb_flush_log_at_trx_commit</code>如果设置成<code>1</code>而<code>sync_binlog</code>未设置成<code>1</code>，这个时候如果执行完<code>redo log</code>后宕机了，是不是<code>redo log</code>的内容跟<code>binlog</code>也会不一样？</p>
 <p>📝答：对，有可能</p>
@@ -621,7 +635,11 @@
 <h2 id="六本文涉及的mysql参数">六、本文涉及的mysql参数</h2>
 <p> </p>
 <p> </p>
-<p><code>binlog_format</code>, <code>binlog</code>的类型，可选值为 <code>STATEMENT/ ROW/ MIXED</code></p>
+<h3 id="61-binlog_format">6.1 binlog_format</h3>
+<p> </p>
+<p><code>binlog_format</code>,</p>
+<p><code>binlog</code>的类型，可选值为 <code>STATEMENT/ ROW/ MIXED</code></p>
+<p> </p>
 <div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="c1"># (1) 查看binlog日志格式
 </span><span class="c1"></span><span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s2">&#34;binlog_format&#34;</span>
 
@@ -639,6 +657,42 @@
 
 <span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">binlog_format</span> <span class="o">=</span> <span class="s1">&#39;MIXED&#39;</span><span class="p">;</span>
 </code></pre></div><p> </p>
+<p> </p>
+<h3 id="62-sync_binlog">6.2 sync_binlog</h3>
+<p> </p>
+<p><code>sync_binlog</code>, 控制<code>MySQL</code>服务器将<code>binlog</code>同步到磁盘的频率， 可选值为 <code>0/1/N</code></p>
+<p> </p>
+<p>(1) 值为<code>0</code>时候，禁用<code>MySQL</code>服务器将<code>binlog</code>同步到磁盘的功能, 取而代之的是，</p>
+<p><code>MySQL</code>服务器依靠操作系统不时将<code>binlog</code>刷新到磁盘上，就像处理其他任何文件一样。</p>
+<p>此设置提供最佳性能，但是在电源故障或操作系统崩溃的情况下，服务器可能提交了尚未同步到<code>binlog</code>的事务</p>
+<p> </p>
+<p>(2) 值为<code>1</code>时候，在提交事务之前启用<code>binlog</code>到磁盘的同步。</p>
+<p>这是最安全的设置，但由于磁盘写入次数增加，可能会对性能产生负面影响。</p>
+<p>如果发生电源故障或操作系统崩溃，<code>binlog</code>缺少的事务将仅处于准备状态。</p>
+<p>这允许自动恢复例程回滚事务，从而保证<code>binlog</code>中不会丢失任何事务</p>
+<p> </p>
+<p>(3) 值为<code>N</code>的时候（<code>N</code>不等于<code>0</code>或者<code>1</code>），<code>N</code>次<code>binlog</code>提交组已收集之后，<code>binlog</code>将同步到磁盘 。</p>
+<p>在电源故障或操作系统崩溃的情况下，服务器可能提交了尚未刷新到<code>binlog</code>的事务。</p>
+<p>由于磁盘写入次数的增加，此设置可能会对性能产生负面影响。</p>
+<p>较高的值可以提高性能，但是会增加数据丢失的风险</p>
+<p> </p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="c1"># (1) 查看当前的配置
+</span><span class="c1"></span>
+<span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s2">&#34;sync_binlog&#34;</span><span class="p">;</span>
+
+<span class="c1"># 返回值
+</span><span class="c1"></span>
+<span class="o">+---------------+-------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span> <span class="o">|</span> <span class="n">Value</span> <span class="o">|</span>
+<span class="o">+---------------+-------+</span>
+<span class="o">|</span> <span class="n">sync_binlog</span>   <span class="o">|</span> <span class="mi">1</span>     <span class="o">|</span>
+<span class="o">+---------------+-------+</span>
+
+</code></pre></div><p> </p>
+<p> </p>
+<h3 id="63-innodb_flush_log_at_trx_commit">6.3 innodb_flush_log_at_trx_commit</h3>
+<p> </p>
 <p><code>innodb_flush_log_at_trx_commit</code>， 表示<code>redo log</code>文件持久化的方式，可选值为 <code>0/1/2</code></p>
 <p> </p>
 <p>(1) 默认值是<code>1</code>， 实现<code>ACID</code>， 每次事务提交， 都会确保<code>redo log</code>里的数据是持久化到磁盘的</p>
@@ -654,6 +708,7 @@
 <p>但每次事务提交不会有任何影响，也就是 <code>log buffer </code>的刷写操作和事务提交操作没有关系。</p>
 <p>在这种情况下，<code>MySQL</code>性能<code>最好</code>，</p>
 <p>但如果 <code>mysqld</code> 进程崩溃，通常会导致最后 <code>1s</code> 的日志丢失</p>
+<p> </p>
 <p>(4) 上面说到的「<code>最后 1s</code>」并不是绝对的，有的时候会丢失更多数据。</p>
 <p>有时候由于调度的问题，每秒刷写（<code>once-per-second flushing</code>）并不能保证 <code>100%</code> 执行。</p>
 <p>对于一些数据一致性和完整性要求不高的应用，配置为<code>2</code>就足够了；</p>
@@ -672,9 +727,92 @@
 
 </code></pre></div><p> </p>
 <p> </p>
-<p>expire_logs_days</p>
+<h3 id="64-expire_logs_daysbinlog_expire_logs_seconds">6.4 expire_logs_days/binlog_expire_logs_seconds</h3>
 <p> </p>
-</div><div class="post-footer" id="post-footer">
+<p><code>expire_logs_days</code>,</p>
+<p><code>binlog</code>保存的天数，超过该数值将删除， 可选值为<code>0 ~ 99</code></p>
+<p> </p>
+<p>(1) 值为<code>0</code>时候，表示“ 不自动删除”， 即<code>binlog</code>将一直保存</p>
+<p> </p>
+<p>(2) <code>非0值</code>，表示保存天数，最大值为<code>99</code></p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="c1"># mysql 5.7 
+</span><span class="c1"></span>
+<span class="c1"># (1) 查看过期日期
+</span><span class="c1"></span><span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s2">&#34;expire_logs_days&#34;</span><span class="p">;</span>
+
+<span class="c1"># 返回值
+</span><span class="c1"></span><span class="o">+------------------+-------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>    <span class="o">|</span> <span class="n">Value</span> <span class="o">|</span>
+<span class="o">+------------------+-------+</span>
+<span class="o">|</span> <span class="n">expire_logs_days</span> <span class="o">|</span> <span class="mi">0</span>     <span class="o">|</span>
+<span class="o">+------------------+-------+</span>
+
+<span class="c1"># (2) 设置过期时间
+</span><span class="c1"></span><span class="kt">set</span> <span class="n">global</span> <span class="n">expire_logs_days</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+
+<span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s2">&#34;expire_logs_days&#34;</span><span class="p">;</span>
+
+<span class="c1"># 返回值， 即最大值为99
+</span><span class="c1"></span><span class="o">+------------------+-------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>    <span class="o">|</span> <span class="n">Value</span> <span class="o">|</span>
+<span class="o">+------------------+-------+</span>
+<span class="o">|</span> <span class="n">expire_logs_days</span> <span class="o">|</span> <span class="mi">99</span>    <span class="o">|</span>
+<span class="o">+------------------+-------+</span>
+
+</code></pre></div><p> </p>
+<p> </p>
+<p>这个参数已经废弃，现在<code>mysql 8.0</code>使用<code>binlog_expire_logs_seconds</code></p>
+<p>可选值为<code> 0～4294967295</code></p>
+<p> </p>
+<p>(1) 值为<code>0</code>时候，表示禁用自动清理<code>binlog</code>；</p>
+<p>(2) 默认值为<code>2592000</code>秒，即<code>30天</code></p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql">
+<span class="c1"># mysql 8.0
+</span><span class="c1"></span>
+<span class="c1"># (1) 查看过期配置
+</span><span class="c1"></span><span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s2">&#34;binlog_expire_logs_seconds&#34;</span><span class="p">;</span>
+
+<span class="c1"># 返回值
+</span><span class="c1"></span><span class="o">+----------------------------+---------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>              <span class="o">|</span> <span class="n">Value</span>   <span class="o">|</span>
+<span class="o">+----------------------------+---------+</span>
+<span class="o">|</span> <span class="n">binlog_expire_logs_seconds</span> <span class="o">|</span> <span class="mi">2592000</span> <span class="o">|</span>
+<span class="o">+----------------------------+---------+</span>
+
+<span class="c1"># (2) 设置过期时间
+</span><span class="c1"></span><span class="kt">set</span> <span class="n">global</span> <span class="n">binlog_expire_logs_seconds</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s2">&#34;binlog_expire_logs_seconds&#34;</span><span class="p">;</span>
+
+<span class="c1"># 返回值
+</span><span class="c1"></span><span class="o">+----------------------------+-------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>              <span class="o">|</span> <span class="n">Value</span> <span class="o">|</span>
+<span class="o">+----------------------------+-------+</span>
+<span class="o">|</span> <span class="n">binlog_expire_logs_seconds</span> <span class="o">|</span> <span class="mi">0</span>     <span class="o">|</span>
+<span class="o">+----------------------------+-------+</span>
+
+</code></pre></div><p> </p>
+<p> </p>
+<h3 id="65-log_bin">6.5 log_bin</h3>
+<p> </p>
+<p><code>log_bin</code>, 是否开启<code>binlog</code>功能</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="c1"># (1) 查看log_bin
+</span><span class="c1"></span><span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s2">&#34;log_bin&#34;</span><span class="p">;</span>
+
+<span class="c1"># 返回值
+</span><span class="c1"></span><span class="o">+---------------+-------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span> <span class="o">|</span> <span class="n">Value</span> <span class="o">|</span>
+<span class="o">+---------------+-------+</span>
+<span class="o">|</span> <span class="n">log_bin</span>       <span class="o">|</span> <span class="n">OFF</span>   <span class="o">|</span>
+<span class="o">+---------------+-------+</span>
+
+<span class="c1"># (2) 配置log_bin
+</span><span class="c1"></span><span class="err">该参数无法动态配置，需要在配置文件中指定</span>
+
+</code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

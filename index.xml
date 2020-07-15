@@ -14,7 +14,7 @@
     <guid>https://yzthewind.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql/2-sql%E6%9B%B4%E6%96%B0%E8%AF%AD%E5%8F%A5%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/mysql/2-sql%e6%9b%b4%e6%96%b0%e8%af%ad%e5%8f%a5%e5%a6%82%e4%bd%95%e6%89%a7%e8%a1%8c.jpg" referrerpolicy="no-referrer">
-            </div>一、 参考 mysql实战 binlog的类型 redolog的持久化方式 MySQL写优化,关于 innodb_flush_log_at_trx_commit 和 sync_binlog 二、引言 一条查询语句的执行过程一般是经过连接器]]></description>
+            </div>一、 参考 mysql实战 binlog的类型 redolog的持久化方式 MySQL写优化,关于 innodb_flush_log_at_trx_commit 和 sync_binlog sync_binlog MySQL - binlog日志简介及设置 二、引言 一条查]]></description>
 </item><item>
     <title>1. sql语句执行过程</title>
     <link>https://yzthewind.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql/1-sql%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/</link>
