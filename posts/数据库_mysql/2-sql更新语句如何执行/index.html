@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/yzthewind.github.io\/posts\/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql\/2-sql%E6%9B%B4%E6%96%B0%E8%AF%AD%E5%8F%A5%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C\/"
-        },"genre": "posts","keywords": "mysql","wordcount":  10581 ,
+        },"genre": "posts","keywords": "mysql","wordcount":  10824 ,
         "url": "https:\/\/yzthewind.github.io\/posts\/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql\/2-sql%E6%9B%B4%E6%96%B0%E8%AF%AD%E5%8F%A5%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C\/","datePublished": "2020-07-06T11:00:00+08:00","dateModified": "2020-07-06T11:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": "yz"},"author": {
@@ -79,7 +79,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">2. sql更新语句执行过程 </h1><h2 class="single-subtitle">mysql</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%98%E5%82%A8/"><i class="far fa-folder fa-fw"></i>存储</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-06">2020-07-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 10581 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-06">2020-07-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 10824 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 22 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -125,13 +125,19 @@
         <li><a href="#56-binlog总结">5.6 binlog总结</a></li>
       </ul>
     </li>
-    <li><a href="#六本文涉及的mysql参数">六、本文涉及的mysql参数</a>
+    <li><a href="#六涉及参数">六、涉及参数</a>
       <ul>
         <li><a href="#61-binlog_format">6.1 binlog_format</a></li>
         <li><a href="#62-sync_binlog">6.2 sync_binlog</a></li>
         <li><a href="#63-innodb_flush_log_at_trx_commit">6.3 innodb_flush_log_at_trx_commit</a></li>
         <li><a href="#64-expire_logs_daysbinlog_expire_logs_seconds">6.4 expire_logs_days/binlog_expire_logs_seconds</a></li>
         <li><a href="#65-log_bin">6.5 log_bin</a></li>
+      </ul>
+    </li>
+    <li><a href="#七本节问题与解答">七、本节问题与解答</a>
+      <ul>
+        <li><a href="#71-问题">7.1 问题</a></li>
+        <li><a href="#72-解答">7.2 解答</a></li>
       </ul>
     </li>
   </ul>
@@ -492,6 +498,9 @@
 <p>🔖问：怎样让数据库恢复到半个月内任意一秒的状态？这个是不是还需要<code>redo log</code>啊？为啥我感觉仅仅<code>binlog</code>不够</p>
 <p>📝答：<code>binlog</code>记录了所有操作，操作记录里的时间也是精确到秒的</p>
 <p> </p>
+<p>🔖问：如果有主从配置， 是不是就不需要备份了？</p>
+<p>📝答：要，错误执行的<code>drop table</code> 也会同步给备库的</p>
+<p> </p>
 <h4 id="543-恢复数据的过程">5.4.3 恢复数据的过程</h4>
 <p> </p>
 <p>当需要恢复到指定的某一秒时，比如某天下午两点发现中午十二点有一次误删表，需要找回数据，那你可以这么做：</p>
@@ -632,7 +641,7 @@
 <p> </p>
 <hr>
 <p> </p>
-<h2 id="六本文涉及的mysql参数">六、本文涉及的mysql参数</h2>
+<h2 id="六涉及参数">六、涉及参数</h2>
 <p> </p>
 <p> </p>
 <h3 id="61-binlog_format">6.1 binlog_format</h3>
@@ -812,7 +821,23 @@
 <span class="c1"># (2) 配置log_bin
 </span><span class="c1"></span><span class="err">该参数无法动态配置，需要在配置文件中指定</span>
 
-</code></pre></div></div><div class="post-footer" id="post-footer">
+</code></pre></div><p> </p>
+<hr>
+<p> </p>
+<h2 id="七本节问题与解答">七、本节问题与解答</h2>
+<p> </p>
+<p> </p>
+<h3 id="71-问题">7.1 问题</h3>
+<p> </p>
+<p>定期全量备份的周期“取决于系统重要性，有的是一天一备，有的是一周一备”。</p>
+<p>那么在什么场景下，一天一备会比一周一备更有优势呢？或者说，它影响了这个数据库系统的哪个指标？</p>
+<p> </p>
+<h3 id="72-解答">7.2 解答</h3>
+<p> </p>
+<p>(1) 好处是“最长恢复时间”更短, 即一天一备份可以更快的恢复；</p>
+<p>(2) 系统的对应指标就是<code>RTO</code>（恢复目标时间）</p>
+<p>当然一天一备是有成本的，因为更频繁全量备份需要消耗更多存储空间，所以这个 <code>RTO</code> 是成本换来的，就需要你根据业务重要性来评估了</p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

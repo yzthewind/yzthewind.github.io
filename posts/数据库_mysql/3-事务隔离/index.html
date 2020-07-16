@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/yzthewind.github.io\/posts\/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql\/3-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB\/"
-        },"genre": "posts","keywords": "mysql","wordcount":  704 ,
+        },"genre": "posts","keywords": "mysql","wordcount":  7237 ,
         "url": "https:\/\/yzthewind.github.io\/posts\/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql\/3-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB\/","datePublished": "2020-07-06T12:00:00+08:00","dateModified": "2020-07-06T12:00:00+08:00","publisher": {
             "@type": "Organization",
             "name": "yz"},"author": {
@@ -79,8 +79,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">3. 事务隔离</h1><h2 class="single-subtitle">mysql</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%98%E5%82%A8/"><i class="far fa-folder fa-fw"></i>存储</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-06">2020-07-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 704 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-06">2020-07-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 7237 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 15 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -103,6 +103,40 @@
         <li><a href="#32-读提交">3.2 读提交</a></li>
         <li><a href="#33-可重复读">3.3 可重复读</a></li>
         <li><a href="#34-串行化">3.4 串行化</a></li>
+        <li><a href="#35-查看设置隔离级别">3.5 查看设置隔离级别</a></li>
+      </ul>
+    </li>
+    <li><a href="#三视图">三、视图</a>
+      <ul>
+        <li><a href="#31-读未提交没有视图">3.1 读未提交没有视图</a></li>
+        <li><a href="#32-读已提交隔离的视图实现">3.2 读已提交隔离的视图实现</a></li>
+        <li><a href="#33-可重复读的视图实现">3.3 可重复读的视图实现</a></li>
+        <li><a href="#34-串行化的锁机制">3.4 串行化的锁机制</a></li>
+      </ul>
+    </li>
+    <li><a href="#四事务隔离的实现">四、事务隔离的实现</a>
+      <ul>
+        <li><a href="#41-回滚日志-undo-log">4.1 回滚日志 undo log</a></li>
+        <li><a href="#42-长事务">4.2 长事务</a></li>
+      </ul>
+    </li>
+    <li><a href="#五事务的启动方式">五、事务的启动方式</a>
+      <ul>
+        <li><a href="#51-显式启动">5.1 显式启动</a></li>
+        <li><a href="#52-autocommit">5.2 autocommit</a></li>
+        <li><a href="#53-多一次交互">5.3 多一次交互</a></li>
+        <li><a href="#54-查询长事务">5.4 查询长事务</a></li>
+      </ul>
+    </li>
+    <li><a href="#六涉及参数">六、涉及参数</a>
+      <ul>
+        <li><a href="#61-transaction-isolation">6.1 transaction-isolation</a></li>
+      </ul>
+    </li>
+    <li><a href="#七本节问题与解答">七、本节问题与解答</a>
+      <ul>
+        <li><a href="#71-问题">7.1 问题</a></li>
+        <li><a href="#72-解答">7.2 解答</a></li>
       </ul>
     </li>
   </ul>
@@ -142,21 +176,58 @@
 <p> </p>
 <h3 id="31-读未提交">3.1 读未提交</h3>
 <p> </p>
-<p>读未提交是指，一个事务还没提交时，它做的变更就能被别的事务看到</p>
+<p>读未提交是指，一个事务还没提交时，它做的变更就能被别的事务看到,</p>
+<p>如下图：</p>
+<p>(1) 事务<code>A、B</code>中间的隔离级别为读未提交</p>
+<p>(2) 事务<code>A</code>，在读取<code>V1</code>时候，值为<code>2</code>，读取到事务<code>B</code>中未提交的值</p>
+<p>(3) 同样，<code>V2</code>的值为<code>2</code></p>
+<p>(4) 同上，<code>V3</code>的值为<code>2</code></p>
+<p> </p>
+<p>🔖 问：当隔离级别是“读未提交“的时候，当读数据读到了一个未提交事务的值，</p>
+<p>比如文章中的<code>V1=2</code>，但事务<code>B</code>回滚了，实际上<code>V1</code>的值仍然是<code>1</code>，可事务<code>A</code>已经查到结果是<code>2</code>，</p>
+<p>这样结果不就不一致了？ 该如何解决？</p>
+<p>📝 答： 解决方法就是不用这个隔离级别， 读未提交也称为“脏读”，就是你说的这个场景得名的</p>
 <p> </p>
 <h3 id="32-读提交">3.2 读提交</h3>
 <p> </p>
 <p>读提交是指，一个事务提交之后，它做的变更才会被其他事务看到</p>
+<p>如下图：</p>
+<p>(1) 事务<code>A、B</code>中间的隔离级别为读提交</p>
+<p>(2) 事务<code>A</code>，在读取<code>V1</code>时候，值为<code>1</code>，无法读取到事务<code>B</code>中未提交的值</p>
+<p>(3) 事务<code>A</code>，在读取<code>V2</code>时候，值为<code>2</code>，因为事务<code>B</code>已经提交，此时<code>V2</code>的值为事务<code>B</code>提交的最新结果；</p>
+<p>(4) 同上，<code>V3</code>的值为<code>2</code></p>
 <p> </p>
 <h3 id="33-可重复读">3.3 可重复读</h3>
 <p> </p>
 <p>可重复读是指，一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的</p>
 <p>当然在可重复读隔离级别下，未提交变更对其他事务也是不可见的</p>
+<p>如下图：</p>
+<p>(1) 事务<code>A、B</code>中间的隔离级别为可重复读</p>
+<p>(2) 事务<code>A</code>，在读取<code>V1</code>时候，值为<code>1</code>，因为是可重复读，所以事务<code>A</code>在读取<code>V1</code>时候的值应该和事务开始时候值一致，都是<code>1</code>；</p>
+<p>(3) 事务<code>A</code>，在读取<code>V2</code>时候，值为<code>1</code>，因为是可重复读，所以事务<code>A</code>在提交之前的值，都要保持一致性，即<code>V2</code>的值和事务<code>A</code>开始时候读取的值一致，都是<code>1</code>；</p>
+<p>(4) 事务<code>A</code>，在读取<code>V3</code>的值为<code>2</code>，因为此时事务<code>A</code>已经提交，<code>V3</code>的值为事务<code>B</code>中提交的最新值</p>
+<p> </p>
+<p>🔖 问：什么时候需要“可重复读”的场景呢？</p>
+<p>📝 答：假设你在管理一个个人银行账户表。一个表存了账户余额，一个表存了账单明细。</p>
+<p>到了月底你要做数据校对，也就是判断上个月的余额和当前余额的差额，是否与本月的账单明细一致。</p>
+<p>你一定希望在校对过程中，即使有用户发生了一笔新的交易，也不影响你的校对结果</p>
+<p>这时候使用“可重复读”隔离级别就很方便。事务启动时的视图可以认为是静态的，不受其他事务更新的影响。</p>
+<p> </p>
+<p>🔖 问：<code>mysql</code>的默认事务隔离等级是可重复读，那比如<code>a事务</code>执行过程中要把字段<code>num数量+1</code>，但<code>num</code>被其他人改了，那如何保证数据一致性，是要行加锁了吗？</p>
+<p>📝 答：对，<code>a事务</code>加行锁</p>
+<p> </p>
+<p>🔖 问：什么场景下用<code>RC</code>，什么场景下用<code>RR</code>，能否举些场景出来?</p>
+<p>📝 答： 业务场景里面需要明确的“可重复读”的能力，比如我见过的一些金融类的业务里面需要。大多数时候可以优先考虑 <code>row </code>格式 + <code>RC</code></p>
 <p> </p>
 <h3 id="34-串行化">3.4 串行化</h3>
 <p> </p>
 <p>顾名思义是对于同一行记录，“写”会加“写锁”，“读”会加“读锁”</p>
 <p>当出现读写锁冲突的时候，后访问的事务必须等前一个事务执行完成，才能继续执行</p>
+<p>如下图：</p>
+<p>(1) 事务<code>A、B</code>中间的隔离级别为串行化</p>
+<p>(2) 事务B在执行<code>“将 1 改成 2”</code>的时候，会被锁住， 直到事务 <code>A</code> 提交后，事务 <code>B </code>才可以继续执行</p>
+<p>(3) 所以从 <code>A</code> 的角度看， <code>V1、V2</code> 值是 <code>1</code>，<code>V3</code> 的值是 <code>2</code></p>
+<p> </p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -164,7 +235,325 @@
         data-srcset="/images/mysql/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/%E4%BA%8B%E5%8A%A11.jpg, /images/mysql/%e4%ba%8b%e5%8a%a1%e9%9a%94%e7%a6%bb/%e4%ba%8b%e5%8a%a11.jpg 1.5x, /images/mysql/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/%E4%BA%8B%E5%8A%A11.jpg 2x"
         data-sizes="auto"
         alt="/images/mysql/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/%E4%BA%8B%E5%8A%A11.jpg"
-        title="测试" /></p>
+        title="事务1" /></p>
+<p> </p>
+<p> </p>
+<h3 id="35-查看设置隔离级别">3.5 查看设置隔离级别</h3>
+<p> </p>
+<p>在不同的隔离级别下，数据库行为是有所不同的</p>
+<p>(1) <code>Oracle</code> 数据库的默认隔离级别其实就是“读提交”</p>
+<p>(2) 对于一些从 <code>Oracle</code> 迁移到 <code>MySQL </code>的应用，为保证数据库隔离级别的一致，需要将 <code>MySQL</code> 的隔离级别设置为“读提交”</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="c1"># (1) 查看现在的隔离级别
+</span><span class="c1"></span><span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s1">&#39;transaction_isolation&#39;</span><span class="p">;</span>
+
+<span class="c1"># 返回值
+</span><span class="c1"></span><span class="o">+-----------------------+-----------------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>         <span class="o">|</span> <span class="n">Value</span>           <span class="o">|</span>
+<span class="o">+-----------------------+-----------------+</span>
+<span class="o">|</span> <span class="n">transaction_isolation</span> <span class="o">|</span> <span class="n">REPEATABLE</span><span class="o">-</span><span class="k">READ</span> <span class="o">|</span>
+<span class="o">+-----------------------+-----------------+</span>
+
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="err">将隔离级别由</span> <span class="err">可重复读</span> <span class="err">设置为</span> <span class="err">读已提交</span>
+
+<span class="kt">set</span> <span class="n">global</span> <span class="n">transaction_isolation</span> <span class="o">=</span> <span class="s1">&#39;READ-COMMITTED&#39;</span><span class="p">;</span>
+
+</code></pre></div><p> </p>
+<p>🔖 问： <code>Innodb</code> 默认隔离级别是什么呢？</p>
+<p>📝 答：<code>Innodb</code>默认的是<code>repeatable-read</code>的隔离级别</p>
+<p> </p>
+<p>🔖 问：4种隔离级别，并行性能和安全性能的区别是什么？</p>
+<p>📝 答：</p>
+<p>(1) 读未提交：别人改数据的事务尚未提交，我在我的事务中也能读到。</p>
+<p>(2) 读已提交：别人改数据的事务已经提交，我在我的事务中才能读到。</p>
+<p>(3) 可重复读：别人改数据的事务已经提交，我在我的事务中也不去读。</p>
+<p>(4) 串行：我的事务尚未提交，别人就别想改数据。</p>
+<p>这4种隔离级别，并行性能依次降低，安全性依次提高</p>
+<p> </p>
+<p>🔖 问：同一个事务中的插入/更新/删除-&gt;查询，这种情况呢？是否有隔离？</p>
+<p>📝 答：那自己改了肯定得看到呀，不然程序逻辑崩溃了</p>
+<p> </p>
+<p>🔖 问：想问一下隔离级别是针对整个数据库的所有事务还是某一次执行的事务呢。比如上面的事务<code>A</code>和<code>B</code>的例子，能否<code>A</code>和<code>B</code>使用不同的隔离级别呢?</p>
+<p>📝 答：可以</p>
+<p> </p>
+<p>🔖 问：怎么理解事务是基于连接的这句话？如果我在多线程中共用一个连接，并执行事务会有什么后果？</p>
+<p>📝 答：多线程不能同时用一个连接，你说的共同，是不是指连接池复用？这时候对一个连接是“先后使用”，不是“同时使用”</p>
+<hr>
+<p> </p>
+<h2 id="三视图">三、视图</h2>
+<p> </p>
+<p>在实现隔离中，数据库里面会创建一个视图，访问的时候以视图的逻辑结果为准;</p>
+<p>(1) “读未提交”隔离级别下直接返回记录上的最新值，没有视图概念；</p>
+<p>(2) 在“读提交”隔离级别下，这个视图是在每个 <code>SQL</code> 语句开始执行的时候创建的</p>
+<p>(3) 在“可重复读”隔离级别下，这个视图是在事务启动时创建的，整个事务存在期间都用这个视图</p>
+<p>(4) “串行化”隔离级别下直接用加锁的方式来避免并行访问</p>
+<p> </p>
+<h3 id="31-读未提交没有视图">3.1 读未提交没有视图</h3>
+<p> </p>
+<p>🔖 问：读未提交”隔离级别下直接返回记录上的最新值，没有视图概念； 这个最新值从哪儿得到的？</p>
+<p>📝 答：内存里，<code>InnoDB buffer pool</code></p>
+<p> </p>
+<h3 id="32-读已提交隔离的视图实现">3.2 读已提交隔离的视图实现</h3>
+<p> </p>
+<p>在每一条 <code>SQL</code> 开始执行时创建视图，隔离作用域仅限该条 <code>SQL</code> 语句</p>
+<p> </p>
+<p>🔖 问：读提交通过在执行 <code>sql</code> 时建立视图，那它查询以后就会放弃这个视图？每次查询都会基于最新值建立一个视图吗</p>
+<p>📝 答：是的</p>
+<p> </p>
+<h3 id="33-可重复读的视图实现">3.3 可重复读的视图实现</h3>
+<p> </p>
+<p>事务启动时创建视图，因此，在事务任意时刻，对记录读取的值都是一样的</p>
+<p> </p>
+<p> </p>
+<p>🔖 问：既然读提交每次都要新建一个视图，而可重复读只建立一次，那么为什么读提交的效率要比可重复读高呢？</p>
+<p>📝 答：建立视图没什么成本的，就是拷贝一个事务数组；所以性能的差异不是体现在这</p>
+<p>一般我们说可重复的效率相对的低（其实也还好，不会低多少），</p>
+<p>主要还是因为可重复读的锁范围可能更大（有<code>gap lock</code>），锁时间更长（事务结束才释放），影响并发度</p>
+<p> </p>
+<h3 id="34-串行化的锁机制">3.4 串行化的锁机制</h3>
+<p> </p>
+<p>串行化：通过读写锁来避免并行访问</p>
+<p>(1) 读-读：允许并发执行</p>
+<p>(2) 读-写：只能串行</p>
+<p>(3) 写-写：只能串行</p>
+<p> </p>
+<p>🔖 问：串行化隔离级别的锁是什么粒度的？合理的做法应该是只在读写记录时加锁，但从结果来看，是对整个事务加锁</p>
+<p>📝 答：串行化隔离级别的锁是事务级别，既然是串行化，就是保证一个事务结束前，其他事务不能访问它锁住的资源；</p>
+<p> </p>
+<p>🔖 问：如果事务<code>A</code>和事务<code>B</code>不按相同顺序都访问了多个<code>row</code>，会不会出现死锁？</p>
+<p>📝 答：会</p>
+<hr>
+<p> </p>
+<h2 id="四事务隔离的实现">四、事务隔离的实现</h2>
+<p> </p>
+<p>下面展开说明“可重复读”的事务隔离的实现</p>
+<p>对于可重复读，你可以这么想，每个事务启动的时候打一个快照，别人改的“我不听我不听”</p>
+<p> </p>
+<h3 id="41-回滚日志-undo-log">4.1 回滚日志 undo log</h3>
+<p> </p>
+<p>(1) 在<code> MySQL</code> 中，实际上每条记录在更新的时候都会同时记录一条回滚操作</p>
+<p>(2) 记录上的最新值，通过回滚操作，都可以得到前一个状态的值</p>
+<p> </p>
+<p>假设一个值从 <code>1</code> 被按顺序改成了 <code>2、3、4</code>，在回滚日志里面就会有类似下面的记录:</p>
+<p> </p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/mysql/%e4%ba%8b%e5%8a%a1%e9%9a%94%e7%a6%bb/%e4%ba%8b%e5%8a%a12.jpg"
+        data-srcset="/images/mysql/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/%E4%BA%8B%E5%8A%A12.jpg, /images/mysql/%e4%ba%8b%e5%8a%a1%e9%9a%94%e7%a6%bb/%e4%ba%8b%e5%8a%a12.jpg 1.5x, /images/mysql/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/%E4%BA%8B%E5%8A%A12.jpg 2x"
+        data-sizes="auto"
+        alt="/images/mysql/%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/%E4%BA%8B%E5%8A%A12.jpg"
+        title="事务2" /></p>
+<p> </p>
+<p>当前值是 <code>4</code>，但是在查询这条记录的时候，不同时刻启动的事务会有不同的 <code>read-view</code></p>
+<p> </p>
+<p>🔖 问：<code>undo log</code>是在什么时候写入的呢？</p>
+<p>📝 答：更新过程一边更新一边生成<code>undo log</code></p>
+<p> </p>
+<p>🔖 问：回滚语句就是传说中的<code>undo</code>吧？</p>
+<p>📝 答：不是, <code>undo</code>叫做 回滚段，回滚语句就是”<code>rollback</code>”这个命令</p>
+<p> </p>
+<p>🔖 问：“当系统中没有比某一回滚日志更早的<code>read-view</code>时，回滚日志会被删除”。</p>
+<p>这个操作是定时的执行的吗？</p>
+<p>是不是如果某个数据库在一定时间内完全处于空闲状态，<code>undo log</code>就被删除完了？</p>
+<p>📝 答：是后台，有定时的逻辑。如果空闲很久，确实有可能删除完了</p>
+<p> </p>
+<p>🔖 问：回滚日志，是一个事务记录一个日志？还是只有一个回滚日志，不同事务只在其中对应不同回滚段？</p>
+<p>📝 答：第二种</p>
+<p> </p>
+<p>🔖 问：在更新语句的时候 会两阶段提交形式写入 <code>redo log</code> 和 <code>bin log</code> , 那记录旧版本的 <code>undo log</code> 是这么时候写入的呢?</p>
+<p>📝 答： 更早之前了，写<code>redolog</code>和<code>binlog</code>是提交过程。在此之前更新数据的时候就已经写了<code>undolog</code></p>
+<p> </p>
+<h4 id="411-mvcc">4.1.1 MVCC</h4>
+<p> </p>
+<p>如图中看到的，在视图 <code>A、B、C</code> 里面，这一个记录的值分别是 <code>1、2、4</code>，同一条记录在系统中可以存在多个版本，就是数据库的多版本并发控制（<code>MVCC</code>)</p>
+<p>(1) 对于 <code>read-view A</code>，要得到 <code>1</code>，就必须将当前值依次执行图中所有的回滚操作得到;</p>
+<p>(2) 即使现在有另外一个事务正在将 <code>4</code> 改成 <code>5</code>，这个事务跟 <code>read-view A、B、C</code> 对应的事务是不会冲突的</p>
+<p> </p>
+<p>🔖 问：如上<code>（2）</code>， 如果这个时候将数据改为<code>4</code>的事务<code>1</code>回滚了，另一个将<code>4</code>改为<code>5</code>的事务<code>2</code>如何处理？</p>
+<p>📝 答：不会出现这种情况， ”将数据改为<code>4</code>的事务<code>1</code>回滚了“ 表示这个事务还没提交，那么就有行锁；</p>
+<p>“另一个将<code>4</code>改为<code>5</code>的事务<code>2</code>” 这个就会进入锁等待，不会被执行的</p>
+<p> </p>
+<p>🔖 问：对于在同一个事务里对同一个字段进行了多次修改，相应的回滚日志是记录多条，还是只会记录一条？</p>
+<p>📝 答：多条</p>
+<p> </p>
+<h4 id="412-何时删除回滚日志">4.1.2 何时删除回滚日志？</h4>
+<p> </p>
+<p>在不需要的时候才删除</p>
+<p>系统会判断，当没有事务再需要用到这些回滚日志时，回滚日志会被删除。</p>
+<p>什么时候才不需要了呢？</p>
+<p>就是当系统里没有比这个回滚日志更早的 <code>read-view</code> 的时候</p>
+<p>换一个说法，就是一个查询事务开启以后，在这个时刻之后，事务提交/回滚之前，所有更新产生的<code>undo log</code>都不能被删除</p>
+<p> </p>
+<p>🔖 问：回滚段存放的是回滚操作而不是旧版本数据吗？</p>
+<p>📝 答： 对，回滚操作</p>
+<p> </p>
+<p>🔖 问：是不是当事务提交后，就无法回滚了？</p>
+<p>📝 答：对</p>
+<p> </p>
+<p>🔖 问：什么叫更早的<code>read-view</code>呢？是指由另外其他的事务产生的回滚日志吗？</p>
+<p>📝 答：不是，就是“更早启动的事务”</p>
+<p> </p>
+<h3 id="42-长事务">4.2 长事务</h3>
+<p> </p>
+<p>为什么建议你尽量不要使用长事务？</p>
+<p>(1) 长事务意味着系统里面会存在很老的事务视图;</p>
+<p>(2) 由于这些事务随时可能访问数据库里面的任何数据，所以这个事务提交之前，数据库里面它可能用到的回滚记录都必须保留，这就会导致大量占用存储空间;</p>
+<p>(3) 除了对回滚段的影响，长事务还占用锁资源，也可能拖垮整个库</p>
+<p> </p>
+<p>🔖 问：什么是长事务，是指执行时间长的事务，还是说一个事务里面包含的<code>SQL</code>语句太多，怎么定义的</p>
+<p>📝 答：长事务就是从事务开始到提交，这期间时间很长</p>
+<p> </p>
+<p>🔖 问： 数据库可以设置事务超时时间吗，一般会不会设置？</p>
+<p>📝 答：没有直接的“事务时间”， 有“语句执行时间”和“等待时间”，线上比较重要的业务，一般都要设置</p>
+<p> </p>
+<p>🔖 问：回滚日志存储在哪？</p>
+<p>📝 答：回滚日志默认放在<code>ibdata</code> 里面</p>
+<p> </p>
+<p>🔖 问：长事务导致的占用大量存储空间，可能会有多大比例？</p>
+<p>📝 答：在 <code>MySQL 5.5</code> 及以前的版本，回滚日志是跟数据字典一起放在 <code>ibdata</code> 文件里的，即使长事务最终提交，回滚段被清理，文件也不会变小</p>
+<p>我见过数据只有 <code>20GB</code>，而回滚段有 <code>200GB</code> 的库。最终只好为了清理回滚段，重建整个库</p>
+<p>因为默认回滚段是在一个大文件里，和数据字段放一起。空间不够文件膨胀，空间逻辑删除，文件不能随便删除</p>
+<p> </p>
+<p>🔖 问： 长事务占用大量存储空间的过程解析？</p>
+<p>📝 答：比如，</p>
+<p>(1) 在某个时刻（今天上午<code>9:00</code>）开启了一个事务<code>A</code>（对于可重复读隔离级别，此时一个视图<code>read-view A</code>也创建了），这是一个很长的事务;</p>
+<p>(2) 事务<code>A</code>在今天上午<code>9:20</code>的时候，查询了一个记录<code>R1</code>的一个字段<code>f1</code>的值为<code>1</code>;</p>
+<p>(3) 今天上午<code>9:25</code>的时候，一个事务<code>B</code>（随之而来的<code>read-view B</code>）也被开启了，</p>
+<p>它更新了<code>R1.f1</code>的值为<code>2</code>（同时也创建了一个<code>由2到1</code>的回滚日志），这是一个短事务，事务随后就被<code>commit</code>;</p>
+<p>(4) 今天上午<code>9:30</code>的时候，一个事务<code>C</code>（随之而来的<code>read-view C</code>）也被开启了，</p>
+<p>它更新了<code>R1.f1</code>的值为<code>3</code>（同时也创建了一个<code>由3到2</code>的回滚日志），这是一个短事务，事务随后就被<code>commit</code></p>
+<p>(5) 到了下午<code>3:00</code>了，长事务<code>A</code>还没有<code>commit</code>，</p>
+<p>为了保证事务在执行期间看到的数据在前后必须是一致的，那些老的事务视图、回滚日志就必须存在了，这就占用了大量的存储空间</p>
+<p> </p>
+<p>🔖 问：避免长事务那就要进行拆分，在业务中进行逻辑控制了吧？</p>
+<p>📝 答：是的，这个是需要业务逻辑配合的</p>
+<p> </p>
+<p>🔖 问：在事务开启前是不是可以把需要查询的数据查询出来，做好逻辑运算，只有写数据库阶段才开启事务，是不是可以避免长事务了？</p>
+<p>📝 答：要注意的是，这时候查询没在事务里面，所以等开始事务进行更新的时候，可能数据已经变了。如果业务逻辑可以接受这么做，那这样是很好的方法。</p>
+<p>也是我比较建议的业务优化方向</p>
+<p> </p>
+<p>🔖 问：事务的回滚日志难道直接写到磁盘吗？</p>
+<p>我猜想应该是先存在内存然后在某一个时间写到磁盘，那么问题又来了？</p>
+<p>这个时间是什么时候呢？如果猜想正确那是不是意味着长事务还会导致短时间内内存占用较大？</p>
+<p>📝 答：回滚日志和数据的写入策略一样（<code>WAL</code>），但是不一定不写盘，</p>
+<p>比如<code>checkpoint</code> 推进过程就可能把<code>undolog</code>的内容从内存写到日志文件，所以不会因为<code>undolog</code>导致占用内存很大的情况</p>
+<hr>
+<p> </p>
+<h2 id="五事务的启动方式">五、事务的启动方式</h2>
+<p> </p>
+<p>如前面所述，长事务有这些潜在风险，当然是建议你尽量避免。</p>
+<p>其实很多时候业务开发同学并不是有意使用长事务，通常是由于误用所致</p>
+<p><code>MySQL </code>的事务启动方式有以下几种</p>
+<p> </p>
+<h3 id="51-显式启动">5.1 显式启动</h3>
+<p> </p>
+<p>显式启动事务语句，</p>
+<p>(1) <code>begin</code> 或 <code>start transaction</code></p>
+<p>(2) 配套的提交语句是 <code>commit</code></p>
+<p>(3) 回滚语句是 <code>rollback</code></p>
+<p> </p>
+<p>🔖 问： 事务是何时启动？</p>
+<p>📝 答： 事务在第一个<code>select</code>才启动， 只是<code>begin</code>, 无法查询到事务</p>
+<p><code>begin</code>不是事务启动， 之后第一个<code>DML</code>才是, (<code>Data Manipulation Language</code>, 数据操纵语言)</p>
+<p> </p>
+<p>🔖 问：在没有显式开启事务的情况下，可不可以认为每个<code>sql</code>的执行都算是一个事务？</p>
+<p>📝 答：是的</p>
+<p> </p>
+<p>🔖 问：一条单独<code>insert</code>语句构成一个事务吗？</p>
+<p>📝 答：如果没有显式的启动事务，一条单独<code>insert</code>语句构成一个事务的</p>
+<p> </p>
+<p>🔖 问：如果不<code>begin</code>，那么<code>select</code>语句会开启一个事务吗？</p>
+<p>📝 答：如果<code>select</code>的是一个<code>innodb</code>表，会的</p>
+<p> </p>
+<p>🔖 问：单条查询算一个事务，这个事务什么时候提交？</p>
+<p>📝 答：语句执行完成算</p>
+<p> </p>
+<h3 id="52-autocommit">5.2 autocommit</h3>
+<p> </p>
+<p>方式一： <code>set autocommit=0</code>，这个命令会将这个线程的自动提交关掉</p>
+<p>(1) 意味着如果你只执行一个 <code>select</code> 语句，这个事务就启动了，而且并不会自动提交</p>
+<p>(2) 这个事务持续存在直到你主动执行 <code>commit</code> 或 <code>rollback</code> 语句，或者断开连接</p>
+<p>(3) 有些客户端连接框架会默认连接成功后先执行一个 <code>set autocommit=0</code> 的命令。</p>
+<p>这就导致接下来的查询都在事务中，如果是长连接，就导致了意外的长事务</p>
+<p> </p>
+<p>🔖 问：是<code>select</code>在自动提交设置为0的时候，也会同样开启一个事务，这点不是很理解，用意合在？</p>
+<p>📝 答：<code>Set autocommit=0</code> ，每次<code>commit/rollback</code>之后，再执行一个<code>SQL</code>语句自动开启事务，就是这么个设定</p>
+<p> </p>
+<p>方式二： 建议你总是使用 <code>set autocommit=1</code>, 通过显式语句的方式来启动事务</p>
+<p>(1) 自动提交的意思是“在没有<code>begin</code>或<code>start transaction</code> 的时候”，自动提交</p>
+<p>(2) 如果有<code>begin</code>或<code>start transaction</code> 的时候, 不会自动提交</p>
+<p> </p>
+<p>🔖 问：<code>python</code>里面，<code>autocommit</code>默认是<code>0</code>的，这种情况下，一条<code>select</code>语句如果不写<code>begin</code>，是否需要，<code>commit</code>?</p>
+<p>📝 答：不<code>commit</code>如果连接保持着，就可能变成长事务哦</p>
+<p> </p>
+<p>🔖 问：事物隔离级别和自动提交这俩是什么关系呢？这俩参数会打架吗</p>
+<p>📝 答：自动提交只是把事务提交掉，提交结束事务。事务隔离级别是事务运行期间能看到的什么数据。这俩不会“打架”呀</p>
+<p> </p>
+<p>🔖 问：既然设置了<code>autocommit=1</code>，就是自动提交事务了，为什么还要显示来开启事务呢？</p>
+<p>📝 答：现在每个语句会自动提交了，如果你要在一个事务里增加一行，再修改一行，怎么做讷？所以，还是需要有事务存在。</p>
+<p> </p>
+<p>🔖 问：如果<code>set autocommit=1</code>，我执行一个<code>delete</code>操作，删除后发现删错了，想<code>rollback</code>，但是因为是自动提交的，所以没法回退了吗？</p>
+<p>📝 答：是的</p>
+<p> </p>
+<h3 id="53-多一次交互">5.3 多一次交互</h3>
+<p> </p>
+<p>对于一个需要频繁使用事务的业务，方式二（即<code>set autocommit=1</code>）每个事务在开始时都不需要主动执行一次 <code>“begin”</code>，减少了语句的交互次数</p>
+<p>建议你使用 <code>commit work and chain</code> 语法</p>
+<p> </p>
+<p>(1) 在 <code>autocommit</code> 为 <code>1</code> 的情况下，用 <code>begin</code> 显式启动的事务，如果执行<code> commit</code> 则提交事务;</p>
+<p>(2) 如果执行 <code>commit work and chain</code>，则是提交事务并自动启动下一个事务，这样也省去了再次执行 <code>begin</code> 语句的开销</p>
+<p>同时带来的好处是从程序开发的角度明确地知道每个语句是否处于事务中</p>
+<p> </p>
+<h3 id="54-查询长事务">5.4 查询长事务</h3>
+<p> </p>
+<p>可以在 <code>information_schema</code> 库的 <code>innodb_trx </code>这个表中查询长事务</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="c1"># (1) 查询所有的事务
+</span><span class="c1"></span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">innodb_trx</span> <span class="k">where</span> <span class="nf">TIME_TO_SEC</span><span class="p">(</span><span class="nf">timediff</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span><span class="n">trx_started</span><span class="p">))</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">;</span>
+
+<span class="c1"># 返回值
+</span><span class="c1"></span><span class="o">+-----------------+-----------+---------------------+-----------------------+------------------+------------+---------------------+-----------+---------------------+-------------------+-------------------+------------------+-----------------------+-----------------+-------------------+-------------------------+---------------------+-------------------+------------------------+----------------------------+---------------------------+---------------------------+------------------+----------------------------+</span>
+<span class="o">|</span> <span class="n">trx_id</span>          <span class="o">|</span> <span class="n">trx_state</span> <span class="o">|</span> <span class="n">trx_started</span>         <span class="o">|</span> <span class="n">trx_requested_lock_id</span> <span class="o">|</span> <span class="n">trx_wait_started</span> <span class="o">|</span> <span class="n">trx_weight</span> <span class="o">|</span> <span class="n">trx_mysql_thread_id</span> <span class="o">|</span> <span class="n">trx_query</span> <span class="o">|</span> <span class="n">trx_operation_state</span> <span class="o">|</span> <span class="n">trx_tables_in_use</span> <span class="o">|</span> <span class="n">trx_tables_locked</span> <span class="o">|</span> <span class="n">trx_lock_structs</span> <span class="o">|</span> <span class="n">trx_lock_memory_bytes</span> <span class="o">|</span> <span class="n">trx_rows_locked</span> <span class="o">|</span> <span class="n">trx_rows_modified</span> <span class="o">|</span> <span class="n">trx_concurrency_tickets</span> <span class="o">|</span> <span class="n">trx_isolation_level</span> <span class="o">|</span> <span class="n">trx_unique_checks</span> <span class="o">|</span> <span class="n">trx_foreign_key_checks</span> <span class="o">|</span> <span class="n">trx_last_foreign_key_error</span> <span class="o">|</span> <span class="n">trx_adaptive_hash_latched</span> <span class="o">|</span> <span class="n">trx_adaptive_hash_timeout</span> <span class="o">|</span> <span class="n">trx_is_read_only</span> <span class="o">|</span> <span class="n">trx_autocommit_non_locking</span> <span class="o">|</span>
+<span class="o">+-----------------+-----------+---------------------+-----------------------+------------------+------------+---------------------+-----------+---------------------+-------------------+-------------------+------------------+-----------------------+-----------------+-------------------+-------------------------+---------------------+-------------------+------------------------+----------------------------+---------------------------+---------------------------+------------------+----------------------------+</span>
+<span class="o">|</span> <span class="mi">281479796718976</span> <span class="o">|</span> <span class="n">RUNNING</span>   <span class="o">|</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">15</span> <span class="mi">14</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mi">23</span> <span class="o">|</span> <span class="no">NULL</span>                  <span class="o">|</span> <span class="no">NULL</span>             <span class="o">|</span>          <span class="mi">0</span> <span class="o">|</span>                  <span class="mi">15</span> <span class="o">|</span> <span class="no">NULL</span>      <span class="o">|</span> <span class="no">NULL</span>                <span class="o">|</span>                 <span class="mi">0</span> <span class="o">|</span>                 <span class="mi">0</span> <span class="o">|</span>                <span class="mi">0</span> <span class="o">|</span>                  <span class="mi">1136</span> <span class="o">|</span>               <span class="mi">0</span> <span class="o">|</span>                 <span class="mi">0</span> <span class="o">|</span>                       <span class="mi">0</span> <span class="o">|</span> <span class="k">READ</span> <span class="n">COMMITTED</span>      <span class="o">|</span>                 <span class="mi">1</span> <span class="o">|</span>                      <span class="mi">1</span> <span class="o">|</span> <span class="no">NULL</span>                       <span class="o">|</span>                         <span class="mi">0</span> <span class="o">|</span>                         <span class="mi">0</span> <span class="o">|</span>                <span class="mi">0</span> <span class="o">|</span>                          <span class="mi">0</span> <span class="o">|</span>
+<span class="o">|</span> <span class="mi">281479796718120</span> <span class="o">|</span> <span class="n">RUNNING</span>   <span class="o">|</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">15</span> <span class="mi">14</span><span class="p">:</span><span class="mi">47</span><span class="p">:</span><span class="mi">52</span> <span class="o">|</span> <span class="no">NULL</span>                  <span class="o">|</span> <span class="no">NULL</span>             <span class="o">|</span>          <span class="mi">0</span> <span class="o">|</span>                  <span class="mi">13</span> <span class="o">|</span> <span class="no">NULL</span>      <span class="o">|</span> <span class="no">NULL</span>                <span class="o">|</span>                 <span class="mi">0</span> <span class="o">|</span>                 <span class="mi">0</span> <span class="o">|</span>                <span class="mi">0</span> <span class="o">|</span>                  <span class="mi">1136</span> <span class="o">|</span>               <span class="mi">0</span> <span class="o">|</span>                 <span class="mi">0</span> <span class="o">|</span>                       <span class="mi">0</span> <span class="o">|</span> <span class="k">READ</span> <span class="n">COMMITTED</span>      <span class="o">|</span>                 <span class="mi">1</span> <span class="o">|</span>                      <span class="mi">1</span> <span class="o">|</span> <span class="no">NULL</span>                       <span class="o">|</span>                         <span class="mi">0</span> <span class="o">|</span>                         <span class="mi">0</span> <span class="o">|</span>                <span class="mi">0</span> <span class="o">|</span>                          <span class="mi">0</span> <span class="o">|</span>
+<span class="o">+-----------------+-----------+---------------------+-----------------------+------------------+------------+---------------------+-----------+---------------------+-------------------+-------------------+------------------+-----------------------+-----------------+-------------------+-------------------------+---------------------+-------------------+------------------------+----------------------------+---------------------------+---------------------------+------------------+----------------------------+</span>
+
+<span class="c1"># (2) 查看现有的长事务，即持续时间大于60s的事务
+</span><span class="c1"></span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">innodb_trx</span> <span class="k">where</span> <span class="nf">TIME_TO_SEC</span><span class="p">(</span><span class="nf">timediff</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span><span class="n">trx_started</span><span class="p">))</span><span class="o">&gt;</span><span class="mi">60</span><span class="p">;</span>
+
+<span class="c1"># 返回值
+</span><span class="c1"></span>
+<span class="o">+-----------------+-----------+---------------------+-----------------------+------------------+------------+---------------------+-----------+---------------------+-------------------+-------------------+------------------+-----------------------+-----------------+-------------------+-------------------------+---------------------+-------------------+------------------------+----------------------------+---------------------------+---------------------------+------------------+----------------------------+</span>
+<span class="o">|</span> <span class="n">trx_id</span>          <span class="o">|</span> <span class="n">trx_state</span> <span class="o">|</span> <span class="n">trx_started</span>         <span class="o">|</span> <span class="n">trx_requested_lock_id</span> <span class="o">|</span> <span class="n">trx_wait_started</span> <span class="o">|</span> <span class="n">trx_weight</span> <span class="o">|</span> <span class="n">trx_mysql_thread_id</span> <span class="o">|</span> <span class="n">trx_query</span> <span class="o">|</span> <span class="n">trx_operation_state</span> <span class="o">|</span> <span class="n">trx_tables_in_use</span> <span class="o">|</span> <span class="n">trx_tables_locked</span> <span class="o">|</span> <span class="n">trx_lock_structs</span> <span class="o">|</span> <span class="n">trx_lock_memory_bytes</span> <span class="o">|</span> <span class="n">trx_rows_locked</span> <span class="o">|</span> <span class="n">trx_rows_modified</span> <span class="o">|</span> <span class="n">trx_concurrency_tickets</span> <span class="o">|</span> <span class="n">trx_isolation_level</span> <span class="o">|</span> <span class="n">trx_unique_checks</span> <span class="o">|</span> <span class="n">trx_foreign_key_checks</span> <span class="o">|</span> <span class="n">trx_last_foreign_key_error</span> <span class="o">|</span> <span class="n">trx_adaptive_hash_latched</span> <span class="o">|</span> <span class="n">trx_adaptive_hash_timeout</span> <span class="o">|</span> <span class="n">trx_is_read_only</span> <span class="o">|</span> <span class="n">trx_autocommit_non_locking</span> <span class="o">|</span>
+<span class="o">+-----------------+-----------+---------------------+-----------------------+------------------+------------+---------------------+-----------+---------------------+-------------------+-------------------+------------------+-----------------------+-----------------+-------------------+-------------------------+---------------------+-------------------+------------------------+----------------------------+---------------------------+---------------------------+------------------+----------------------------+</span>
+<span class="o">|</span> <span class="mi">281479796718976</span> <span class="o">|</span> <span class="n">RUNNING</span>   <span class="o">|</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">15</span> <span class="mi">14</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mi">23</span> <span class="o">|</span> <span class="no">NULL</span>                  <span class="o">|</span> <span class="no">NULL</span>             <span class="o">|</span>          <span class="mi">0</span> <span class="o">|</span>                  <span class="mi">15</span> <span class="o">|</span> <span class="no">NULL</span>      <span class="o">|</span> <span class="no">NULL</span>                <span class="o">|</span>                 <span class="mi">0</span> <span class="o">|</span>                 <span class="mi">0</span> <span class="o">|</span>                <span class="mi">0</span> <span class="o">|</span>                  <span class="mi">1136</span> <span class="o">|</span>               <span class="mi">0</span> <span class="o">|</span>                 <span class="mi">0</span> <span class="o">|</span>                       <span class="mi">0</span> <span class="o">|</span> <span class="k">READ</span> <span class="n">COMMITTED</span>      <span class="o">|</span>                 <span class="mi">1</span> <span class="o">|</span>                      <span class="mi">1</span> <span class="o">|</span> <span class="no">NULL</span>                       <span class="o">|</span>                         <span class="mi">0</span> <span class="o">|</span>                         <span class="mi">0</span> <span class="o">|</span>                <span class="mi">0</span> <span class="o">|</span>                          <span class="mi">0</span> <span class="o">|</span>
+<span class="o">|</span> <span class="mi">281479796718120</span> <span class="o">|</span> <span class="n">RUNNING</span>   <span class="o">|</span> <span class="mi">2020</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">15</span> <span class="mi">14</span><span class="p">:</span><span class="mi">47</span><span class="p">:</span><span class="mi">52</span> <span class="o">|</span> <span class="no">NULL</span>                  <span class="o">|</span> <span class="no">NULL</span>             <span class="o">|</span>          <span class="mi">0</span> <span class="o">|</span>                  <span class="mi">13</span> <span class="o">|</span> <span class="no">NULL</span>      <span class="o">|</span> <span class="no">NULL</span>                <span class="o">|</span>                 <span class="mi">0</span> <span class="o">|</span>                 <span class="mi">0</span> <span class="o">|</span>                <span class="mi">0</span> <span class="o">|</span>                  <span class="mi">1136</span> <span class="o">|</span>               <span class="mi">0</span> <span class="o">|</span>                 <span class="mi">0</span> <span class="o">|</span>                       <span class="mi">0</span> <span class="o">|</span> <span class="k">READ</span> <span class="n">COMMITTED</span>      <span class="o">|</span>                 <span class="mi">1</span> <span class="o">|</span>                      <span class="mi">1</span> <span class="o">|</span> <span class="no">NULL</span>                       <span class="o">|</span>                         <span class="mi">0</span> <span class="o">|</span>                         <span class="mi">0</span> <span class="o">|</span>                <span class="mi">0</span> <span class="o">|</span>                          <span class="mi">0</span> <span class="o">|</span>
+<span class="o">+-----------------+-----------+---------------------+-----------------------+------------------+------------+---------------------+-----------+---------------------+-------------------+-------------------+------------------+-----------------------+-----------------+-------------------+-------------------------+---------------------+-------------------+------------------------+----------------------------+---------------------------+---------------------------+------------------+----------------------------+</span>
+
+</code></pre></div><p> </p>
+<hr>
+<p> </p>
+<h2 id="六涉及参数">六、涉及参数</h2>
+<p> </p>
+<p> </p>
+<h3 id="61-transaction-isolation">6.1 transaction-isolation</h3>
+<p> </p>
+<p><code>transaction-isolation</code></p>
+<p>事务隔离级别，可选值为 <code>READ-UNCOMMITTED/ READ-COMMITTED/ REPEATABLE-READ/ SERIALIZABLE</code></p>
+<p>分别代表 读未提交，读已提交，可重复读，串行化</p>
+<hr>
+<p> </p>
+<h2 id="七本节问题与解答">七、本节问题与解答</h2>
+<p> </p>
+<p> </p>
+<h3 id="71-问题">7.1 问题</h3>
+<p> </p>
+<p>你现在知道了系统里面应该避免长事务，如果你是业务开发负责人同时也是数据库负责人，你会有什么方案来避免出现或者处理这种情况呢？</p>
+<p> </p>
+<h3 id="72-解答">7.2 解答</h3>
+<p> </p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
