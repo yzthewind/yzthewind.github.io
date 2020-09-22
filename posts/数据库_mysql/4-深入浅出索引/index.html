@@ -5,32 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>1. sql语句执行过程 - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="1. sql语句执行过程" />
-<meta property="og:description" content="一、 参考 mysql实战" />
+        <title>4. 深入浅出索引 - </title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="4. 深入浅出索引" />
+<meta property="og:description" content="一、 参考 mysql实战 innodb_diagrams 二、 引言 提到数据库索引，我想你并不陌生，在日常工作中会经常接触到。 比如某一个 SQL 查询比较慢，分析完原因之后，你可能就会" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yzthewind.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql/4-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95/" />
 <meta property="og:image" content="https://yzthewind.github.io/logo.png"/>
-<meta property="article:published_time" content="2020-07-05T10:00:00+08:00" />
-<meta property="article:modified_time" content="2020-07-05T10:00:00+08:00" />
+<meta property="article:published_time" content="2020-07-06T12:01:00+08:00" />
+<meta property="article:modified_time" content="2020-07-06T12:01:00+08:00" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://yzthewind.github.io/logo.png"/>
 
-<meta name="twitter:title" content="1. sql语句执行过程"/>
-<meta name="twitter:description" content="一、 参考 mysql实战"/>
+<meta name="twitter:title" content="4. 深入浅出索引"/>
+<meta name="twitter:description" content="一、 参考 mysql实战 innodb_diagrams 二、 引言 提到数据库索引，我想你并不陌生，在日常工作中会经常接触到。 比如某一个 SQL 查询比较慢，分析完原因之后，你可能就会"/>
 <meta name="application-name" content="一曲广陵散">
 <meta name="apple-mobile-web-app-title" content="一曲广陵散"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yzthewind.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql/4-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95/" /><link rel="prev" href="https://yzthewind.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql/40-%E5%BF%AB%E9%80%9F%E5%A4%8D%E5%88%B6%E4%B8%80%E5%BC%A0%E8%A1%A8/" /><link rel="next" href="https://yzthewind.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql/39-insert%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E9%94%81/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yzthewind.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql/4-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95/" /><link rel="prev" href="https://yzthewind.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql/3-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/" /><link rel="next" href="https://yzthewind.github.io/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3%E4%B9%A0%E9%A2%98/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "1. sql语句执行过程",
+        "headline": "4. 深入浅出索引",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/yzthewind.github.io\/posts\/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql\/4-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95\/"
-        },"genre": "posts","keywords": "mysql","wordcount":  11 ,
-        "url": "https:\/\/yzthewind.github.io\/posts\/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql\/4-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95\/","datePublished": "2020-07-05T10:00:00+08:00","dateModified": "2020-07-05T10:00:00+08:00","publisher": {
+        },"genre": "posts","keywords": "mysql","wordcount":  8070 ,
+        "url": "https:\/\/yzthewind.github.io\/posts\/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql\/4-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95\/","datePublished": "2020-07-06T12:01:00+08:00","dateModified": "2020-07-06T12:01:00+08:00","publisher": {
             "@type": "Organization",
             "name": "yz"},"author": {
                 "@type": "Person",
@@ -77,18 +77,18 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">1. sql语句执行过程</h1><h2 class="single-subtitle">mysql</h2><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">4. 深入浅出索引</h1><h2 class="single-subtitle">mysql</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>yz</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%AD%98%E5%82%A8/"><i class="far fa-folder fa-fw"></i>存储</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-05">2020-07-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 11 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-07-06">2020-07-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 8070 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 17 分钟&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/mysql/1-sql%e8%af%ad%e5%8f%a5%e6%89%a7%e8%a1%8c%e8%bf%87%e7%a8%8b.jpg"
-        data-srcset="/images/mysql/1-sql%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.jpg, /images/mysql/1-sql%e8%af%ad%e5%8f%a5%e6%89%a7%e8%a1%8c%e8%bf%87%e7%a8%8b.jpg 1.5x, /images/mysql/1-sql%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.jpg 2x"
+        data-src="/images/mysql/4-%e6%b7%b1%e5%85%a5%e6%b5%85%e5%87%ba%e7%b4%a2%e5%bc%95.jpg"
+        data-srcset="/images/mysql/4-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95.jpg, /images/mysql/4-%e6%b7%b1%e5%85%a5%e6%b5%85%e5%87%ba%e7%b4%a2%e5%bc%95.jpg 1.5x, /images/mysql/4-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95.jpg 2x"
         data-sizes="auto"
-        alt="/images/mysql/1-sql%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.jpg"
-        title="/images/mysql/1-sql%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B.jpg" /></div><div class="details toc" id="toc-static"  kept="">
+        alt="/images/mysql/4-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95.jpg"
+        title="/images/mysql/4-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95.jpg" /></div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
@@ -96,6 +96,35 @@
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#一-参考">一、 参考</a></li>
+    <li><a href="#二-引言">二、 引言</a></li>
+    <li><a href="#三-索引的常见模型">三、 索引的常见模型</a>
+      <ul>
+        <li><a href="#31-哈希表">3.1 哈希表</a></li>
+        <li><a href="#32-有序数组">3.2 有序数组</a></li>
+        <li><a href="#33-搜索树">3.3 搜索树</a></li>
+        <li><a href="#34-其他数据结构">3.4 其他数据结构</a></li>
+      </ul>
+    </li>
+    <li><a href="#四innodb-的索引模型">四、InnoDB 的索引模型</a>
+      <ul>
+        <li><a href="#41-索引组织表">4.1 索引组织表</a></li>
+      </ul>
+    </li>
+    <li><a href="#五索引维护">五、索引维护</a>
+      <ul>
+        <li><a href="#51-页分裂">5.1 页分裂</a></li>
+        <li><a href="#52-页分裂的影响">5.2 页分裂的影响</a></li>
+        <li><a href="#53-页合并">5.3 页合并</a></li>
+        <li><a href="#54-自增主键">5.4 自增主键</a></li>
+        <li><a href="#55-重建索引">5.5 重建索引</a></li>
+      </ul>
+    </li>
+    <li><a href="#六问题与解答">六、问题与解答</a>
+      <ul>
+        <li><a href="#61-问题">6.1 问题</a></li>
+        <li><a href="#62-解答">6.2 解答</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><hr>
@@ -105,11 +134,537 @@
 <blockquote>
 <p><a href="https://time.geekbang.org/column/intro/139" target="_blank" rel="noopener noreffer">mysql实战</a></p>
 </blockquote>
+<blockquote>
+<p><a href="https://github.com/jeremycole/innodb_diagrams" target="_blank" rel="noopener noreffer">innodb_diagrams</a></p>
+</blockquote>
+<hr>
+<p> </p>
+<h2 id="二-引言">二、 引言</h2>
+<p> </p>
+<p>提到数据库索引，我想你并不陌生，在日常工作中会经常接触到。</p>
+<p>比如某一个 SQL 查询比较慢，分析完原因之后，你可能就会说“给某个字段加个索引吧”之类的解决方案。</p>
+<p>但到底什么是索引，索引又是如何工作的呢？</p>
+<p>一句话简单来说，索引的出现其实就是为了提高数据查询的效率，就像书的目录一样</p>
+<p> </p>
+<p>问：什么情况下创建索引才有意义？有哪些限制？比如字段长度？</p>
+<p>答：</p>
+<p>(1) 有这个索引带来的查询收益，大于维护索引的代价，就该建</p>
+<p>(2) 对于可能变成大表的表，实际上如果不建索引会导致全表扫描，这个索引就是必须的</p>
+<p> </p>
+<p>问：索引本身在<code>mysql</code>里又是用什么数据结构管理的，内存里会有副本吗？</p>
+<p>答：内存是一大片<code>buffer</code> , 内存的数据内容跟磁盘一样的</p>
+<p> </p>
+<p>问：索引的代价有哪些？</p>
+<p>答：因为索引相当于目录，增加了页数，就需要修改目录，所以有影响</p>
+<hr>
+<p> </p>
+<h2 id="三-索引的常见模型">三、 索引的常见模型</h2>
+<p> </p>
+<p>索引的出现是为了提高查询效率，但是实现索引的方式却有很多种，所以这里也就引入了索引模型的概念。</p>
+<p>三种常见、也比较简单的数据结构，它们分别是</p>
+<p>(1) 哈希表</p>
+<p>(2) 有序数组</p>
+<p>(3) 搜索树</p>
+<p> </p>
+<h3 id="31-哈希表">3.1 哈希表</h3>
+<p> </p>
+<p>哈希表是一种以<code>键 - 值</code>（<code>key-value</code>）存储数据的结构，</p>
+<p>我们只要输入待查找的键即 <code>key</code>，就可以找到其对应的值即 <code>Value</code>。</p>
+<p>哈希的思路很简单，把值放在数组里，用一个哈希函数把 <code>key</code> 换算成一个确定的位置，然后把 <code>value</code> 放在数组的这个位置</p>
+<p>不可避免地，多个 <code>key </code>值经过哈希函数的换算，会出现同一个值的情况。</p>
+<p>处理这种情况的一种方法是，拉出一个链表</p>
+<p> </p>
+<p>假设，你现在维护着一个身份证信息和姓名的表，需要根据身份证号查找对应的名字，这时对应的哈希索引的示意图如下所示:</p>
+<p> </p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/mysql/%e7%b4%a2%e5%bc%95/%e7%b4%a2%e5%bc%951.jpg"
+        data-srcset="/images/mysql/%E7%B4%A2%E5%BC%95/%E7%B4%A2%E5%BC%951.jpg, /images/mysql/%e7%b4%a2%e5%bc%95/%e7%b4%a2%e5%bc%951.jpg 1.5x, /images/mysql/%E7%B4%A2%E5%BC%95/%E7%B4%A2%E5%BC%951.jpg 2x"
+        data-sizes="auto"
+        alt="/images/mysql/%E7%B4%A2%E5%BC%95/%E7%B4%A2%E5%BC%951.jpg"
+        title="索引1" /></p>
+<p> </p>
+<p>图中，<code>User2 </code>和 <code>User4 </code>根据身份证号算出来的值都是<code> N</code>，但没关系，后面还跟了一个链表。</p>
+<p>假设，这时候你要查 <code>ID_card_n2</code> 对应的名字是什么，处理步骤就是：</p>
+<p>首先，将 <code>ID_card_n2</code> 通过哈希函数算出 <code>N</code>；</p>
+<p>然后，按顺序遍历，找到 <code>User2</code></p>
+<p> </p>
+<h4 id="311-hash表的优点">3.1.1 hash表的优点</h4>
+<p> </p>
+<p>哈希表好处是增加新的记录 时速度会很快，只需要往后追加。但缺点是，因为不是有序的，所以哈希索引做区间查询的速度是很慢的。</p>
+<p> </p>
+<h4 id="312-hash表的缺点">3.1.2 hash表的缺点</h4>
+<p> </p>
+<p>哈希表这种结构适用于只有等值查询的场景，比如 <code>Memcached</code> 及其他一些<code> NoSQL</code> 引擎</p>
+<p> </p>
+<h3 id="32-有序数组">3.2 有序数组</h3>
+<p> </p>
+<p>有序数组在等值查询和范围查询场景中的性能就都非常优秀</p>
+<p> </p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/mysql/%e7%b4%a2%e5%bc%95/%e7%b4%a2%e5%bc%952.jpg"
+        data-srcset="/images/mysql/%E7%B4%A2%E5%BC%95/%E7%B4%A2%E5%BC%952.jpg, /images/mysql/%e7%b4%a2%e5%bc%95/%e7%b4%a2%e5%bc%952.jpg 1.5x, /images/mysql/%E7%B4%A2%E5%BC%95/%E7%B4%A2%E5%BC%952.jpg 2x"
+        data-sizes="auto"
+        alt="/images/mysql/%E7%B4%A2%E5%BC%95/%E7%B4%A2%E5%BC%952.jpg"
+        title="索引2" /></p>
+<p> </p>
+<p>如上， 这里我们假设身份证号没有重复，这个数组就是按照身份证号递增的顺序保存的。</p>
+<p>(1) 这时候如果你要查 <code>ID_card_n2</code> 对应的名字，用二分法就可以快速得到，这个时间复杂度是 <code>O(log(N))</code></p>
+<p>(2) 同时很显然，这个索引结构支持范围查询。</p>
+<p>你要查身份证号在<code>[ID_card_X, ID_card_Y]</code>区间的 <code>User</code>，</p>
+<p>可以先用二分法找到 <code>ID_card_X</code>（如果不存在 <code>ID_card_X</code>，就找到大于 <code>ID_card_X </code>的第一个 <code>User</code>），</p>
+<p>然后向右遍历，直到查到第一个大于 <code>ID_card_Y</code> 的身份证号，退出循环</p>
+<p> </p>
+<h4 id="321-有序数组的优点">3.2.1 有序数组的优点</h4>
+<p> </p>
+<p>如果仅仅看查询效率，有序数组就是最好的数据结构了</p>
+<p> </p>
+<h4 id="322-有序数组的缺点">3.2.2 有序数组的缺点</h4>
+<p> </p>
+<p>但是，在需要更新数据的时候就麻烦了，你往中间插入一个记录就必须得挪动后面所有的记录，成本太高</p>
+<p>有序数组索引只适用于静态存储引擎</p>
+<p> </p>
+<h3 id="33-搜索树">3.3 搜索树</h3>
+<p> </p>
+<p>二叉搜索树也是课本里的经典数据结构了。还是上面根据身份证号查名字的例子，如果我们用二叉搜索树来实现的话，示意图如下所示:</p>
+<p> </p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/mysql/%e7%b4%a2%e5%bc%95/%e7%b4%a2%e5%bc%953.jpg"
+        data-srcset="/images/mysql/%E7%B4%A2%E5%BC%95/%E7%B4%A2%E5%BC%953.jpg, /images/mysql/%e7%b4%a2%e5%bc%95/%e7%b4%a2%e5%bc%953.jpg 1.5x, /images/mysql/%E7%B4%A2%E5%BC%95/%E7%B4%A2%E5%BC%953.jpg 2x"
+        data-sizes="auto"
+        alt="/images/mysql/%E7%B4%A2%E5%BC%95/%E7%B4%A2%E5%BC%953.jpg"
+        title="索引3" /></p>
+<p> </p>
+<p> </p>
+<h4 id="331-二叉搜索树的特点">3.3.1 二叉搜索树的特点</h4>
+<p> </p>
+<p>(1) 每个节点的左儿子小于父节点</p>
+<p>(2) 父节点又小于右儿子</p>
+<p> </p>
+<p>要查 <code>ID_card_n2 </code>的话，按照图中的搜索顺序就是按照 <code>UserA -&gt; UserC -&gt; UserF -&gt; User2</code> 这个路径得到。这个时间复杂度是 <code>O(log(N))</code></p>
+<p>当然为了维持<code> O(log(N))</code> 的查询复杂度，你就需要保持这棵树是平衡二叉树。为了做这个保证，更新的时间复杂度也是<code> O(log(N))</code></p>
+<p> </p>
+<h4 id="332-多叉树">3.3.2 多叉树</h4>
+<p> </p>
+<p>树可以有二叉，也可以有多叉。</p>
+<p>多叉树就是每个节点有多个儿子，儿子之间的大小保证从左到右递增</p>
+<p>二叉树是搜索效率最高的，但是实际上大多数的数据库存储却并不使用二叉树。</p>
+<p>其原因是，索引不止存在内存中，还要写到磁盘上</p>
+<p> </p>
+<p>问：为什么索引不使用二叉树存储？</p>
+<p>答：你可以想象一下一棵 <code>100 万</code>节点的平衡二叉树，树高 <code>20</code> (<code>2 ** 20 = 1048576</code>)。一次查询可能需要访问 <code>20 个</code>数据块。</p>
+<p>在机械硬盘时代，从磁盘随机读一个数据块需要 <code>10 ms</code> 左右的寻址时间。</p>
+<p>也就是说，对于一个 <code>100 万</code>行的表，如果使用二叉树来存储，单独访问一个行可能需要 <code>20 个 10 ms</code> (<code>200ms</code>) 的时间</p>
+<p> </p>
+<p>问：你可以想象一下一棵 <code>100 万</code>节点的平衡二叉树，树高 <code>20</code>。一次查询可能需要访问 <code>20 个</code>数据块。</p>
+<p>这里有点不理解，为什么树高<code>20</code>就是<code>20个</code>数据块？</p>
+<p>答：每个叶子节点就是一个块，每个块包含两个数据，块之间通过链式方式链接。树高<code>20</code>的话，就要遍历<code>20个</code>块；</p>
+<p>因为是二叉树结构，每次指针查找很大概率是触发随机磁盘读（比如很难刚好碰上一个节点和他的左右儿子刚好相邻）</p>
+<p> </p>
+<p>问：数据块和数据页是同一个东西吗？<code>16k</code>的这个数据页和数据块有什么区别？</p>
+<p>答：如果前缀是<code>InnoDB</code>， 即<code>InnoDB</code>数据块和<code>InnoDB</code>数据页是指同一个东西</p>
+<p> </p>
+<p>问：如何保证整个节点刚好在一个数据块上面，如果刚好分布在不同的数据块上面，那岂不是还是要查询两次？</p>
+<p>答：一个数据页大小是<code>16k</code>， 如果有的数据超过<code>16k</code>，就会放在多个不同的数据页上，查这样的记录是要访问多个数据页的</p>
+<p> </p>
+<p>为了让一个查询尽量少地读磁盘，就必须让查询过程访问尽量少的数据块。</p>
+<p>那么，我们就不应该使用二叉树，而是要使用“<code>N 叉</code>”树。这里，“<code>N 叉</code>”树中的“<code>N</code>”取决于数据块的大小,</p>
+<p><code>N 叉树</code>由于在读写上的性能优点，以及适配磁盘的访问模式，已经被广泛应用在数据库引擎中了</p>
+<p> </p>
+<p>问：<code>InnoDB</code>中如何实现搜索树？</p>
+<p>答：以 <code>InnoDB</code> 的一个整数字段索引为例，这个 <code>N</code> 差不多是 <code>1200</code>。</p>
+<p>这棵树高是<code> 4</code> 的时候，就可以存 <code>1200</code> 的 <code>3 次方</code>个值，这已经 <code>17 亿</code>了</p>
+<p>考虑到树根的数据块总是在内存中的，一个 <code>10 亿</code>行的表上一个整数字段的索引，查找一个值最多只需要访问 <code>3 次</code>磁盘。</p>
+<p>其实，树的第二层也有很大概率在内存中，那么访问磁盘的平均次数就更少</p>
+<p> </p>
+<p>问：<code>“N叉树”</code>的N值在<code>MySQL</code>中是可以被人工调整的么？曾经面试被问到过这问题</p>
+<p>答：面试中题面越简单的问题越暗藏凶险，可见一斑；可以按照调整<code>key</code>的大小的思路来说；</p>
+<p>如果你能指出来<code>5.6</code>以后可以通过<code>page</code>大小来间接控制应该能加分吧， 面试回答不能太精减，计算方法、前缀索引什么的一起上</p>
+<p>(1) 通过改变key值来调整</p>
+<p><code>N叉树</code>中非叶子节点存放的是索引信息，索引包含<code>Key</code>和<code>Point</code>指针。</p>
+<p><code>Point</code>指针固定为<code>6个</code>字节，假如<code>Key</code>为<code>10个</code>字节，那么单个索引就是<code>16个</code>字节。</p>
+<p>如果<code>B+树</code>中页大小为<code>16K</code>，那么一个页就可以存储<code>1024个</code>索引，此时<code>N</code>就等于<code>1024</code>。我们通过改变<code>Key</code>的大小，就可以改变<code>N</code>的值</p>
+<p>上一个问题中，以长整数字段索引，则N的值为 <code>16k / (6 + 8) = 1170.28...</code></p>
+<p>(2) 改变页的大小</p>
+<p>页越大，一页存放的索引就越多，<code>N</code>就越大</p>
+<p> </p>
+<h3 id="34-其他数据结构">3.4 其他数据结构</h3>
+<p> </p>
+<p>(1) 不管是哈希还是有序数组，或者 <code>N 叉树</code>，它们都是不断迭代、不断优化的产物或者解决方案。</p>
+<p>数据库技术发展到今天，跳表、<code>LSM 树</code>等数据结构也被用于引擎设计中</p>
+<p>(2) 数据库底层存储的核心就是基于这些数据模型的,</p>
+<p>当你理解了索引的模型后，就会发现在分析问题的时候会有一个更清晰的视角，体会到引擎设计的精妙之处</p>
+<p>(3) 在 <code>MySQL</code> 中，索引是在存储引擎层实现的，所以并没有统一的索引标准，</p>
+<p>A. 即不同存储引擎的索引的工作方式并不一样。</p>
+<p>B. 而即使多个存储引擎支持同一种类型的索引，其底层的实现也可能不同</p>
+<hr>
+<p> </p>
+<h2 id="四innodb-的索引模型">四、InnoDB 的索引模型</h2>
+<p> </p>
+<p> </p>
+<h3 id="41-索引组织表">4.1 索引组织表</h3>
+<p> </p>
+<p>在 <code>InnoDB</code> 中，</p>
+<p> </p>
+<p>(1) 表都是根据主键顺序以索引的形式存放的，这种存储方式的表称为索引组织表</p>
+<p><code>InnoDB</code> 使用了 <code>B+ </code>树索引模型，所以数据都是存储在 <code>B+</code> 树中的</p>
+<p>(2) 每一个索引在 <code>InnoDB</code> 里面对应一棵<code> B+</code> 树</p>
+<p> </p>
+<p>假设，我们有一个主键列为 ID 的表，表中有字段 k，并且在 k 上有索引:</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="c1"># (1) 创建表
+</span><span class="c1"></span> <span class="k">create</span> <span class="k">table</span> <span class="nf">T</span> <span class="p">(</span>
+    <span class="o">-&gt;</span> <span class="n">id</span> <span class="kt">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">k</span> <span class="kt">int</span> <span class="k">not</span> <span class="no">null</span><span class="p">,</span>
+    <span class="o">-&gt;</span> <span class="n">name</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span>
+    <span class="o">-&gt;</span> <span class="k">index</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="o">-&gt;</span> <span class="p">)</span> <span class="kp">engine</span><span class="o">=</span><span class="n">InnoDB</span><span class="p">;</span>
+
+<span class="c1"># (2) 插入数据
+</span><span class="c1"></span><span class="k">insert</span> <span class="k">into</span> <span class="nf">T</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="c1"># (3) 查看表数据
+</span><span class="c1"></span><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">T</span><span class="p">;</span>
+
+<span class="c1"># 返回值
+</span><span class="c1"></span><span class="o">+-----+---+------+</span>
+<span class="o">|</span> <span class="n">id</span>  <span class="o">|</span> <span class="n">k</span> <span class="o">|</span> <span class="n">name</span> <span class="o">|</span>
+<span class="o">+-----+---+------+</span>
+<span class="o">|</span> <span class="mi">100</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="no">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="mi">200</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="no">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="mi">300</span> <span class="o">|</span> <span class="mi">3</span> <span class="o">|</span> <span class="no">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="mi">500</span> <span class="o">|</span> <span class="mi">5</span> <span class="o">|</span> <span class="no">NULL</span> <span class="o">|</span>
+<span class="o">|</span> <span class="mi">600</span> <span class="o">|</span> <span class="mi">6</span> <span class="o">|</span> <span class="no">NULL</span> <span class="o">|</span>
+<span class="o">+-----+---+------+</span>
+</code></pre></div><p> </p>
+<p>两棵树的示例示意图如下:</p>
+<p> </p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/mysql/%e7%b4%a2%e5%bc%95/%e7%b4%a2%e5%bc%954.jpg"
+        data-srcset="/images/mysql/%E7%B4%A2%E5%BC%95/%E7%B4%A2%E5%BC%954.jpg, /images/mysql/%e7%b4%a2%e5%bc%95/%e7%b4%a2%e5%bc%954.jpg 1.5x, /images/mysql/%E7%B4%A2%E5%BC%95/%E7%B4%A2%E5%BC%954.jpg 2x"
+        data-sizes="auto"
+        alt="/images/mysql/%E7%B4%A2%E5%BC%95/%E7%B4%A2%E5%BC%954.jpg"
+        title="索引4" /></p>
+<p> </p>
+<p>(1) 表中 <code>R1~R5</code> 的 <code>(ID,k)</code> 值分别为 <code>(100,1)、(200,2)、(300,3)、(500,5)</code> 和 <code>(600,6)</code></p>
+<p>(2) 根据叶子节点的内容，索引类型分为主键索引和非主键索引</p>
+<p>(3) 主键索引的叶子节点存的是整行数据。</p>
+<p>在 <code>InnoDB</code> 里，主键索引也被称为聚簇索引（<code>clustered index</code>）</p>
+<p>(4) 非主键索引的叶子节点内容是主键的值。</p>
+<p>在 <code>InnoDB</code> 里，非主键索引也被称为二级索引（<code>secondary index</code>）</p>
+<p>原来二级索引中叶结点会有主键，不是存记录地址</p>
+<p> </p>
+<p>问：在<code> InnoDB</code> 里，非主键索引也被称为二级索引（<code>secondary index</code>）。</p>
+<p>我看图上一个非主键索引只有一个叶子节点，实际上应该会有多个叶子节点吧，内容是主键的值吧？</p>
+<p>答：有多个叶子节点的。每个叶子节点是一个数据页，每个数据页<code>16K</code>，里面是放多个值的</p>
+<p> </p>
+<p>问：二级索引上为啥叶子节点的<code>value</code>为什么不是地址，这样可以直接定位到整条数据，而不用再次对整棵树进行查询？</p>
+<p>答：这个叫作“堆组织表”，<code>MyISAM</code>就是这样的，各有利弊。你想一下如果修改了数据的位置的情况，<code>InnoDB</code>这种模式是不是就方便些</p>
+<p> </p>
+<p>问：主键索引的叶子节点存的是整行数据。叶子节点存的难道不是指向行数据的指针吗？</p>
+<p>如果直接存的是整行数据，是不是可以理解，整张表的数据其实就是存在主键索引中的？</p>
+<p>答：是的， 整张表的数据其实就是存在主键索引中的，这个就是&quot;聚簇索引”的意思</p>
+<p> </p>
+<p>问：如果磁盘中的主键索引已经存储了这个表的全部数据的话，那常说的没走索引是遍历整个<code>B+树</code>还是其他地方还有整个表的数据呢？</p>
+<p>答：就是遍历这个主键索引的意思</p>
+<p> </p>
+<p>问：如果我新建一张表，不加任何约束，也就是没有主键。当插入一定量的数据库后，我再给一个字段加上主键，那么这个主键会包含一行的数据吗？</p>
+<p>答：加主键就会重建整张表， 而且，没有指定主键约束，<code>InnoDB</code>也会有一个默认主键<code>rowId</code></p>
+<p> </p>
+<p>问：<code>innodb B+</code>树主键索引的叶子节点存的是什么，我说是行，面试官说错，存的是页？</p>
+<p>答：<code>B+树</code>的叶子节点是<code>page</code> （页），一个页里面可以存多个行</p>
+<p>例如上图，<code>key</code>值<code>100</code>和<code>200</code>包括<code>data</code>值<code>R1</code>和<code>R2</code>这个四个方块就是一个节点，这个节点就是一页，</p>
+<p>然后每个<code>key</code>值对应的<code>data</code>就是主键对应的行记录。所以节点存的是页，每页有多行记录</p>
+<p> </p>
+<p>问：索引只能定位到<code>page</code>，<code>page</code>内部怎么去定位行数据？</p>
+<p>答：内部有个有序数组，二分法</p>
+<p> </p>
+<p>问：对于<code>T</code>表来说，如果有两个<code>K</code>相同的值，也就是在<code>K</code>树中有两个相同值指向不同的<code>id</code>，不会冲突吗。那对于<code>K</code>字段的索引应该怎么维护？</p>
+<p>答：没问题的，一个是 <code>(k,id1)</code>, 一个是<code>(k,id2)</code>，这是不同的值</p>
+<p> </p>
+<p>问：请教下，文中说非主键索引会存储主键的值，而文中举例的非主键索引值刚好没有重复，</p>
+<p>所以想请问下，如果记录表中 <code>R1~R5 </code>的 <code>(ID,k)</code> 值分别为 <code>(100,1)、(200,1)、(300,1)、(500,1)</code> 和 <code>(600,1)</code>，</p>
+<p>那么非主键索引<code>k=1</code>的节点，应该记录<code>100，200，300，500，600</code>的值，是这样理解么？</p>
+<p>答：不是，非主键索引上有<code>5个</code>值，分别是<code>（1，100），（1，200）... （1，600）</code></p>
+<p> </p>
+<p>问：如果把多个列联合起来搞成主键索引，那么二级索引里包含的主键是什么样的呢，也是多列？</p>
+<p>答：对，多列</p>
+<p> </p>
+<p>问：基于主键索引和普通索引的查询有什么区别？</p>
+<p>答：</p>
+<p>（1） 如果语句是 <code>select * from T where ID=500</code>，即主键查询方式，则只需要搜索 <code>ID</code> 这棵 <code>B+</code> 树</p>
+<p>（2） 如果语句是 <code>select * from T where k=5</code>，即普通索引查询方式，则需要先搜索 <code>k 索引树</code>，得到<code> ID</code> 的值为 <code>500</code>，</p>
+<p>再到 <code>ID 索引树</code>搜索一次。这个过程称为回表</p>
+<p>（3） 也就是说，基于非主键索引的查询需要多扫描一棵索引树。因此，我们在应用中应该尽量使用主键查询</p>
+<p> </p>
+<p>问：回表只是普通索引才会有的吗？主键和数据放在同一个树中，根据主键查询的时候，就可以直接获得数据了。</p>
+<p>那<code>select ＊from table where id＝xx</code>和<code>select id from table where id＝xx</code>的效率是一样的吗？（<code>id</code>是主键）</p>
+<p>答：这两个语句是都不用回表了，在“查找行”这个逻辑上是一样的，</p>
+<p>但是<code>select *</code>要读和拷贝更多列到<code>server</code>,还要发送更多列给客户端，所以还是<code>select id</code>更快的</p>
+<p> </p>
+<p>问：请问没有主键的表，有一个普通索引。怎么回表？</p>
+<p>答：没有主键的表，<code>innodb</code>会给默认创建一个<code>Rowid</code>做主键</p>
+<p> </p>
+<p>问：当<code>table T</code>出现以下数据时: <code>(300, 3) (400, 3)</code>时，通个非主键索引<code>3</code>查到对应<code>ID</code> 有两个<code>300</code>和<code>400</code>，那是否要回表两次？</p>
+<p>答：是的</p>
+<p> </p>
+<p>问：一个<code>innoDB</code>引擎的表，数据量非常大，根据二级索引搜索会比主键搜索快，文章阐述的原因是主键索引和数据行在一起，非常大搜索慢，我的疑惑是：</p>
+<p>通过普通索引找到主键<code>ID</code>后，同样要跑一边主键索引，还望解惑？</p>
+<p>答：二级索引比主键索引快的场景是使用了覆盖索引</p>
+<p> </p>
+<p>问：如何查看索引占用多少空间？查看索引数的结构，比如多少个层，多少节点？</p>
+<p>答：可以估算出来的，根据表的行数和索引的定义。 如果要精确的，需要了解数据文件，这个<a href="https://github.com/jeremycole/innodb_diagrams" target="_blank" rel="noopener noreffer">工具</a>可以看看</p>
+<p> </p>
+<p>问：如何查看索引的利用率。比如我创建了一个索引，是否可以有记录这个索引被调用了多少次？</p>
+<p>答：<code>performance_schema.table_io_waits_summary_by_index_usage</code>能看到一些信息</p>
+<p> </p>
+<p>问：当插入数据时，会维护该表所有主键、索引的 <code>B+树</code>，这是在插入的同时维护，还是插入数据后再维护？</p>
+<p>答：唯一索引是马上，普通索引如果用上<code>change buffer</code>，就算是“事后”</p>
+<hr>
+<p> </p>
+<h2 id="五索引维护">五、索引维护</h2>
+<p> </p>
+<p>B+ 树为了维护索引有序性，在插入新值的时候需要做必要的维护</p>
+<p> </p>
+<h3 id="51-页分裂">5.1 页分裂</h3>
+<p> </p>
+<p>(1) 以上面这个图为例，如果插入新的行<code> ID</code> 值为 <code>700</code>，则只需要在<code>R5</code>的记录后面插入一个新记录;</p>
+<p>(2) 如果新插入的 <code>ID </code>值为 <code>400</code>，就相对麻烦了，需要逻辑上挪动后面的数据，空出位置;</p>
+<p>(3) 而更糟的情况是，如果 <code>R5</code> 所在的数据页已经满了，根据<code> B+</code> 树的算法，这时候需要申请一个新的数据页，然后挪动部分数据过去。</p>
+<p>这个过程称为页分裂</p>
+<p> </p>
+<p>问：自增主键的插入数据模式，每次插入一条新记录，都是追加操作，都不涉及到挪动其他记录，也不会触发叶子节点的分裂。</p>
+<p>这表述不对吧，插入无数个数据，数据页早就满了啊，应该分裂啊？</p>
+<p>答：不用“分裂”，已经有了<code>12345</code>， 要插入<code>6</code>的时候，如果叶子满了，就申请一个空的页，然后单独放入<code>6</code>； 这个过程不叫做“分裂”</p>
+<p> </p>
+<p>问：如果插入的数据是在主键树叶子结点的中间，后面的所有页如果都是满的状态，是不是会造成后面的每一页都会去进行页分裂操作，直到最后一个页申请新页移过去最后一个值？</p>
+<p>答：不会，只会分裂它要写入的那个页面。每个页面之间是用指针串的，改指针就好了，不需要“后面的全部挪动</p>
+<p> </p>
+<p>问：之前看到过说是插入数据如果是在某个数据满了页的首尾，为了减少数据移动和页分裂，会先去前后两个页看看是否满了，如果没满会先将数据放到前后两个页上，不知道是不是有这种情况？</p>
+<p>答：对，为了增加空间利用率</p>
+<p> </p>
+<h3 id="52-页分裂的影响">5.2 页分裂的影响</h3>
+<p> </p>
+<p>(1) 页分裂影响性能</p>
+<p>(2) 页分裂操作还影响数据页的利用率， 原本放在一个页的数据，现在分到两个页中，整体空间利用率降低大约 <code>50%</code></p>
+<p> </p>
+<h3 id="53-页合并">5.3 页合并</h3>
+<p> </p>
+<p>当相邻两个页由于删除了数据，利用率很低之后，会将数据页做合并。合并的过程，可以认为是分裂过程的逆过程</p>
+<p> </p>
+<h3 id="54-自增主键">5.4 自增主键</h3>
+<p> </p>
+<p>自增主键是指自增列上定义的主键，在建表语句中一般是这么定义的： <code>NOT NULL PRIMARY KEY AUTO_INCREMENT</code></p>
+<p>(1) 插入新记录的时候可以不指定<code> ID</code> 的值，系统会获取当前 <code>ID</code> 最大值加 <code>1</code> 作为下一条记录的 <code>ID</code> 值</p>
+<p>(2) 每次插入一条新记录，都是追加操作，都不涉及到挪动其他记录，也不会触发叶子节点的分裂</p>
+<p>(3) 使用业务逻辑的字段做主键，则往往不容易保证有序插入，这样写数据成本相对较高</p>
+<p> </p>
+<p>问：自增主键，如果在并发量特别大的情况下，仍然适合使用吗？</p>
+<p>答：可以的，当然可能会导致没那么紧凑，但是也是不错的了</p>
+<p> </p>
+<h4 id="541-自增主键的优点">5.4.1 自增主键的优点</h4>
+<p> </p>
+<p>由于每个非主键索引的叶子节点上都是主键的值， 主键长度越小，普通索引的叶子节点就越小，普通索引占用的空间也就越小</p>
+<p>例如上面的例子，</p>
+<p>(1) 如果用身份证号做主键，那么每个二级索引的叶子节点占用约 <code>20 个</code>字节，</p>
+<p>(2) 而如果用整型做主键，则只要 <code>4 个</code>字节，</p>
+<p>(3) 如果是长整型（<code>bigint</code>）则是 <code>8 个</code>字节</p>
+<p>从性能和存储空间方面考量，自增主键往往是更合理的选择</p>
+<p> </p>
+<p>问：现在一般自增索引都设置为bigint？</p>
+<p>答：特别合理，因为现在很多业务插入数据很凶残，容易超过<code>int</code> 上限，实际上是建议设置<code>bigint unsigned</code></p>
+<p> </p>
+<p>问：在插入数据的时候，主键类型为字符串，<code>ID</code>为<code>uuid</code>的形式，插入时会导致分裂吗？</p>
+<p>答：会，特别不建议<code>uuid</code>做主键， <code>uuid</code>作为主键, 太长</p>
+<p> </p>
+<p>问：现在只是讲到了单表主键建索引的，分库的时候不能用到自增主键，这个索引怎么处理呢？</p>
+<p>答：分库分表可以用自增主键的，有的公司是用步长来控制</p>
+<p> </p>
+<p>问：数据库做集群，用自增索性，需要给每台服务器设置不同步长，感觉很麻烦。</p>
+<p>但用自己生成的唯一<code>id</code>，可能存储空间和效率没自增好，请问这时候怎么考虑？</p>
+<p>答：自己生成唯一<code>ID</code>就是实现麻烦一点，如果是<code>bigint </code>类型自增的，存储空间和效率其实也不错的</p>
+<p> </p>
+<p>问：主键在新增的时候不会触发页分裂，而是进行追加操作。那么当删除主键时，会不会存在页合并的情况？</p>
+<p>答：会。一个页里的数据行，如果被删得太多（空出来的多），有可能跟隔壁的数据页做合并</p>
+<p> </p>
+<h4 id="542-业务字段直接做主键">5.4.2 业务字段直接做主键</h4>
+<p> </p>
+<p>有没有什么场景适合用业务字段直接做主键的呢？</p>
+<p>比如，有些业务的场景需求是这样的：</p>
+<p>(1) 只有一个索引；</p>
+<p>(2) 该索引必须是唯一索引。</p>
+<p>这就是典型的<code> KV</code> 场景</p>
+<p> </p>
+<p>问：<code>KV</code>场景，如何理解？</p>
+<p>答：<code>KV</code>场景的意思就是，所有的查询都是<code>where k=N</code>， 并没有<code>&gt;= </code>或者<code>&lt;=</code> 这种操作（没有<code>range</code>操作）</p>
+<p>在这种场景里，<code>hash</code>索引的效率就比<code>N叉树</code>高</p>
+<p> </p>
+<p>(1) 由于没有其他索引，所以也就不用考虑其他索引的叶子节点大小的问题</p>
+<p>(2) 直接将这个索引设置为主键，可以避免每次查询需要搜索两棵树</p>
+<p> </p>
+<h3 id="55-重建索引">5.5 重建索引</h3>
+<p> </p>
+<p> </p>
+<h4 id="551-重建索引-k">5.5.1 重建索引 k</h4>
+<p> </p>
+<p>使用上面的例子，</p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="c1"># (1) 查看当前索引
+</span><span class="c1"></span>
+<span class="k">show</span> <span class="k">create</span> <span class="k">table</span> <span class="n">T</span><span class="p">;</span>
+
+<span class="c1"># 返回值
+</span><span class="c1"></span>
+<span class="o">+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="k">Table</span> <span class="o">|</span> <span class="k">Create</span> <span class="k">Table</span>                                                                                                                                                                                            <span class="o">|</span>
+<span class="o">+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">T</span>     <span class="o">|</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">T</span><span class="o">`</span> <span class="p">(</span>
+  <span class="o">`</span><span class="n">id</span><span class="o">`</span> <span class="kt">int</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">k</span><span class="o">`</span> <span class="kt">int</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">name</span><span class="o">`</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">),</span>
+  <span class="k">KEY</span> <span class="o">`</span><span class="n">k</span><span class="o">`</span> <span class="p">(</span><span class="o">`</span><span class="n">k</span><span class="o">`</span><span class="p">)</span>
+<span class="p">)</span> <span class="kp">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="kp">CHARSET</span><span class="o">=</span><span class="n">utf8mb4</span> <span class="k">COLLATE</span><span class="o">=</span><span class="n">utf8mb4_0900_ai_ci</span> <span class="o">|</span>
+<span class="o">+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+
+<span class="c1"># (2) 删除索引k
+</span><span class="c1"></span><span class="k">alter</span> <span class="k">table</span> <span class="n">T</span> <span class="k">drop</span> <span class="k">index</span> <span class="n">k</span><span class="p">;</span>
+<span class="k">show</span> <span class="k">create</span> <span class="k">table</span> <span class="n">T</span><span class="p">;</span>
+
+<span class="c1"># 返回值
+</span><span class="c1"></span><span class="o">+-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="k">Table</span> <span class="o">|</span> <span class="k">Create</span> <span class="k">Table</span>                                                                                                                                                                           <span class="o">|</span>
+<span class="o">+-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">T</span>     <span class="o">|</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">T</span><span class="o">`</span> <span class="p">(</span>
+  <span class="o">`</span><span class="n">id</span><span class="o">`</span> <span class="kt">int</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">k</span><span class="o">`</span> <span class="kt">int</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">name</span><span class="o">`</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">)</span>
+<span class="p">)</span> <span class="kp">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="kp">CHARSET</span><span class="o">=</span><span class="n">utf8mb4</span> <span class="k">COLLATE</span><span class="o">=</span><span class="n">utf8mb4_0900_ai_ci</span> <span class="o">|</span>
+<span class="o">+-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+
+<span class="c1"># (3) 重建索引k
+</span><span class="c1"></span><span class="k">alter</span> <span class="k">table</span> <span class="n">T</span> <span class="k">add</span> <span class="k">index</span> <span class="n">k</span><span class="p">;</span>
+<span class="k">show</span> <span class="k">create</span> <span class="k">table</span> <span class="n">T</span><span class="p">;</span>
+
+<span class="c1"># 返回值
+</span><span class="c1"></span><span class="o">+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="k">Table</span> <span class="o">|</span> <span class="k">Create</span> <span class="k">Table</span>                                                                                                                                                                                            <span class="o">|</span>
+<span class="o">+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">T</span>     <span class="o">|</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">T</span><span class="o">`</span> <span class="p">(</span>
+  <span class="o">`</span><span class="n">id</span><span class="o">`</span> <span class="kt">int</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">k</span><span class="o">`</span> <span class="kt">int</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">name</span><span class="o">`</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">),</span>
+  <span class="k">KEY</span> <span class="o">`</span><span class="n">k</span><span class="o">`</span> <span class="p">(</span><span class="o">`</span><span class="n">k</span><span class="o">`</span><span class="p">)</span>
+<span class="p">)</span> <span class="kp">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="kp">CHARSET</span><span class="o">=</span><span class="n">utf8mb4</span> <span class="k">COLLATE</span><span class="o">=</span><span class="n">utf8mb4_0900_ai_ci</span> <span class="o">|</span>
+<span class="o">+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+</code></pre></div><p> </p>
+<p> </p>
+<p>问：如果对一个表的同一个字段创建多个索引，即索引名不同，但是都是同一个字段，会有什么影响？</p>
+<p>答：就是维护成本高，更新的时候得多更新几个</p>
+<p> </p>
+<h4 id="552-重建主键索引">5.5.2 重建主键索引</h4>
+<p> </p>
+<p> </p>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="c1"># (1) 查看当前的索引
+</span><span class="c1"></span><span class="k">show</span> <span class="k">create</span> <span class="k">table</span> <span class="n">T</span><span class="p">;</span>
+
+<span class="c1"># 返回值
+</span><span class="c1"></span>
+<span class="o">+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="k">Table</span> <span class="o">|</span> <span class="k">Create</span> <span class="k">Table</span>                                                                                                                                                                                            <span class="o">|</span>
+<span class="o">+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">T</span>     <span class="o">|</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">T</span><span class="o">`</span> <span class="p">(</span>
+  <span class="o">`</span><span class="n">id</span><span class="o">`</span> <span class="kt">int</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">k</span><span class="o">`</span> <span class="kt">int</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">name</span><span class="o">`</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">),</span>
+  <span class="k">KEY</span> <span class="o">`</span><span class="n">k</span><span class="o">`</span> <span class="p">(</span><span class="o">`</span><span class="n">k</span><span class="o">`</span><span class="p">)</span>
+<span class="p">)</span> <span class="kp">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="kp">CHARSET</span><span class="o">=</span><span class="n">utf8mb4</span> <span class="k">COLLATE</span><span class="o">=</span><span class="n">utf8mb4_0900_ai_ci</span> <span class="o">|</span>
+<span class="o">+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+
+<span class="c1"># (2) 删除主键索引
+</span><span class="c1"></span><span class="k">alter</span> <span class="k">table</span> <span class="n">T</span> <span class="k">drop</span> <span class="k">primary</span> <span class="k">key</span><span class="p">;</span>
+
+<span class="k">show</span> <span class="k">create</span> <span class="k">table</span> <span class="n">T</span><span class="p">;</span>
+
+<span class="c1"># 返回值
+</span><span class="c1"></span><span class="o">+-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="k">Table</span> <span class="o">|</span> <span class="k">Create</span> <span class="k">Table</span>                                                                                                                                                                      <span class="o">|</span>
+<span class="o">+-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">T</span>     <span class="o">|</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">T</span><span class="o">`</span> <span class="p">(</span>
+  <span class="o">`</span><span class="n">id</span><span class="o">`</span> <span class="kt">int</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">k</span><span class="o">`</span> <span class="kt">int</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">name</span><span class="o">`</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="k">KEY</span> <span class="o">`</span><span class="n">k</span><span class="o">`</span> <span class="p">(</span><span class="o">`</span><span class="n">k</span><span class="o">`</span><span class="p">)</span>
+<span class="p">)</span> <span class="kp">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="kp">CHARSET</span><span class="o">=</span><span class="n">utf8mb4</span> <span class="k">COLLATE</span><span class="o">=</span><span class="n">utf8mb4_0900_ai_ci</span> <span class="o">|</span>
+<span class="o">+-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+
+<span class="c1"># (3) 重建主键索引
+</span><span class="c1"></span><span class="k">alter</span> <span class="k">table</span> <span class="n">T</span> <span class="k">add</span> <span class="k">primary</span> <span class="k">key</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+
+<span class="k">show</span> <span class="k">create</span> <span class="k">table</span> <span class="n">T</span><span class="p">;</span>
+
+<span class="c1"># 返回值
+</span><span class="c1"></span><span class="o">+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="k">Table</span> <span class="o">|</span> <span class="k">Create</span> <span class="k">Table</span>                                                                                                                                                                                            <span class="o">|</span>
+<span class="o">+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+<span class="o">|</span> <span class="n">T</span>     <span class="o">|</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">T</span><span class="o">`</span> <span class="p">(</span>
+  <span class="o">`</span><span class="n">id</span><span class="o">`</span> <span class="kt">int</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">k</span><span class="o">`</span> <span class="kt">int</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">name</span><span class="o">`</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">),</span>
+  <span class="k">KEY</span> <span class="o">`</span><span class="n">k</span><span class="o">`</span> <span class="p">(</span><span class="o">`</span><span class="n">k</span><span class="o">`</span><span class="p">)</span>
+<span class="p">)</span> <span class="kp">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="kp">CHARSET</span><span class="o">=</span><span class="n">utf8mb4</span> <span class="k">COLLATE</span><span class="o">=</span><span class="n">utf8mb4_0900_ai_ci</span> <span class="o">|</span>
+<span class="o">+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span>
+
+</code></pre></div><p> </p>
+<p> </p>
+<p>问：如果删除了一张表的主键，是不是会自动生成一个默认的<code>ROWID</code>主键？</p>
+<p>答：删除主键的时候其实是重建整张表，这时候因为新的定义里面没有主键，所以系统会默认给一个<code>ROW_ID</code></p>
+<p> </p>
+<p>问：为什么我执行删除主键索引后，使用<code>show index from table</code>显示普通索引还存在，那所谓的普通索引失效是指什么？</p>
+<p>答：你删除主键索引，没有删除普通索引，普通索引肯定是还在的；一般说普通索引失效，是指<code>sql</code>执行的时候，用不上这个索引</p>
+<p> </p>
+<p>问：外键的利与弊？</p>
+<p>答：</p>
+<p>(1) 外键可以用来做约束， 但是这种约束关系是在数据库里面做的（类似于存储过程，其实是一种逻辑）</p>
+<p>(2) 这种情况下，等于你的数据库里面也有业务逻辑，这个就要看项目管理上做得怎么样</p>
+<p>(3) 如果能够把这些关系也作为代码的一部分，其实是可以的，</p>
+<p>(4) 之前很多人会觉得说加了存储过程、触发器、外键这些以后，代码逻辑混乱，一个原因也是因为没有把数据库里的逻辑像代码一样管理好</p>
+<p> </p>
+<p>问：一张表里是否不建议创建多个<code>unique key </code>唯一索引？删除<code>unique key </code>唯一索引，再创建它，这种操作和处理普通的二级索引是一样的吧？</p>
+<p>答：没有这个约束，但是要评估一下合理性，要注意数据量大的时候，多个唯一索引插入速度很慢； 一样的，只是要增加<code>unique</code>判断过程</p>
+<p> </p>
+<p>问：<code>OPTIMIZE TABLE tableName;</code> 和 <code>ALTER TABLE tableName ENGINE=INNODB;</code> 有什么区别呢？</p>
+<p>答：<code>Optimize </code>每次执行的后都会有<code>warning</code></p>
+<p> </p>
+<p>问：线上环境如何快速给一个大表加主键？</p>
+<p>答：加主键都快不了， 都要重建表</p>
+<hr>
+<p> </p>
+<h2 id="六问题与解答">六、问题与解答</h2>
+<p> </p>
+<p> </p>
+<h3 id="61-问题">6.1 问题</h3>
+<p> </p>
+<p>对于上面这两个重建索引的作法，说出你的理解。如果有不合适的，为什么，更好的方法是什么？</p>
+<p> </p>
+<h3 id="62-解答">6.2 解答</h3>
+<p> </p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2020-07-05</span>
+                <span>更新于 2020-07-06</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -128,8 +683,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql/40-%E5%BF%AB%E9%80%9F%E5%A4%8D%E5%88%B6%E4%B8%80%E5%BC%A0%E8%A1%A8/" class="prev" rel="prev" title="1. sql语句执行过程"><i class="fas fa-angle-left fa-fw"></i>1. sql语句执行过程</a>
-            <a href="/posts/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql/39-insert%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E9%94%81/" class="next" rel="next" title="1. sql语句执行过程">1. sql语句执行过程<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/%E6%95%B0%E6%8D%AE%E5%BA%93_mysql/3-%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB/" class="prev" rel="prev" title="3. 事务隔离"><i class="fas fa-angle-left fa-fw"></i>3. 事务隔离</a>
+            <a href="/posts/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95/%E6%95%B0%E5%AD%A6_%E7%AE%97%E6%B3%95_%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3%E4%B9%A0%E9%A2%98/" class="next" rel="next" title="算法图解习题">算法图解习题<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
@@ -145,5 +700,5 @@
             </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
                 <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["yzthewind"],"clientID":"8e70465ecd960275a174","clientSecret":"32c54e1095f64e2ac3dcfa4afed2e61d5444bc0d","id":"2020-07-05T10:00:00+08:00","owner":"yzthewind","repo":"blog_gitalk","title":"1. sql语句执行过程"}},"data":{"id-1":"一曲广陵散","id-2":"一曲广陵散"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["yzthewind"],"clientID":"8e70465ecd960275a174","clientSecret":"32c54e1095f64e2ac3dcfa4afed2e61d5444bc0d","id":"2020-07-06T12:01:00+08:00","owner":"yzthewind","repo":"blog_gitalk","title":"4. 深入浅出索引"}},"data":{"id-1":"一曲广陵散","id-2":"一曲广陵散"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>
