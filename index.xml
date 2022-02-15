@@ -15,11 +15,9 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/work/%e9%be%99%e7%8c%ab.jpg" referrerpolicy="no-referrer">
             </div><p>主要技术栈为</p>
-<p>a. 开发语言: 主要为python,可以阅读 c/java源码;</p>
-<p>b. 操作系统: centos/ubuntu等</p>
-<p>c. 存储: MySQL/MongoDB/redis</p>
-<p>d. 消息引擎: kafka/redis</p>
-<p>e. 其他: elasticsearch/前端基础</p>]]></description>
+<p>a. 开发语言: 主要为golang、python,可以阅读 c/java源码;</p>
+<p>b. 存储: elasticsearch/MySQL/MongoDB/redis</p>
+<p>c. 消息引擎: kafka/redis</p>]]></description>
 </item><item>
     <title>2020年7～8月阅读文章</title>
     <link>https://yzthewind.github.io/posts/%E5%B7%A5%E4%BD%9C_%E9%98%85%E8%AF%BB/%E5%B7%A5%E4%BD%9C_%E9%98%85%E8%AF%BB_2020_7_8%E9%98%85%E8%AF%BB%E6%96%87%E7%AB%A0/</link>
